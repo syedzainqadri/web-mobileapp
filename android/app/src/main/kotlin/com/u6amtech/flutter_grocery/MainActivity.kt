@@ -1,4 +1,4 @@
-package com.u6amtech.flutter_grocery
+package amo.ewiglife.com
 
 import io.flutter.embedding.android.FlutterActivity
 
