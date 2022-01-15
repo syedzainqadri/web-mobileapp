@@ -80,15 +80,6 @@ class HomeScreen extends StatelessWidget {
                                 ? SizedBox()
                                 : BannersView();
                       }),
-                      // Banner Two
-                      Consumer<BannerTwoProvider>(
-                          builder: (context, bannerTwo, child) {
-                        return bannerTwo.bannerTwoList == null
-                            ? BannerTwoView()
-                            : bannerTwo.bannerTwoList.length == 0
-                                ? SizedBox()
-                                : BannerTwoView();
-                      }),
                       // Category
                       Consumer<CategoryProvider>(
                           builder: (context, category, child) {
@@ -97,6 +88,15 @@ class HomeScreen extends StatelessWidget {
                             : category.categoryList.length == 0
                                 ? SizedBox()
                                 : CategoryView();
+                      }),
+                      // Banner Two
+                      Consumer<BannerTwoProvider>(
+                          builder: (context, bannerTwo, child) {
+                        return bannerTwo.bannerTwoList == null
+                            ? BannerTwoView()
+                            : bannerTwo.bannerTwoList.length == 0
+                                ? SizedBox()
+                                : BannerTwoView();
                       }),
                       // Category
                       Consumer<ProductProvider>(

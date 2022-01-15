@@ -1,7 +1,7 @@
 import 'package:flutter_grocery/data/model/response/language_model.dart';
 
 class AppConstants {
-  static const String APP_NAME = 'GroFresh';
+  static const String APP_NAME = 'Akbari Mandi Online';
 
   static const String BASE_URL = 'https://amo.ewiglife.com';
   static const String CONFIG_URI = '/api/v1/config';
@@ -68,7 +68,7 @@ class AppConstants {
   static const String USER_ADDRESS = 'user_address';
   static const String USER_NUMBER = 'user_number';
   static const String SEARCH_ADDRESS = 'search_address';
-  static const String TOPIC = 'grofresh';
+  static const String TOPIC = 'Akbari Mandi Online';
 
   static List<LanguageModel> languages = [
     LanguageModel(
