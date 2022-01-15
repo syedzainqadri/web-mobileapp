@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_grocery/helper/responsive_helper.dart';
 import 'package:flutter_grocery/provider/auth_provider.dart';
 import 'package:flutter_grocery/provider/banner_provider.dart';
+import 'package:flutter_grocery/provider/banner_two_provider.dart';
 import 'package:flutter_grocery/provider/cart_provider.dart';
 import 'package:flutter_grocery/provider/category_provider.dart';
 import 'package:flutter_grocery/provider/chat_provider.dart';
@@ -78,6 +79,7 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (context) => di.sl<BannerProvider>()),
       ChangeNotifierProvider(
           create: (context) => di.sl<NotificationProvider>()),
+      ChangeNotifierProvider(create: (context) => di.sl<BannerTwoProvider>()),
     ],
     child: MyApp(orderID: _orderID, isWeb: !kIsWeb),
   ));

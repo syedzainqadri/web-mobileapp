@@ -25,26 +25,26 @@ class ConfigModel {
 
   ConfigModel(
       {String ecommerceName,
-        String ecommerceLogo,
-        String ecommerceAddress,
-        String ecommercePhone,
-        String ecommerceEmail,
-        EcommerceLocationCoverage ecommerceLocationCoverage,
-        double minimumOrderValue,
-        int selfPickup,
-        BaseUrls baseUrls,
-        String currencySymbol,
-        double deliveryCharge,
-        String cashOnDelivery,
-        String digitalPayment,
-        List<Branches> branches,
-        String termsAndConditions,
-        bool emailVerification,
-        bool phoneVerification,
-        String currencySymbolPosition,
-        bool maintenanceMode,
-        String country,
-        DeliveryManagement deliveryManagement}) {
+      String ecommerceLogo,
+      String ecommerceAddress,
+      String ecommercePhone,
+      String ecommerceEmail,
+      EcommerceLocationCoverage ecommerceLocationCoverage,
+      double minimumOrderValue,
+      int selfPickup,
+      BaseUrls baseUrls,
+      String currencySymbol,
+      double deliveryCharge,
+      String cashOnDelivery,
+      String digitalPayment,
+      List<Branches> branches,
+      String termsAndConditions,
+      bool emailVerification,
+      bool phoneVerification,
+      String currencySymbolPosition,
+      bool maintenanceMode,
+      String country,
+      DeliveryManagement deliveryManagement}) {
     this._ecommerceName = ecommerceName;
     this._ecommerceLogo = ecommerceLogo;
     this._ecommerceAddress = ecommerceAddress;
@@ -75,7 +75,8 @@ class ConfigModel {
   String get ecommerceAddress => _ecommerceAddress;
   String get ecommercePhone => _ecommercePhone;
   String get ecommerceEmail => _ecommerceEmail;
-  EcommerceLocationCoverage get ecommerceLocationCoverage => _ecommerceLocationCoverage;
+  EcommerceLocationCoverage get ecommerceLocationCoverage =>
+      _ecommerceLocationCoverage;
   double get minimumOrderValue => _minimumOrderValue;
   int get selfPickup => _selfPickup;
   BaseUrls get baseUrls => _baseUrls;
@@ -85,8 +86,8 @@ class ConfigModel {
   String get digitalPayment => _digitalPayment;
   List<Branches> get branches => _branches;
   String get termsAndConditions => _termsAndConditions;
-  String get aboutUs=> _aboutUs;
-  String get privacyPolicy=> _privacyPolicy;
+  String get aboutUs => _aboutUs;
+  String get privacyPolicy => _privacyPolicy;
   bool get emailVerification => _emailVerification;
   bool get phoneVerification => _phoneVerification;
   String get currencySymbolPosition => _currencySymbolPosition;
@@ -102,7 +103,7 @@ class ConfigModel {
     _ecommerceEmail = json['ecommerce_email'];
     _ecommerceLocationCoverage = json['ecommerce_location_coverage'] != null
         ? new EcommerceLocationCoverage.fromJson(
-        json['ecommerce_location_coverage'])
+            json['ecommerce_location_coverage'])
         : null;
     _minimumOrderValue = json['minimum_order_value'].toDouble();
     _selfPickup = json['self_pickup'];
@@ -175,7 +176,8 @@ class EcommerceLocationCoverage {
   String _latitude;
   double _coverage;
 
-  EcommerceLocationCoverage({String longitude, String latitude, double coverage}) {
+  EcommerceLocationCoverage(
+      {String longitude, String latitude, double coverage}) {
     this._longitude = longitude;
     this._latitude = latitude;
     this._coverage = coverage;
@@ -204,6 +206,7 @@ class BaseUrls {
   String _productImageUrl;
   String _customerImageUrl;
   String _bannerImageUrl;
+  String _bannerTwoImageUrl;
   String _categoryImageUrl;
   String _reviewImageUrl;
   String _notificationImageUrl;
@@ -213,17 +216,19 @@ class BaseUrls {
 
   BaseUrls(
       {String productImageUrl,
-        String customerImageUrl,
-        String bannerImageUrl,
-        String categoryImageUrl,
-        String reviewImageUrl,
-        String notificationImageUrl,
-        String ecommerceImageUrl,
-        String deliveryManImageUrl,
-        String chatImageUrl}) {
+      String customerImageUrl,
+      String bannerImageUrl,
+      String bannerTwoImageUrl,
+      String categoryImageUrl,
+      String reviewImageUrl,
+      String notificationImageUrl,
+      String ecommerceImageUrl,
+      String deliveryManImageUrl,
+      String chatImageUrl}) {
     this._productImageUrl = productImageUrl;
     this._customerImageUrl = customerImageUrl;
     this._bannerImageUrl = bannerImageUrl;
+    this._bannerTwoImageUrl = bannerTwoImageUrl;
     this._categoryImageUrl = categoryImageUrl;
     this._reviewImageUrl = reviewImageUrl;
     this._notificationImageUrl = notificationImageUrl;
@@ -235,6 +240,7 @@ class BaseUrls {
   String get productImageUrl => _productImageUrl;
   String get customerImageUrl => _customerImageUrl;
   String get bannerImageUrl => _bannerImageUrl;
+  String get bannerTwoImageUrl => _bannerTwoImageUrl;
   String get categoryImageUrl => _categoryImageUrl;
   String get reviewImageUrl => _reviewImageUrl;
   String get notificationImageUrl => _notificationImageUrl;
@@ -246,6 +252,7 @@ class BaseUrls {
     _productImageUrl = json['product_image_url'];
     _customerImageUrl = json['customer_image_url'];
     _bannerImageUrl = json['banner_image_url'];
+    _bannerTwoImageUrl = json['bannertwo_image_url'];
     _categoryImageUrl = json['category_image_url'];
     _reviewImageUrl = json['review_image_url'];
     _notificationImageUrl = json['notification_image_url'];
@@ -259,6 +266,7 @@ class BaseUrls {
     data['product_image_url'] = this._productImageUrl;
     data['customer_image_url'] = this._customerImageUrl;
     data['banner_image_url'] = this._bannerImageUrl;
+    data['bannertwo_image_url'] = this._bannerTwoImageUrl;
     data['category_image_url'] = this._categoryImageUrl;
     data['review_image_url'] = this._reviewImageUrl;
     data['notification_image_url'] = this._notificationImageUrl;
@@ -280,12 +288,12 @@ class Branches {
 
   Branches(
       {int id,
-        String name,
-        String email,
-        String longitude,
-        String latitude,
-        String address,
-        double coverage}) {
+      String name,
+      String email,
+      String longitude,
+      String latitude,
+      String address,
+      double coverage}) {
     this._id = id;
     this._name = name;
     this._email = email;
