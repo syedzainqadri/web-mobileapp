@@ -1,4 +1,5 @@
 import 'package:country_code_picker/country_code.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery/helper/email_checker.dart';
 import 'package:flutter_grocery/helper/responsive_helper.dart';
@@ -299,6 +300,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             ? CustomButton(
                                 buttonText: getTranslated('login', context),
                                 onPressed: () async {
+                                  String token = await FirebaseMessaging
+                                      .instance
+                                      .getToken();
+                                  print(token);
                                   String _email = _emailController.text.trim();
                                   if (!Provider.of<SplashProvider>(context,
                                           listen: false)

@@ -15,7 +15,6 @@ import 'package:flutter_grocery/view/screens/home/widget/category_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/daily_item_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/product_view.dart';
 import 'package:provider/provider.dart';
-
 import 'widget/banners_two_view.dart';
 
 class HomeScreen extends StatelessWidget {

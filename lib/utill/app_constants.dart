@@ -78,8 +78,8 @@ class AppConstants {
         languageCode: 'en'),
     LanguageModel(
         imageUrl: '',
-        languageName: 'arabic',
-        countryCode: 'SA',
-        languageCode: 'ar'),
+        languageName: 'اردو',
+        countryCode: 'PK',
+        languageCode: 'ur'),
   ];
 }
