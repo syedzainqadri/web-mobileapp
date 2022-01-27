@@ -3,7 +3,7 @@ import 'package:flutter_grocery/data/model/response/language_model.dart';
 class AppConstants {
   static const String APP_NAME = 'Akbari Mandi Online';
 
-  static const String BASE_URL = 'https://amo.ewiglife.com';
+  static const String BASE_URL = 'https://admin.akbarimandi.online';
   static const String CONFIG_URI = '/api/v1/config';
   static const String BANNER_URI = '/api/v1/banners';
   static const String BANNERTWO_URI = '/api/v1/banner-two';
