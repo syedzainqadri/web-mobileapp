@@ -87,17 +87,19 @@ class ProductWidget extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: FadeInImage.assetNetwork(
-                    placeholder: Images.placeholder,
-                    image:
-                        '${Provider.of<SplashProvider>(context, listen: false).baseUrls.productImageUrl}/${product.image[0]}',
-                    fit: BoxFit.cover,
-                    width: 85,
-                    imageErrorBuilder: (c, o, s) => Image.asset(
-                        Images.placeholder,
-                        width: 85,
-                        fit: BoxFit.cover),
-                  ),
+                  child: Image.network(
+                      '${Provider.of<SplashProvider>(context, listen: false).baseUrls.productImageUrl}/${product.image[0]}'),
+                  // child: FadeInImage.assetNetwork(
+                  //   placeholder: Images.placeholder,
+                  //   image:
+                  //       '${Provider.of<SplashProvider>(context, listen: false).baseUrls.productImageUrl}/${product.image[0]}',
+                  //   fit: BoxFit.cover,
+                  //   width: 85,
+                  //   imageErrorBuilder: (c, o, s) => Image.asset(
+                  //       Images.placeholder,
+                  //       width: 85,
+                  //       fit: BoxFit.cover),
+                  // ),
                 ),
               ),
               Expanded(
@@ -112,7 +114,7 @@ class ProductWidget extends StatelessWidget {
                           product.name,
                           style: poppinsMedium.copyWith(
                               fontSize: Dimensions.FONT_SIZE_SMALL),
-                          maxLines: 1,
+                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
                         SizedBox(height: 10),
