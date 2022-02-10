@@ -59,7 +59,6 @@ class ProductTitleView extends StatelessWidget {
                       color: ColorResources.getTextColor(context)),
                   // maxLines: 2,
                 ),
-                SizedBox(height: 30),
                 //Product Price
                 Text(
                   '${PriceConverter.convertPrice(context, _startingPrice, discount: product.discount, discountType: product.discountType)}'

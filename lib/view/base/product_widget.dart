@@ -110,14 +110,16 @@ class ProductWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          product.name,
-                          style: poppinsMedium.copyWith(
-                              fontSize: Dimensions.FONT_SIZE_SMALL),
-                          // maxLines: 2,
-                          // overflow: TextOverflow.ellipsis,
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: Text(
+                            product.name,
+                            style: poppinsMedium.copyWith(
+                                fontSize: Dimensions.FONT_SIZE_SMALL),
+                            // maxLines: 2,
+                            // overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                        SizedBox(height: 30),
                         Text('${product.capacity} ${product.unit}',
                             style: poppinsRegular.copyWith(
                                 fontSize: Dimensions.FONT_SIZE_SMALL,

@@ -15,7 +15,15 @@ import 'package:flutter_grocery/view/screens/home/widget/category_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/daily_item_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/product_view.dart';
 import 'package:provider/provider.dart';
+import '../../../data/model/response/category_model.dart';
+import '../../../helper/route_helper.dart';
+import '../../../provider/theme_provider.dart';
+import '../../../utill/color_resources.dart';
+import '../../../utill/styles.dart';
+import '../category/all_category_screen.dart';
+import '../product/category_product_screen.dart';
 import 'widget/banners_two_view.dart';
+import 'widget/categorylistview.dart';
 
 class HomeScreen extends StatelessWidget {
   Future<void> _loadData(BuildContext context, bool reload) async {
@@ -71,6 +79,16 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                     // controller: _scrollController,
                     children: [
+                      // Category
+                      Consumer<CategoryProvider>(
+                          builder: (context, category, child) {
+                        return category.categoryList == null
+                            ? CategoryListView()
+                            : category.categoryList.length == 0
+                                ? SizedBox()
+                                : CategoryListView();
+                      }),
+                      //banner
                       Consumer<BannerProvider>(
                           builder: (context, banner, child) {
                         return banner.bannerList == null
@@ -79,15 +97,151 @@ class HomeScreen extends StatelessWidget {
                                 ? SizedBox()
                                 : BannersView();
                       }),
-                      // Category
-                      Consumer<CategoryProvider>(
-                          builder: (context, category, child) {
-                        return category.categoryList == null
-                            ? CategoryView()
-                            : category.categoryList.length == 0
+                      // DailyNeeds
+                      Consumer<ProductProvider>(
+                          builder: (context, product, child) {
+                        return product.dailyItemList == null
+                            ? DailyItemView()
+                            : product.dailyItemList.length == 0
                                 ? SizedBox()
-                                : CategoryView();
+                                : DailyItemView();
                       }),
+                      // Consumer<CategoryProvider>(
+                      //   builder: (context, categoryProvider, child) {
+                      //     return categoryProvider.categoryList.length != 0
+                      //         ? Row(children: [
+                      //             Container(
+                      //               width: 100,
+                      //               margin: EdgeInsets.only(top: 3),
+                      //               height: double.infinity,
+                      //               decoration: BoxDecoration(
+                      //                 //color: ColorResources.WHITE,
+                      //                 boxShadow: [
+                      //                   BoxShadow(
+                      //                       color: Colors.grey[
+                      //                           Provider.of<ThemeProvider>(
+                      //                                       context)
+                      //                                   .darkTheme
+                      //                               ? 600
+                      //                               : 200],
+                      //                       spreadRadius: 3,
+                      //                       blurRadius: 10)
+                      //                 ],
+                      //               ),
+                      //               child: ListView.builder(
+                      //                 physics: BouncingScrollPhysics(),
+                      //                 itemCount:
+                      //                     categoryProvider.categoryList.length,
+                      //                 padding: EdgeInsets.all(0),
+                      //                 itemBuilder: (context, index) {
+                      //                   CategoryModel _category =
+                      //                       categoryProvider
+                      //                           .categoryList[index];
+                      //                   return InkWell(
+                      //                     onTap: () {
+                      //                       categoryProvider
+                      //                           .changeSelectedIndex(index);
+                      //                       categoryProvider.getSubCategoryList(
+                      //                           context,
+                      //                           _category.id.toString(),
+                      //                           Provider.of<LocalizationProvider>(
+                      //                                   context,
+                      //                                   listen: false)
+                      //                               .locale
+                      //                               .languageCode);
+                      //                     },
+                      //                     child: CategoryItem(
+                      //                       title: _category.name,
+                      //                       icon: _category.image,
+                      //                       isSelected: categoryProvider
+                      //                               .categorySelectedIndex ==
+                      //                           index,
+                      //                     ),
+                      //                   );
+                      //                 },
+                      //               ),
+                      //             ),
+                      //             categoryProvider.subCategoryList != null
+                      //                 ? Expanded(
+                      //                     child: ListView.builder(
+                      //                       padding: EdgeInsets.all(
+                      //                           Dimensions.PADDING_SIZE_SMALL),
+                      //                       itemCount: categoryProvider
+                      //                               .subCategoryList.length +
+                      //                           1,
+                      //                       itemBuilder: (context, index) {
+                      //                         if (index == 0) {
+                      //                           return ListTile(
+                      //                             onTap: () {
+                      //                               Navigator.of(context)
+                      //                                   .pushNamed(
+                      //                                 RouteHelper
+                      //                                     .getCategoryProductsRoute(
+                      //                                   categoryProvider
+                      //                                       .categoryList[
+                      //                                           categoryProvider
+                      //                                               .categorySelectedIndex]
+                      //                                       .id,
+                      //                                 ),
+                      //                                 arguments:
+                      //                                     CategoryProductScreen(
+                      //                                         categoryModel:
+                      //                                             CategoryModel(
+                      //                                   id: categoryProvider
+                      //                                       .categoryList[
+                      //                                           categoryProvider
+                      //                                               .categorySelectedIndex]
+                      //                                       .id,
+                      //                                   name: categoryProvider
+                      //                                       .categoryList[
+                      //                                           categoryProvider
+                      //                                               .categorySelectedIndex]
+                      //                                       .name,
+                      //                                 )),
+                      //                               );
+                      //                             },
+                      //                             title: Text(getTranslated(
+                      //                                 'all', context)),
+                      //                             trailing: Icon(Icons
+                      //                                 .keyboard_arrow_right),
+                      //                           );
+                      //                         }
+                      //                         return ListTile(
+                      //                           onTap: () {
+                      //                             Navigator.of(context)
+                      //                                 .pushNamed(
+                      //                               RouteHelper
+                      //                                   .getCategoryProductsRoute(
+                      //                                       categoryProvider
+                      //                                           .subCategoryList[
+                      //                                               index - 1]
+                      //                                           .id),
+                      //                             );
+                      //                           },
+                      //                           title: Text(
+                      //                             categoryProvider
+                      //                                 .subCategoryList[
+                      //                                     index - 1]
+                      //                                 .name,
+                      //                             style: poppinsMedium.copyWith(
+                      //                                 fontSize: 13,
+                      //                                 color: ColorResources
+                      //                                     .getTextColor(
+                      //                                         context)),
+                      //                             overflow:
+                      //                                 TextOverflow.ellipsis,
+                      //                           ),
+                      //                           trailing: Icon(
+                      //                               Icons.keyboard_arrow_right),
+                      //                         );
+                      //                       },
+                      //                     ),
+                      //                   )
+                      //                 : Expanded(child: SubCategoryShimmer()),
+                      //           ])
+                      //         : Center(child: CircularProgressIndicator());
+                      //   },
+                      // ),
                       // Banner Two
                       Consumer<BannerTwoProvider>(
                           builder: (context, bannerTwo, child) {
@@ -97,16 +251,6 @@ class HomeScreen extends StatelessWidget {
                                 ? SizedBox()
                                 : BannerTwoView();
                       }),
-                      // Category
-                      Consumer<ProductProvider>(
-                          builder: (context, product, child) {
-                        return product.dailyItemList == null
-                            ? DailyItemView()
-                            : product.dailyItemList.length == 0
-                                ? SizedBox()
-                                : DailyItemView();
-                      }),
-
                       // Popular Item
                       Padding(
                         padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
