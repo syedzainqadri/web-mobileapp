@@ -27,7 +27,7 @@ class BannerTwoProvider extends ChangeNotifier {
         apiResponse.response.data.forEach((brand) {
           BannerTwoModel bannerTwoModel = BannerTwoModel.fromJson(brand);
           if (bannerTwoModel.brandId != null) {
-            getBannerDetails(context, bannerTwoModel.brandId.toString());
+            // getBannerDetails(context, bannerTwoModel.brandId.toString());
           }
           _bannerTwoList.add(bannerTwoModel);
         });
@@ -43,13 +43,13 @@ class BannerTwoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getBannerDetails(BuildContext context, String brandID) async {
-    ApiResponse apiResponse = await bannerTwoRepo.getBannerDetails(brandID);
-    if (apiResponse.response != null &&
-        apiResponse.response.statusCode == 200) {
-      _bannerTwoList.add(BannerTwoModel.fromJson(apiResponse.response.data));
-    } else {
-      ApiChecker.checkApi(context, apiResponse);
-    }
-  }
+  // void getBannerDetails(BuildContext context, String brandID) async {
+  //   ApiResponse apiResponse = await bannerTwoRepo.getBannerDetails(brandID);
+  //   if (apiResponse.response != null &&
+  //       apiResponse.response.statusCode == 200) {
+  //     _bannerTwoList.add(BannerTwoModel.fromJson(apiResponse.response.data));
+  //   } else {
+  //     ApiChecker.checkApi(context, apiResponse);
+  //   }
+  // }
 }

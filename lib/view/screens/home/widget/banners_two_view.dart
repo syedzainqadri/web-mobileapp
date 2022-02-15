@@ -53,48 +53,48 @@ class BannerTwoView extends StatelessWidget {
                           itemBuilder: (context, index, _) {
                             return InkWell(
                               onTap: () {
-                                if (bannerTwo.bannerTwoList[index].brandId !=
-                                    null) {
-                                  Product product;
-                                  for (Product prod in bannerTwo.productList) {
-                                    if (prod.id ==
-                                        bannerTwo
-                                            .bannerTwoList[index].brandId) {
-                                      product = prod;
-                                      break;
-                                    }
-                                  }
-                                  if (product != null) {
-                                    Navigator.pushNamed(
-                                      context,
-                                      RouteHelper.getProductDetailsRoute(
-                                          product.id),
-                                      arguments: ProductDetailsScreen(
-                                          product: product),
-                                    );
-                                  }
-                                } else if (bannerTwo
-                                        .bannerTwoList[index].brandId !=
-                                    null) {
-                                  CategoryModel category;
-                                  for (CategoryModel categoryModel
-                                      in Provider.of<CategoryProvider>(context,
-                                              listen: false)
-                                          .categoryList) {
-                                    if (categoryModel.id ==
-                                        bannerTwo
-                                            .bannerTwoList[index].brandId) {
-                                      category = categoryModel;
-                                      break;
-                                    }
-                                  }
-                                  if (category != null) {
-                                    Navigator.of(context).pushNamed(
-                                      RouteHelper.getCategoryProductsRoute(
-                                          category.id),
-                                    );
-                                  }
-                                }
+                                // if (bannerTwo.bannerTwoList[index].brandId !=
+                                //     null) {
+                                //   Product product;
+                                //   for (Product prod in bannerTwo.productList) {
+                                //     if (prod.id ==
+                                //         bannerTwo
+                                //             .bannerTwoList[index].brandId) {
+                                //       product = prod;
+                                //       break;
+                                //     }
+                                //   }
+                                //   if (product != null) {
+                                //     Navigator.pushNamed(
+                                //       context,
+                                //       RouteHelper.getProductDetailsRoute(
+                                //           product.id),
+                                //       arguments: ProductDetailsScreen(
+                                //           product: product),
+                                //     );
+                                //   }
+                                // } else if (bannerTwo
+                                //         .bannerTwoList[index].brandId !=
+                                //     null) {
+                                //   CategoryModel category;
+                                //   for (CategoryModel categoryModel
+                                //       in Provider.of<CategoryProvider>(context,
+                                //               listen: false)
+                                //           .categoryList) {
+                                //     if (categoryModel.id ==
+                                //         bannerTwo
+                                //             .bannerTwoList[index].brandId) {
+                                //       category = categoryModel;
+                                //       break;
+                                //     }
+                                //   }
+                                //   if (category != null) {
+                                //     Navigator.of(context).pushNamed(
+                                //       RouteHelper.getCategoryProductsRoute(
+                                //           category.id),
+                                //     );
+                                //   }
+                                // }
                               },
                               child: Container(
                                 margin: EdgeInsets.symmetric(horizontal: 10),
@@ -105,7 +105,7 @@ class BannerTwoView extends StatelessWidget {
                                   child: FadeInImage.assetNetwork(
                                     placeholder: Images.placeholder,
                                     image:
-                                        '${Provider.of<SplashProvider>(context, listen: false).baseUrls.bannerTwoImageUrl}'
+                                        'https://admin.akbarimandi.online/storage/app/public/bannertwo'
                                         '/${bannerTwo.bannerTwoList[index].image}',
                                     fit: BoxFit.cover,
                                     imageErrorBuilder: (c, o, s) => Image.asset(
