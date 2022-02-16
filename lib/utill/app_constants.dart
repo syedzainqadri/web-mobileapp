@@ -6,7 +6,7 @@ class AppConstants {
   static const String BASE_URL = 'https://admin.akbarimandi.online';
   static const String CONFIG_URI = '/api/v1/config';
   static const String BANNER_URI = '/api/v1/banners';
-  static const String BANNERTWO_URI = '/api/v1/banner-two';
+  static const String BANNERTWO_URI = '/api/v1/bannertwo';
   static const String CATEGORY_URI = '/api/v1/categories';
   static const String SUB_CATEGORY_URI = '/api/v1/categories/childes/';
   static const String CATEGORY_PRODUCT_URI = '/api/v1/categories/products/';

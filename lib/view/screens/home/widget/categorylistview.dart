@@ -40,7 +40,7 @@ class CategoryListView extends StatelessWidget {
                       }),
                       child: Scrollbar(
                         isAlwaysShown: true,
-                        trackVisibility: true,
+                        // trackVisibility: true,
                         scrollbarOrientation: ScrollbarOrientation.bottom,
                         interactive: true,
                         thickness: 8,
