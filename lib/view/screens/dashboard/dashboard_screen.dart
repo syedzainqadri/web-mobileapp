@@ -59,7 +59,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
           items: [
             _barItem(Images.home, getTranslated('home', context), 0),
             _barItem(Images.list, getTranslated('all_categories', context), 1),
-            _barItem(Images.order_bag, getTranslated('shopping_bag', context), 2),
+            _barItem(
+                Images.order_bag, getTranslated('shopping_bag', context), 2),
             _barItem(Images.order_list, getTranslated('my_order', context), 3),
             _barItem(Images.location, getTranslated('address', context), 4),
             _barItem(Images.coupon, getTranslated('coupon', context), 5),
@@ -84,7 +85,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   BottomNavigationBarItem _barItem(String icon, String label, int index) {
     return BottomNavigationBarItem(
-      icon: Image.asset(icon, color: index == _pageIndex ? Theme.of(context).primaryColor : Colors.grey, width: 25),
+      icon: Image.asset(icon,
+          color: index == _pageIndex
+              ? Theme.of(context).primaryColor
+              : Colors.grey,
+          width: 25),
       label: label,
     );
   }

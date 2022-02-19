@@ -2,25 +2,27 @@ class CategoryModel {
   int _id;
   String _name;
   String _image;
+  int _order;
   int _parentId;
   int _position;
   int _status;
   String _createdAt;
   String _updatedAt;
 
-
   CategoryModel(
       {int id,
-        String name,
-        String image,
-        int parentId,
-        int position,
-        int status,
-        String createdAt,
-        String updatedAt}) {
+      String name,
+      String image,
+      int order,
+      int parentId,
+      int position,
+      int status,
+      String createdAt,
+      String updatedAt}) {
     this._id = id;
     this._name = name;
     this._image = image;
+    this._order = order;
     this._parentId = parentId;
     this._position = position;
     this._status = status;
@@ -31,6 +33,7 @@ class CategoryModel {
   int get id => _id;
   String get name => _name;
   String get image => _image;
+  int get order => _order;
   int get parentId => _parentId;
   int get position => _position;
   int get status => _status;
@@ -41,6 +44,7 @@ class CategoryModel {
     _id = json['id'];
     _name = json['name'];
     _image = json['image'];
+    _order = json['order'];
     _parentId = json['parent_id'];
     _position = json['position'];
     _status = json['status'];
@@ -53,6 +57,7 @@ class CategoryModel {
     data['id'] = this._id;
     data['name'] = this._name;
     data['image'] = this._image;
+    data['order'] = this._order;
     data['parent_id'] = this._parentId;
     data['position'] = this._position;
     data['status'] = this._status;

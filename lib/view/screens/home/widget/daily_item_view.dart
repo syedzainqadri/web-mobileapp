@@ -156,28 +156,50 @@ class DailyItemView extends StatelessWidget {
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Text(
-                                                        PriceConverter
-                                                            .convertPrice(
-                                                          context,
-                                                          productProvider
-                                                              .dailyItemList[
-                                                                  index]
-                                                              .price,
-                                                          discount:
-                                                              productProvider
-                                                                  .dailyItemList[
-                                                                      index]
-                                                                  .discount,
-                                                          discountType:
-                                                              productProvider
-                                                                  .dailyItemList[
-                                                                      index]
-                                                                  .discountType,
+                                                      Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color:
+                                                              Colors.green[900],
+                                                          shape: BoxShape
+                                                              .rectangle,
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(10),
+                                                          ),
                                                         ),
-                                                        style: poppinsBold.copyWith(
-                                                            fontSize: Dimensions
-                                                                .FONT_SIZE_SMALL),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(4.0),
+                                                          child: Text(
+                                                            PriceConverter
+                                                                .convertPrice(
+                                                              context,
+                                                              productProvider
+                                                                  .dailyItemList[
+                                                                      index]
+                                                                  .price,
+                                                              discount:
+                                                                  productProvider
+                                                                      .dailyItemList[
+                                                                          index]
+                                                                      .discount,
+                                                              discountType:
+                                                                  productProvider
+                                                                      .dailyItemList[
+                                                                          index]
+                                                                      .discountType,
+                                                            ),
+                                                            style: poppinsBold
+                                                                .copyWith(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        Dimensions
+                                                                            .FONT_SIZE_SMALL),
+                                                          ),
+                                                        ),
                                                       ),
                                                       productProvider
                                                                   .dailyItemList[
@@ -207,7 +229,12 @@ class DailyItemView extends StatelessWidget {
                                                                           .FONT_SIZE_EXTRA_SMALL,
                                                                   decoration:
                                                                       TextDecoration
-                                                                          .lineThrough),
+                                                                          .lineThrough,
+                                                                  decorationColor:
+                                                                      Colors
+                                                                          .black,
+                                                                  color: Colors
+                                                                      .red),
                                                             )
                                                           : SizedBox(),
                                                     ],

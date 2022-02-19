@@ -60,6 +60,9 @@ class ProductTitleView extends StatelessWidget {
                   // maxLines: 2,
                 ),
                 //Product Price
+                SizedBox(
+                  height: 20,
+                ),
                 Text(
                   '${PriceConverter.convertPrice(context, _startingPrice, discount: product.discount, discountType: product.discountType)}'
                   '${_endingPrice != null ? ' - ${PriceConverter.convertPrice(context, _endingPrice, discount: product.discount, discountType: product.discountType)}' : ''}',

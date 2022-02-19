@@ -251,6 +251,8 @@ class HomeScreen extends StatelessWidget {
                                 ? SizedBox()
                                 : BannerTwoView();
                       }),
+                      //AllCategories with sub Categories
+
                       // Popular Item
                       Padding(
                         padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),

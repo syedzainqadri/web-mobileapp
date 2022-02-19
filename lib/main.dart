@@ -33,6 +33,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'di_container.dart' as di;
 import 'localization/app_localization.dart';
 import 'helper/notification_helper.dart';
+import 'view/screens/category/all_category_section.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     (Platform.isAndroid || Platform.isIOS)
@@ -164,7 +165,7 @@ class _MyAppState extends State<MyApp> {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 supportedLocales: _locals,
-                //home: orderID == null ? SplashScreen() : OrderDetailsScreen(orderModel: null, orderId: orderID),
+                // home: AllCategorySection(),
               );
       },
     );
