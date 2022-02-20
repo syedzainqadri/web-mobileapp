@@ -252,7 +252,39 @@ class HomeScreen extends StatelessWidget {
                                 : BannerTwoView();
                       }),
                       //AllCategories with sub Categories
-
+                      Container(
+                        height: 800,
+                        width: 800,
+                        child: Consumer<CategoryProvider>(
+                          builder: (context, categoryProvider, child) {
+                            return categoryProvider.categoryList.length != 0
+                                ? ListView.builder(
+                                    itemCount:
+                                        categoryProvider.categoryList.length,
+                                    padding: EdgeInsets.all(8.0),
+                                    itemBuilder: (context, index) {
+                                      CategoryModel _category =
+                                          categoryProvider.categoryList[index];
+                                      return Row(
+                                        children: [
+                                          Expanded(
+                                            child: Card(
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text(_category.name),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    })
+                                : Container(
+                                    child: Text('category View'),
+                                  );
+                          },
+                        ),
+                      ),
                       // Popular Item
                       Padding(
                         padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
