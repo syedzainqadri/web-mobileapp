@@ -11,6 +11,7 @@ import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/view/base/main_app_bar.dart';
 import 'package:flutter_grocery/view/base/title_widget.dart';
 import 'package:flutter_grocery/view/screens/home/widget/banners_view.dart';
+import 'package:flutter_grocery/view/screens/home/widget/categories_on_home.dart';
 import 'package:flutter_grocery/view/screens/home/widget/category_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/daily_item_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/product_view.dart';
@@ -119,99 +120,67 @@ class HomeScreen extends StatelessWidget {
                       Container(
                         height: 800,
                         width: 800,
-                        child: Consumer<CategoryProvider>(
+                        child:Consumer<CategoryProvider>(
                           builder: (context, categoryProvider, child) {
                             return categoryProvider.categoryList.length != 0
-                                ? Row(
-                                    children: [
-                                      Container(
-                                        height: 800,
-                                        width: 800,
-                                        child: ListView.builder(
-                                            itemCount: categoryProvider
-                                                .categoryList.length,
-                                            padding: EdgeInsets.all(8.0),
-                                            itemBuilder: (context, index) {
-                                              CategoryModel _category =
-                                                  categoryProvider
-                                                      .categoryList[index];
-                                              return InkWell(
-                                                onTap: () {
-                                                  categoryProvider
-                                                      .changeSelectedIndex(
-                                                          index);
-                                                  categoryProvider
-                                                      .getSubCategoryList(
-                                                          context,
-                                                          _category.id
-                                                              .toString(),
-                                                          Provider.of<LocalizationProvider>(
-                                                                  context,
-                                                                  listen: false)
-                                                              .locale
-                                                              .languageCode);
-                                                },
-                                                child: CategoryItem(
-                                                  title: _category.name,
-                                                  icon: _category.image,
-                                                  isSelected: categoryProvider
-                                                          .categorySelectedIndex ==
-                                                      index,
-                                                ),
+                                ? Container(
+                                  height: 800,
+                                  width: 800,
+                                  child: ListView.builder(
+                                      itemCount: categoryProvider
+                                          .categoryList.length,
+                                      padding: EdgeInsets.all(8.0),
+                                      itemBuilder: (context, index) {
+                                        CategoryModel _category =
+                                        categoryProvider
+                                            .categoryList[index];
+
+                                    // Provider.of<CategoryProvider>(context,listen: false)
+                                    //             .getSubCategoryList(
+                                    //                 context,
+                                    //                 _category.id
+                                    //                     .toString(),
+                                    //                 Provider.of<LocalizationProvider>(
+                                    //                         context,
+                                    //                         listen: false)
+                                    //                     .locale
+                                    //                     .languageCode);
+                                    var category=Provider.of<CategoryProvider>(context,listen: false).subCategoryList;
+                                    print("sub categoris list $category");
+
+                                        return HomeCategory(
+                                                title: _category.name,
+                                                // icon: _category.image,
+                                                // isSelected: categoryProvider
+                                                //         .categorySelectedIndex ==
+                                                //     index,
                                               );
-                                            }),
-                                      ),
-                                      categoryProvider.subCategoryList != null
-                                          ? Expanded(
-                                              child: ListView.builder(
-                                                  padding: EdgeInsets.all(
-                                                      Dimensions
-                                                          .PADDING_SIZE_SMALL),
-                                                  itemCount: categoryProvider
-                                                      .subCategoryList.length,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return ListTile(
-                                                      onTap: () {
-                                                        Navigator.of(context)
-                                                            .pushNamed(
-                                                          RouteHelper
-                                                              .getCategoryProductsRoute(
-                                                            categoryProvider
-                                                                .categoryList[
-                                                                    categoryProvider
-                                                                        .categorySelectedIndex]
-                                                                .id,
-                                                          ),
-                                                          arguments:
-                                                              CategoryProductScreen(
-                                                                  categoryModel:
-                                                                      CategoryModel(
-                                                            id: categoryProvider
-                                                                .categoryList[
-                                                                    categoryProvider
-                                                                        .categorySelectedIndex]
-                                                                .id,
-                                                            name: categoryProvider
-                                                                .categoryList[
-                                                                    categoryProvider
-                                                                        .categorySelectedIndex]
-                                                                .name,
-                                                          )),
-                                                        );
-                                                      },
-                                                      title: Text(getTranslated(
-                                                          'all', context)),
-                                                      trailing: Icon(Icons
-                                                          .keyboard_arrow_right),
-                                                    );
-                                                  }),
-                                            )
-                                          : Container(
-                                              child: Text('No Data'),
-                                            ),
-                                    ],
-                                  )
+                                        // return InkWell(
+                                        //   onTap: () {
+                                        //     categoryProvider
+                                        //         .changeSelectedIndex(
+                                        //             index);
+                                        //     categoryProvider
+                                        //         .getSubCategoryList(
+                                        //             context,
+                                        //             _category.id
+                                        //                 .toString(),
+                                        //             Provider.of<LocalizationProvider>(
+                                        //                     context,
+                                        //                     listen: false)
+                                        //                 .locale
+                                        //                 .languageCode);
+                                        //   },
+                                        //   child: CategoryItem(
+                                        //     title: _category.name,
+                                        //     icon: _category.image,
+                                        //     isSelected: categoryProvider
+                                        //             .categorySelectedIndex ==
+                                        //         index,
+                                        //   ),
+                                        // );
+                                      }),
+                                )
                                 : Container(
                                     child: Text('category View'),
                                   );
