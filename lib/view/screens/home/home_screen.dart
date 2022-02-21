@@ -61,6 +61,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var weidth=MediaQuery.of(context).size.width;
     final ScrollController _scrollController = ScrollController();
     _loadData(context, false);
 
@@ -74,14 +75,13 @@ class HomeScreen extends StatelessWidget {
         body: Scrollbar(
           child: SingleChildScrollView(
             // controller: _scrollController,
-
             child: Container(
-              height: 7000,
-              padding: EdgeInsets.symmetric(horizontal: 40.0),
+              // height: 7000,
+              padding: EdgeInsets.symmetric(horizontal: weidth>800?20.0:8),
               child: Column(
                   // controller: _scrollController,
                   children: [
-                    // Category
+
                     Consumer<CategoryProvider>(
                         builder: (context, category, child) {
                       return category.categoryList == null
@@ -118,37 +118,40 @@ class HomeScreen extends StatelessWidget {
                               : BannerTwoView();
                     }),
                     //AllCategories with sub Categories
-                    Expanded(
-                      child: Container(
-                        width: 800,
-                        child:Consumer<CategoryProvider>(
-                          builder: (context, categoryProvider, child) {
-                            return categoryProvider.categoryList.length != 0
-                                ? ListView.builder(
-                                    itemCount: categoryProvider
-                                        .categoryList.length,
-                                    primary: false,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    padding: EdgeInsets.all(8.0),
-                                    itemBuilder: (context, index) {
-                                      CategoryModel _category =
-                                      categoryProvider
-                                          .categoryList[index];
+                    Container(
+                      // height: 600,
+                      // color: Colors.yellow,
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(horizontal: weidth>1000?weidth*0.2:weidth>800?weidth*0.15:weidth*0.1),
+                      // width: 800,// want to remove this fixed height
+                      child:Consumer<CategoryProvider>(
+                        builder: (context, categoryProvider, child) {
+                          return categoryProvider.categoryList.length != 0
+                              ? ListView.builder(
+                                  itemCount: categoryProvider
+                                      .categoryList.length,
+                                  primary: false,
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  padding: EdgeInsets.all(8.0),
+                                  itemBuilder: (context, index) {
+                                    CategoryModel _category =
+                                    categoryProvider
+                                        .categoryList[index];
 
-                                  var category=Provider.of<CategoryProvider>(context,listen: false).subCategoryList;
-                                  print("sub categoris list $category");
+                                var category=Provider.of<CategoryProvider>(context,listen: false).subCategoryList;
+                                print("sub categoris list $category");
 
-                                      return HomeCategory(
-                                              title: _category.name,
-                                              id: _category.id,
-                                            );
+                                    return HomeCategory(
+                                            title: _category.name,
+                                            id: _category.id,
+                                          );
 
-                                    })
-                                : Container(
-                                    child: Text('category View'),
-                                  );
-                          },
-                        ),
+                                  })
+                              : Container(
+                                  child: Text('category View'),
+                                );
+                        },
                       ),
                     ),
                     // Popular Item
