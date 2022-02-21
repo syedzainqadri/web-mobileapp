@@ -150,6 +150,7 @@ class HomeScreen extends StatelessWidget {
 
                                         return HomeCategory(
                                                 title: _category.name,
+                                                id: _category.id,
                                                 // icon: _category.image,
                                                 // isSelected: categoryProvider
                                                 //         .categorySelectedIndex ==

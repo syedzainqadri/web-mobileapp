@@ -60,7 +60,7 @@ class _HomeCategoryState extends State<HomeCategory> {
                 ),
                  Container(
                    color:Colors.blueGrey,
-                   height: category.length>8?300:category.length>16?600:1000,
+                   height: category.length<8?300:category.length<16?600:1000,
                    child:  isLoading?Center(child: CircularProgressIndicator(),):category!=null || category!=[]?GridView.builder(
                      scrollDirection: Axis.horizontal,
                      // itemCount: titles.length,
@@ -106,7 +106,7 @@ class _HomeCategoryState extends State<HomeCategory> {
                      gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                        crossAxisSpacing: 10.0,
                        mainAxisSpacing: 10.0,
-                       crossAxisCount: 2
+                       crossAxisCount: category.length<8?2:category.length<16?3:4,
 
                        // crossAxisCount: width>800?1:width>600?2:3,
                        // mainAxisExtent: width>800?width*0.15:width>600?width*0.3:width*0.5,
