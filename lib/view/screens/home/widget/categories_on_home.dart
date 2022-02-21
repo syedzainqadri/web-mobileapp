@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery/data/model/response/category_model.dart';
+import 'package:flutter_grocery/helper/route_helper.dart';
 import 'package:flutter_grocery/provider/category_provider.dart';
 import 'package:flutter_grocery/provider/localization_provider.dart';
 import 'package:flutter_grocery/view/screens/category/all_category_screen.dart';
+import 'package:flutter_grocery/view/screens/product/category_product_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeCategory extends StatefulWidget {
@@ -68,6 +70,20 @@ class _HomeCategoryState extends State<HomeCategory> {
 
                        return InkWell(
                          onTap: () {
+
+                           Navigator.of(context).pushNamed(
+                             RouteHelper.getCategoryProductsRoute(
+                             category[index]
+                                   .id,
+                             ),
+                             arguments: CategoryProductScreen(
+                                 categoryModel: CategoryModel(
+                                   id: category[index]
+                                       .id,
+                                   name: category[index]
+                                       .name,
+                                 )),
+                           );
                            // categoryProvider.changeSelectedIndex(index);
                            // categoryProvider.getSubCategoryList(
                            //     context,
