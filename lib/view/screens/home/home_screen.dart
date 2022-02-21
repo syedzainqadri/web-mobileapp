@@ -73,132 +73,94 @@ class HomeScreen extends StatelessWidget {
         appBar: ResponsiveHelper.isDesktop(context) ? MainAppBar() : null,
         body: Scrollbar(
           child: SingleChildScrollView(
-            controller: _scrollController,
-            child: Center(
-              child: SizedBox(
-                width: 1170,
-                child: Column(
-                    // controller: _scrollController,
-                    children: [
-                      // Category
-                      Consumer<CategoryProvider>(
-                          builder: (context, category, child) {
-                        return category.categoryList == null
-                            ? CategoryListView()
-                            : category.categoryList.length == 0
-                                ? SizedBox()
-                                : CategoryListView();
-                      }),
-                      //banner
-                      Consumer<BannerProvider>(
-                          builder: (context, banner, child) {
-                        return banner.bannerList == null
-                            ? BannersView()
-                            : banner.bannerList.length == 0
-                                ? SizedBox()
-                                : BannersView();
-                      }),
-                      // DailyNeeds
-                      Consumer<ProductProvider>(
-                          builder: (context, product, child) {
-                        return product.dailyItemList == null
-                            ? DailyItemView()
-                            : product.dailyItemList.length == 0
-                                ? SizedBox()
-                                : DailyItemView();
-                      }),
-                      // Banner Two
-                      Consumer<BannerTwoProvider>(
-                          builder: (context, bannerTwo, child) {
-                        return bannerTwo.bannerTwoList == null
-                            ? BannerTwoView()
-                            : bannerTwo.bannerTwoList.length == 0
-                                ? SizedBox()
-                                : BannerTwoView();
-                      }),
-                      //AllCategories with sub Categories
-                      Container(
-                        height: 800,
+            // controller: _scrollController,
+
+            child: Container(
+              height: 7000,
+              padding: EdgeInsets.symmetric(horizontal: 40.0),
+              child: Column(
+                  // controller: _scrollController,
+                  children: [
+                    // Category
+                    Consumer<CategoryProvider>(
+                        builder: (context, category, child) {
+                      return category.categoryList == null
+                          ? CategoryListView()
+                          : category.categoryList.length == 0
+                              ? SizedBox()
+                              : CategoryListView();
+                    }),
+                    //banner
+                    Consumer<BannerProvider>(
+                        builder: (context, banner, child) {
+                      return banner.bannerList == null
+                          ? BannersView()
+                          : banner.bannerList.length == 0
+                              ? SizedBox()
+                              : BannersView();
+                    }),
+                    // DailyNeeds
+                    Consumer<ProductProvider>(
+                        builder: (context, product, child) {
+                      return product.dailyItemList == null
+                          ? DailyItemView()
+                          : product.dailyItemList.length == 0
+                              ? SizedBox()
+                              : DailyItemView();
+                    }),
+                    // Banner Two
+                    Consumer<BannerTwoProvider>(
+                        builder: (context, bannerTwo, child) {
+                      return bannerTwo.bannerTwoList == null
+                          ? BannerTwoView()
+                          : bannerTwo.bannerTwoList.length == 0
+                              ? SizedBox()
+                              : BannerTwoView();
+                    }),
+                    //AllCategories with sub Categories
+                    Expanded(
+                      child: Container(
                         width: 800,
                         child:Consumer<CategoryProvider>(
                           builder: (context, categoryProvider, child) {
                             return categoryProvider.categoryList.length != 0
-                                ? Container(
-                                  height: 800,
-                                  width: 800,
-                                  child: ListView.builder(
-                                      itemCount: categoryProvider
-                                          .categoryList.length,
-                                      padding: EdgeInsets.all(8.0),
-                                      itemBuilder: (context, index) {
-                                        CategoryModel _category =
-                                        categoryProvider
-                                            .categoryList[index];
+                                ? ListView.builder(
+                                    itemCount: categoryProvider
+                                        .categoryList.length,
+                                    primary: false,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    padding: EdgeInsets.all(8.0),
+                                    itemBuilder: (context, index) {
+                                      CategoryModel _category =
+                                      categoryProvider
+                                          .categoryList[index];
 
-                                    // Provider.of<CategoryProvider>(context,listen: false)
-                                    //             .getSubCategoryList(
-                                    //                 context,
-                                    //                 _category.id
-                                    //                     .toString(),
-                                    //                 Provider.of<LocalizationProvider>(
-                                    //                         context,
-                                    //                         listen: false)
-                                    //                     .locale
-                                    //                     .languageCode);
-                                    var category=Provider.of<CategoryProvider>(context,listen: false).subCategoryList;
-                                    print("sub categoris list $category");
+                                  var category=Provider.of<CategoryProvider>(context,listen: false).subCategoryList;
+                                  print("sub categoris list $category");
 
-                                        return HomeCategory(
-                                                title: _category.name,
-                                                id: _category.id,
-                                                // icon: _category.image,
-                                                // isSelected: categoryProvider
-                                                //         .categorySelectedIndex ==
-                                                //     index,
-                                              );
-                                        // return InkWell(
-                                        //   onTap: () {
-                                        //     categoryProvider
-                                        //         .changeSelectedIndex(
-                                        //             index);
-                                        //     categoryProvider
-                                        //         .getSubCategoryList(
-                                        //             context,
-                                        //             _category.id
-                                        //                 .toString(),
-                                        //             Provider.of<LocalizationProvider>(
-                                        //                     context,
-                                        //                     listen: false)
-                                        //                 .locale
-                                        //                 .languageCode);
-                                        //   },
-                                        //   child: CategoryItem(
-                                        //     title: _category.name,
-                                        //     icon: _category.image,
-                                        //     isSelected: categoryProvider
-                                        //             .categorySelectedIndex ==
-                                        //         index,
-                                        //   ),
-                                        // );
-                                      }),
-                                )
+                                      return HomeCategory(
+                                              title: _category.name,
+                                              id: _category.id,
+                                            );
+
+                                    })
                                 : Container(
                                     child: Text('category View'),
                                   );
                           },
                         ),
                       ),
-                      // Popular Item
-                      Padding(
-                        padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                        child: TitleWidget(
-                            title: getTranslated('popular_item', context)),
-                      ),
-                      ProductView(
-                          productType: ProductType.POPULAR_PRODUCT,
-                          scrollController: _scrollController),
-                    ]),
-              ),
+                    ),
+                    // Popular Item
+                    Padding(
+                      padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                      child: TitleWidget(
+                          title: getTranslated('popular_item', context)),
+                    ),
+                    ProductView(
+                        productType: ProductType.POPULAR_PRODUCT,
+                        scrollController: _scrollController),
+                  ]),
             ),
           ),
         ),
