@@ -94093,22 +94093,14 @@ o=A.k(a,!1,o).c
 n.ne(a,"1",b,o.gcl(o))
 return A.o(null,r)}})
 return A.p($async$kT,r)},
-A(a,b){var s,r,q,p,o,n,m,l,k,j,i,h=null,g=b.G(t.w).f.a.a,f=A.ix()
+A(a,b){var s,r,q,p,o=null,n=b.G(t.w).f,m=A.ix()
 this.kT(b,!1)
 s=A.r(b).b
-r=A.bt(b)?new A.d7(h):h
-q=g>800?130:40
-p=t.EW
-o=A.bj(new A.aom(),p)
-n=A.bj(new A.aon(),t.ss)
-m=t.Y
-l=A.bj(new A.aoo(),m)
-k=A.bj(new A.aop(),t.jI)
-j=A.bj(new A.aoq(),m)
-m=A.bj(new A.aor(),m)
-if(g>1150)i=g*0.08
-else i=g>1000?g*0.05:8
-return A.ZH(s,A.cw(r,h,A.dn(A.e_(A.N(h,A.au(A.a([o,n,l,k,j,m,A.N(h,A.bj(new A.aos(),p),B.e,h,h,h,h,h,h,new A.A(i,0,i,0),h,h,h),new A.a5(new A.A(10,10,10,10),new A.rc(A.x(b,B.d,t.o).b.h(0,"popular_item"),h,h),h),new A.Zr(B.iK,f,h)],t.t),B.m,B.l,B.i,h),B.e,h,h,h,h,h,h,new A.A(q,0,q,0),h,h,h),h,B.I,h,h,!1,B.A),h,h,h,h,h),h,h),new A.aot(this,b))}}
+r=A.bt(b)?new A.d7(o):o
+n=n.a.a>800?130:40
+q=t.EW
+p=t.Y
+return A.ZH(s,A.cw(r,o,A.dn(A.e_(A.N(o,A.au(A.a([A.bj(new A.aom(),q),A.bj(new A.aon(),t.ss),A.bj(new A.aoo(),p),A.bj(new A.aop(),t.jI),A.bj(new A.aoq(),p),A.bj(new A.aor(),p),A.N(o,A.bj(new A.aos(),q),B.e,o,o,o,o,o,o,new A.A(10,10,10,10),o,o,o),new A.a5(new A.A(10,10,10,10),new A.rc(A.x(b,B.d,t.o).b.h(0,"popular_item"),o,o),o),new A.Zr(B.iK,m,o)],t.t),B.m,B.l,B.i,o),B.e,o,o,o,o,o,o,new A.A(n,0,n,0),o,o,o),o,B.I,o,o,!1,B.A),o,o,o,o,o),o,o),new A.aot(this,b))}}
 A.aot.prototype={
 $0(){var s=0,r=A.q(t.P),q=this
 var $async$$0=A.m(function(a,b){if(a===1)return A.n(b,r)
@@ -94241,7 +94233,7 @@ s.E()},
 $S:217}
 A.adc.prototype={
 $3(a,b,c){var s=null,r=this.a,q=A.ay(10)
-return A.b6(!1,!0,A.N(s,A.eX(A.ay(10),A.fd(B.a2,s,A.d(A.k(a,!1,t.l).c.d)+"/"+A.d(r.b[b].c),new A.ad9(),"assets/image/placeholder.jpg",s)),B.e,s,s,new A.ai(s,s,s,q,s,s,B.r),s,s,new A.A(10,0,10,0),s,s,s,s),s,!0,s,s,s,s,s,s,s,s,s,new A.ada(r,b,a),s,s,s)},
+return A.b6(!1,!0,A.N(s,A.eX(A.ay(10),A.fd(B.a2,s,"https://admin.akbarimandi.online/storage/app/public/bannertwo/"+A.d(r.b[b].c),new A.ad9(),"assets/image/placeholder.jpg",s)),B.e,s,s,new A.ai(s,s,s,q,s,s,B.r),s,s,new A.A(10,0,10,0),s,s,s,s),s,!0,s,s,s,s,s,s,s,s,s,new A.ada(r,b,a),s,s,s)},
 $S:218}
 A.ada.prototype={
 $0(){var s,r=this.a,q=r.b[this.b].d
