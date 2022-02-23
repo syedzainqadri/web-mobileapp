@@ -1,4 +1,3 @@
-
 import 'package:flutter_grocery/helper/product_type.dart';
 import 'package:flutter_grocery/helper/responsive_helper.dart';
 import 'package:flutter_grocery/localization/language_constrants.dart';
@@ -95,21 +94,19 @@ class HomeScreen extends StatelessWidget {
             // controller: _scrollController,
             child: Container(
               // height: 7000,
-              padding: EdgeInsets.symmetric(horizontal: weidth>800?130:40),
+              padding:
+                  EdgeInsets.symmetric(horizontal: weidth > 800 ? 130 : 40),
               child: Column(
                   // controller: _scrollController,
                   children: [
                     Consumer<CategoryProvider>(
                         builder: (context, category, child) {
                       return category.categoryList == null
-                          ? Container(
-                          height: 335,
-                          child: CategoryListView())
+                          ? Container(height: 335, child: CategoryListView())
                           : category.categoryList.length == 0
                               ? SizedBox()
                               : Container(
-                          height: 335,
-                          child: CategoryListView());
+                                  height: 335, child: CategoryListView());
                     }),
                     //banner
                     Consumer<BannerProvider>(builder: (context, banner, child) {
@@ -123,14 +120,19 @@ class HomeScreen extends StatelessWidget {
                     Consumer<ProductProvider>(
                         builder: (context, product, child) {
                       return product.dailyItemList == null
-                          ? Container(
-                          height: 335,
-                          child: DailyItemView())
+                          ? Container(height: 335, child: DailyItemView())
                           : product.dailyItemList.length == 0
                               ? SizedBox()
-                              : Container(
-                          height: 380,
-                          child: DailyItemView());
+                              : Container(height: 380, child: DailyItemView());
+                    }),
+                    // Banner Two
+                    Consumer<BannerTwoProvider>(
+                        builder: (context, bannerTwo, child) {
+                      return bannerTwo.bannerTwoList == null
+                          ? BannerTwoView()
+                          : bannerTwo.bannerTwoList.length == 0
+                              ? SizedBox()
+                              : BannerTwoView();
                     }),
                     // Akbari Mandi Special
                     Consumer<ProductProvider>(
@@ -144,33 +146,21 @@ class HomeScreen extends StatelessWidget {
                     // Fresh Items
                     Consumer<ProductProvider>(
                         builder: (context, product, child) {
-                      return product.freshItemList==null
+                      return product.freshItemList == null
                           ? FreshItemView()
                           : product.freshItemList.length == 0
                               ? SizedBox()
                               : FreshItemView();
                     }),
-                    // Banner Two
-                    Consumer<BannerTwoProvider>(
-                        builder: (context, bannerTwo, child) {
-                      return bannerTwo.bannerTwoList == null
-                          ? BannerTwoView()
-                          : bannerTwo.bannerTwoList.length == 0
-                              ? SizedBox()
-                              : BannerTwoView();
-                    }),
                     //AllCategories with sub Categories
                     Container(
-                      // height: 600,
-                      // color: Colors.yellow,
-                      // width: double.infinity,
-                      padding: EdgeInsets.symmetric(
-                          horizontal: weidth > 1150
-                              ? weidth * 0.08
-                              : weidth > 1000
-                                  ? weidth * 0.05
-                                  :8),
-                      // width: 800,// want to remove this fixed height
+                      padding: EdgeInsets.all(10),
+                      // padding: EdgeInsets.symmetric(
+                      //     horizontal: weidth > 1150
+                      //         ? weidth * 0.08
+                      //         : weidth > 1000
+                      //             ? weidth * 0.05
+                      //             : 8),
                       child: Consumer<CategoryProvider>(
                         builder: (context, categoryProvider, child) {
                           return categoryProvider.categoryList.length != 0
