@@ -39,7 +39,7 @@ class FreshItemView extends StatelessWidget {
                     }),
               ),
               Container(
-                height: 300,
+                height: 330,
                 child: ScrollConfiguration(
                   behavior:
                       ScrollConfiguration.of(context).copyWith(dragDevices: {

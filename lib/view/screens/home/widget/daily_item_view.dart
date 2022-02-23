@@ -22,7 +22,7 @@ class DailyItemView extends StatelessWidget {
       return productProvider.dailyItemList != null
           ? Column(children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(10, 20, 15, 10),
+                padding: EdgeInsets.fromLTRB(10, 10, 15, 10),
                 child: TitleWidget(
                     title: getTranslated('daily_needs', context),
                     onTap: () {
@@ -31,7 +31,7 @@ class DailyItemView extends StatelessWidget {
                     }),
               ),
               Container(
-                height: 300,
+                height: 330,
                 child: ScrollConfiguration(
                   behavior:
                       ScrollConfiguration.of(context).copyWith(dragDevices: {
@@ -54,6 +54,10 @@ class DailyItemView extends StatelessWidget {
                         //     horizontal: Dimensions.PADDING_SIZE_SMALL),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
+
+                          print(" signle item is: ${  productProvider
+                              .dailyItemList[
+                          index].discount}");
                           return Padding(
                             padding: EdgeInsets.only(
                                 right: Dimensions.PADDING_SIZE_SMALL),
@@ -208,21 +212,12 @@ class DailyItemView extends StatelessWidget {
                                                               0
                                                           ? Text(
                                                               PriceConverter
-                                                                  .convertPrice(
+                                                                  .convertWithDiscount(
                                                                 context,
-                                                                productProvider
-                                                                    .dailyItemList[
-                                                                        index]
-                                                                    .price,
-                                                                discount: productProvider
-                                                                    .dailyItemList[
-                                                                        index]
-                                                                    .discount,
-                                                                discountType: productProvider
-                                                                    .dailyItemList[
-                                                                        index]
-                                                                    .discountType,
-                                                              ),
+                                                                productProvider.dailyItemList[index].price,
+                                                                productProvider.dailyItemList[index].discount,
+                                                                 productProvider.dailyItemList[index].discountType).toString()
+                                                              ,
                                                               style: poppinsRegular.copyWith(
                                                                   fontSize:
                                                                       Dimensions

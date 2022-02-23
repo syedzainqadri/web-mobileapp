@@ -24,14 +24,14 @@ class AmsItemView extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 20, 15, 10),
                 child: TitleWidget(
-                    title: getTranslated('akbari_special', context),
+                    title: getTranslated('akbari_special', context)??" ",
                     onTap: () {
                       Navigator.pushNamed(
                           context, RouteHelper.getAmsItemRoute());
                     }),
               ),
               Container(
-                height: 300,
+                height: 330,
                 child: ScrollConfiguration(
                   behavior:
                       ScrollConfiguration.of(context).copyWith(dragDevices: {

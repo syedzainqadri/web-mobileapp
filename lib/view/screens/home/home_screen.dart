@@ -95,18 +95,21 @@ class HomeScreen extends StatelessWidget {
             // controller: _scrollController,
             child: Container(
               // height: 7000,
-              padding:
-                  EdgeInsets.symmetric(horizontal: weidth > 800 ? 20.0 : 8),
+              padding: EdgeInsets.symmetric(horizontal: weidth>800?130:40),
               child: Column(
                   // controller: _scrollController,
                   children: [
                     Consumer<CategoryProvider>(
                         builder: (context, category, child) {
                       return category.categoryList == null
-                          ? CategoryListView()
+                          ? Container(
+                          height: 335,
+                          child: CategoryListView())
                           : category.categoryList.length == 0
                               ? SizedBox()
-                              : CategoryListView();
+                              : Container(
+                          height: 335,
+                          child: CategoryListView());
                     }),
                     //banner
                     Consumer<BannerProvider>(builder: (context, banner, child) {
@@ -120,49 +123,53 @@ class HomeScreen extends StatelessWidget {
                     Consumer<ProductProvider>(
                         builder: (context, product, child) {
                       return product.dailyItemList == null
-                          ? DailyItemView()
+                          ? Container(
+                          height: 335,
+                          child: DailyItemView())
                           : product.dailyItemList.length == 0
                               ? SizedBox()
-                              : DailyItemView();
+                              : Container(
+                          height: 380,
+                          child: DailyItemView());
                     }),
                     // Akbari Mandi Special
                     Consumer<ProductProvider>(
                         builder: (context, product, child) {
-                      return product.amsItemList != null
-                          ? AmsItemView():Offstage();
-                          // : product.amsItemList.length == 0
-                          //     ? SizedBox()
-                          //     : AmsItemView();
+                      return product.amsItemList == null
+                          ? AmsItemView()
+                          : product.amsItemList.length == 0
+                              ? SizedBox()
+                              : AmsItemView();
                     }),
                     // Fresh Items
                     Consumer<ProductProvider>(
                         builder: (context, product, child) {
-                      return product.freshItemList.length!=0
-                          ? FreshItemView():Offstage();
-                          // : product.freshItemList.length == 0
-                          //     ? SizedBox()
-                          //     : FreshItemView();
+                      return product.freshItemList==null
+                          ? FreshItemView()
+                          : product.freshItemList.length == 0
+                              ? SizedBox()
+                              : FreshItemView();
                     }),
                     // Banner Two
                     Consumer<BannerTwoProvider>(
                         builder: (context, bannerTwo, child) {
-                      return bannerTwo.bannerTwoList != null
-                          ? BannerTwoView():Offstage();
-                          // : bannerTwo.bannerTwoList.length == 0
-                          //     ? SizedBox()
-                          //     : BannerTwoView();
+                      return bannerTwo.bannerTwoList == null
+                          ? BannerTwoView()
+                          : bannerTwo.bannerTwoList.length == 0
+                              ? SizedBox()
+                              : BannerTwoView();
                     }),
                     //AllCategories with sub Categories
                     Container(
                       // height: 600,
                       // color: Colors.yellow,
-                      width: double.infinity,
+                      // width: double.infinity,
                       padding: EdgeInsets.symmetric(
-                          horizontal: weidth > 1000
-                              ? weidth * 0.2
-                              : weidth > 1170
-                                  ? weidth * 0.15
-                                  : weidth * 0.1),
+                          horizontal: weidth > 1150
+                              ? weidth * 0.08
+                              : weidth > 1000
+                                  ? weidth * 0.05
+                                  :8),
                       // width: 800,// want to remove this fixed height
                       child: Consumer<CategoryProvider>(
                         builder: (context, categoryProvider, child) {
@@ -173,7 +180,7 @@ class HomeScreen extends StatelessWidget {
                                   primary: false,
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(4.0),
                                   itemBuilder: (context, index) {
                                     CategoryModel _category =
                                         categoryProvider.categoryList[index];

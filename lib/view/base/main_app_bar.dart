@@ -12,7 +12,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Center(
       child: Container(
           color: Theme.of(context).cardColor,
-          width: 1170.0,
+          // width: 1170.0,
+          padding: EdgeInsets.symmetric(horizontal: 130),
           height: 45.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

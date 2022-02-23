@@ -54,7 +54,7 @@ class _HomeCategoryState extends State<HomeCategory> {
                 Container(
                   color: Colors.yellow.shade200,
                   alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.symmetric(vertical: 15.0,horizontal: 10.0),
+                  padding: EdgeInsets.symmetric(vertical: 15.0,horizontal: 2.0),
                   child:Text(
                     widget.title
                   ),
@@ -62,11 +62,10 @@ class _HomeCategoryState extends State<HomeCategory> {
                  SizedBox(height: 10.0,),
                  Container(
                    color:Colors.white,
-                   // height:isLoading?40:category.length<4?150:(category.length/4)*150,
                    child:  isLoading?Center(child: CircularProgressIndicator(),):category!=null || category!=[]?
 
                    MasonryGridView.count(
-                     crossAxisCount: width>1000?5:width>800?4:width>600?3:2,
+                     crossAxisCount: width>1100?5:width>800?4:width>600?3:2,
                      shrinkWrap: true,
                      physics: NeverScrollableScrollPhysics(),
                      itemCount: category.length,
