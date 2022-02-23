@@ -27,7 +27,7 @@ class DailyItemScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: CustomAppBar(title: getTranslated('akbari_special', context)),
+      appBar: CustomAppBar(title: getTranslated('daily_needs', context)),
       body: Scrollbar(
           child: SingleChildScrollView(
               child: Center(

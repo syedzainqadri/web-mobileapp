@@ -24,7 +24,7 @@ class DailyItemView extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 20, 15, 10),
                 child: TitleWidget(
-                    title: getTranslated('akbari_special', context),
+                    title: getTranslated('daily_needs', context),
                     onTap: () {
                       Navigator.pushNamed(
                           context, RouteHelper.getDailyItemRoute());

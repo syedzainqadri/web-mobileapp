@@ -23,8 +23,10 @@ import '../../../utill/color_resources.dart';
 import '../../../utill/styles.dart';
 import '../category/all_category_screen.dart';
 import '../product/category_product_screen.dart';
+import 'widget/ams_item_view.dart';
 import 'widget/banners_two_view.dart';
 import 'widget/categorylistview.dart';
+import 'widget/fresh_item_view.dart';
 
 class HomeScreen extends StatelessWidget {
   Future<void> _loadData(BuildContext context, bool reload) async {
@@ -61,7 +63,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var weidth=MediaQuery.of(context).size.width;
+    var weidth = MediaQuery.of(context).size.width;
     final ScrollController _scrollController = ScrollController();
     _loadData(context, false);
 
@@ -77,11 +79,11 @@ class HomeScreen extends StatelessWidget {
             // controller: _scrollController,
             child: Container(
               // height: 7000,
-              padding: EdgeInsets.symmetric(horizontal: weidth>800?20.0:8),
+              padding:
+                  EdgeInsets.symmetric(horizontal: weidth > 800 ? 20.0 : 8),
               child: Column(
                   // controller: _scrollController,
                   children: [
-
                     Consumer<CategoryProvider>(
                         builder: (context, category, child) {
                       return category.categoryList == null
@@ -91,8 +93,7 @@ class HomeScreen extends StatelessWidget {
                               : CategoryListView();
                     }),
                     //banner
-                    Consumer<BannerProvider>(
-                        builder: (context, banner, child) {
+                    Consumer<BannerProvider>(builder: (context, banner, child) {
                       return banner.bannerList == null
                           ? BannersView()
                           : banner.bannerList.length == 0
@@ -108,6 +109,24 @@ class HomeScreen extends StatelessWidget {
                               ? SizedBox()
                               : DailyItemView();
                     }),
+                    // Akbari Mandi Special
+                    Consumer<ProductProvider>(
+                        builder: (context, product, child) {
+                      return product.amsItemList == null
+                          ? AmsItemView()
+                          : product.amsItemList.length == 0
+                              ? SizedBox()
+                              : AmsItemView();
+                    }),
+                    // Fresh Items
+                    Consumer<ProductProvider>(
+                        builder: (context, product, child) {
+                      return product.freshItemList == null
+                          ? FreshItemView()
+                          : product.freshItemList.length == 0
+                              ? SizedBox()
+                              : FreshItemView();
+                    }),
                     // Banner Two
                     Consumer<BannerTwoProvider>(
                         builder: (context, bannerTwo, child) {
@@ -122,31 +141,37 @@ class HomeScreen extends StatelessWidget {
                       // height: 600,
                       // color: Colors.yellow,
                       width: double.infinity,
-                      padding: EdgeInsets.symmetric(horizontal: weidth>1000?weidth*0.2:weidth>800?weidth*0.15:weidth*0.1),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: weidth > 1000
+                              ? weidth * 0.2
+                              : weidth > 1170
+                                  ? weidth * 0.15
+                                  : weidth * 0.1),
                       // width: 800,// want to remove this fixed height
-                      child:Consumer<CategoryProvider>(
+                      child: Consumer<CategoryProvider>(
                         builder: (context, categoryProvider, child) {
                           return categoryProvider.categoryList.length != 0
                               ? ListView.builder(
-                                  itemCount: categoryProvider
-                                      .categoryList.length,
+                                  itemCount:
+                                      categoryProvider.categoryList.length,
                                   primary: false,
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
                                   padding: EdgeInsets.all(8.0),
                                   itemBuilder: (context, index) {
                                     CategoryModel _category =
-                                    categoryProvider
-                                        .categoryList[index];
+                                        categoryProvider.categoryList[index];
 
-                                var category=Provider.of<CategoryProvider>(context,listen: false).subCategoryList;
-                                print("sub categoris list $category");
+                                    var category =
+                                        Provider.of<CategoryProvider>(context,
+                                                listen: false)
+                                            .subCategoryList;
+                                    print("sub categoris list $category");
 
                                     return HomeCategory(
-                                            title: _category.name,
-                                            id: _category.id,
-                                          );
-
+                                      title: _category.name,
+                                      id: _category.id,
+                                    );
                                   })
                               : Container(
                                   child: Text('category View'),
