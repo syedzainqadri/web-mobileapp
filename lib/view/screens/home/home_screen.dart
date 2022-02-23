@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 import 'package:flutter_grocery/helper/product_type.dart';
 import 'package:flutter_grocery/helper/responsive_helper.dart';
 import 'package:flutter_grocery/localization/language_constrants.dart';
@@ -27,6 +27,7 @@ import 'widget/ams_item_view.dart';
 import 'widget/banners_two_view.dart';
 import 'widget/categorylistview.dart';
 import 'widget/fresh_item_view.dart';
+import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
   Future<void> _loadData(BuildContext context, bool reload) async {
@@ -44,6 +45,21 @@ class HomeScreen extends StatelessWidget {
     await Provider.of<BannerTwoProvider>(context, listen: false)
         .getBannerTwoList(context, reload);
     await Provider.of<ProductProvider>(context, listen: false).getDailyItemList(
+      context,
+      reload,
+      Provider.of<LocalizationProvider>(context, listen: false)
+          .locale
+          .languageCode,
+    );
+
+    await Provider.of<ProductProvider>(context, listen: false).getFreshItemList(
+      context,
+      reload,
+      Provider.of<LocalizationProvider>(context, listen: false)
+          .locale
+          .languageCode,
+    );
+    await Provider.of<ProductProvider>(context, listen: false).getAmsItemList(
       context,
       reload,
       Provider.of<LocalizationProvider>(context, listen: false)
@@ -112,29 +128,29 @@ class HomeScreen extends StatelessWidget {
                     // Akbari Mandi Special
                     Consumer<ProductProvider>(
                         builder: (context, product, child) {
-                      return product.amsItemList == null
-                          ? AmsItemView()
-                          : product.amsItemList.length == 0
-                              ? SizedBox()
-                              : AmsItemView();
+                      return product.amsItemList != null
+                          ? AmsItemView():Offstage();
+                          // : product.amsItemList.length == 0
+                          //     ? SizedBox()
+                          //     : AmsItemView();
                     }),
                     // Fresh Items
                     Consumer<ProductProvider>(
                         builder: (context, product, child) {
-                      return product.freshItemList == null
-                          ? FreshItemView()
-                          : product.freshItemList.length == 0
-                              ? SizedBox()
-                              : FreshItemView();
+                      return product.freshItemList.length!=0
+                          ? FreshItemView():Offstage();
+                          // : product.freshItemList.length == 0
+                          //     ? SizedBox()
+                          //     : FreshItemView();
                     }),
                     // Banner Two
                     Consumer<BannerTwoProvider>(
                         builder: (context, bannerTwo, child) {
-                      return bannerTwo.bannerTwoList == null
-                          ? BannerTwoView()
-                          : bannerTwo.bannerTwoList.length == 0
-                              ? SizedBox()
-                              : BannerTwoView();
+                      return bannerTwo.bannerTwoList != null
+                          ? BannerTwoView():Offstage();
+                          // : bannerTwo.bannerTwoList.length == 0
+                          //     ? SizedBox()
+                          //     : BannerTwoView();
                     }),
                     //AllCategories with sub Categories
                     Container(

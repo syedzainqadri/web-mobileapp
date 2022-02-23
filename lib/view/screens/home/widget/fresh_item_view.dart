@@ -15,6 +15,14 @@ import 'package:provider/provider.dart';
 
 class FreshItemView extends StatelessWidget {
   final ScrollController controller = ScrollController();
+
+  fetchData(){
+
+
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ProductProvider>(
