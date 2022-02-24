@@ -54,10 +54,8 @@ class DailyItemView extends StatelessWidget {
                         //     horizontal: Dimensions.PADDING_SIZE_SMALL),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-
-                          print(" signle item is: ${  productProvider
-                              .dailyItemList[
-                          index].discount}");
+                          print(
+                              " signle item is: ${productProvider.dailyItemList[index].discount}");
                           return Padding(
                             padding: EdgeInsets.only(
                                 right: Dimensions.PADDING_SIZE_SMALL),
@@ -134,7 +132,7 @@ class DailyItemView extends StatelessWidget {
                                                     .dailyItemList[index].name,
                                                 style: poppinsMedium.copyWith(
                                                     fontSize: Dimensions
-                                                        .FONT_SIZE_SMALL),
+                                                        .FONT_SIZE_DEFAULT),
                                                 // maxLines: 1, overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
@@ -145,7 +143,7 @@ class DailyItemView extends StatelessWidget {
                                                 '${productProvider.dailyItemList[index].capacity} ${productProvider.dailyItemList[index].unit}',
                                                 style: poppinsRegular.copyWith(
                                                     fontSize: Dimensions
-                                                        .FONT_SIZE_EXTRA_SMALL),
+                                                        .FONT_SIZE_DEFAULT),
                                                 // maxLines: 2,
                                                 // overflow: TextOverflow.ellipsis,
                                               ),
@@ -201,7 +199,7 @@ class DailyItemView extends StatelessWidget {
                                                                         .white,
                                                                     fontSize:
                                                                         Dimensions
-                                                                            .FONT_SIZE_SMALL),
+                                                                            .FONT_SIZE_DEFAULT),
                                                           ),
                                                         ),
                                                       ),
@@ -211,17 +209,25 @@ class DailyItemView extends StatelessWidget {
                                                                   .discount >
                                                               0
                                                           ? Text(
-                                                              PriceConverter
-                                                                  .convertWithDiscount(
-                                                                context,
-                                                                productProvider.dailyItemList[index].price,
-                                                                productProvider.dailyItemList[index].discount,
-                                                                 productProvider.dailyItemList[index].discountType).toString()
-                                                              ,
+                                                              PriceConverter.convertWithDiscount(
+                                                                          context,
+                                                                          productProvider
+                                                                              .dailyItemList[
+                                                                                  index]
+                                                                              .price,
+                                                                          productProvider
+                                                                              .dailyItemList[
+                                                                                  index]
+                                                                              .discount,
+                                                                          productProvider
+                                                                              .dailyItemList[index]
+                                                                              .discountType)
+                                                                      .toString() +
+                                                                  '.00',
                                                               style: poppinsRegular.copyWith(
                                                                   fontSize:
                                                                       Dimensions
-                                                                          .FONT_SIZE_EXTRA_SMALL,
+                                                                          .FONT_SIZE_DEFAULT,
                                                                   decoration:
                                                                       TextDecoration
                                                                           .lineThrough,

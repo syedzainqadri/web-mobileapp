@@ -26,9 +26,9 @@ class PriceConverter {
   static double convertWithDiscount(BuildContext context, double price,
       double discount, String discountType) {
     if (discountType == 'amount') {
-      price = price - discount;
+      price = price;
     } else if (discountType == 'percent') {
-      price = price - ((discount / 100) * price);
+      price = price;
     }
     return price;
   }
