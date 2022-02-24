@@ -105,7 +105,7 @@ class BannerTwoView extends StatelessWidget {
                                   child: FadeInImage.assetNetwork(
                                     placeholder: Images.placeholder,
                                     image:
-                                        '${Provider.of<SplashProvider>(context, listen: false).baseUrls.bannerTwoImageUrl}'
+                                        'https://admin.akbarimandi.online/storage/app/public/bannertwo'
                                         '/${bannerTwo.bannerTwoList[index].image}',
                                     fit: BoxFit.cover,
                                     imageErrorBuilder: (c, o, s) => Image.asset(

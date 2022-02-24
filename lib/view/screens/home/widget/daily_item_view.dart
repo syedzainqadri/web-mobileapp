@@ -211,7 +211,12 @@ class DailyItemView extends StatelessWidget {
                                                                   .discount >
                                                               0
                                                           ? Text(
-                                                        productProvider.product.price.toString()
+                                                              PriceConverter
+                                                                  .convertWithDiscount(
+                                                                context,
+                                                                productProvider.dailyItemList[index].price,
+                                                                productProvider.dailyItemList[index].discount,
+                                                                 productProvider.dailyItemList[index].discountType).toString()
                                                               ,
                                                               style: poppinsRegular.copyWith(
                                                                   fontSize:
