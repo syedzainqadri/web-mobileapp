@@ -80,6 +80,7 @@ class ProductDetailsScreen extends StatelessWidget {
             });
 
             price = productProvider.product.price;
+            print("price before loop:  $price");
             _stock = productProvider.product.totalStock;
             for (Variations variation in productProvider.product.variations) {
               if (variation.type == variationType) {
@@ -89,6 +90,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 break;
               }
             }
+            print("price after loop:  $price");
             double priceWithDiscount = PriceConverter.convertWithDiscount(
                 context,
                 price,
