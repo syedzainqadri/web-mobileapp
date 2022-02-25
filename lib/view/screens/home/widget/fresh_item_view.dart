@@ -16,12 +16,7 @@ import 'package:provider/provider.dart';
 class FreshItemView extends StatelessWidget {
   final ScrollController controller = ScrollController();
 
-  fetchData(){
-
-
-
-  }
-
+  fetchData() {}
 
   @override
   Widget build(BuildContext context) {
@@ -215,22 +210,21 @@ class FreshItemView extends StatelessWidget {
                                                                   .discount >
                                                               0
                                                           ? Text(
-                                                              PriceConverter
-                                                                  .convertPrice(
-                                                                context,
-                                                                productProvider
-                                                                    .freshItemList[
-                                                                        index]
-                                                                    .price,
-                                                                discount: productProvider
-                                                                    .freshItemList[
-                                                                        index]
-                                                                    .discount,
-                                                                discountType: productProvider
-                                                                    .freshItemList[
-                                                                        index]
-                                                                    .discountType,
-                                                              ),
+                                                              PriceConverter.convertWithDiscount(
+                                                                          context,
+                                                                          productProvider
+                                                                              .freshItemList[
+                                                                                  index]
+                                                                              .price,
+                                                                          productProvider
+                                                                              .freshItemList[
+                                                                                  index]
+                                                                              .discount,
+                                                                          productProvider
+                                                                              .freshItemList[index]
+                                                                              .discountType)
+                                                                      .toString() +
+                                                                  ".00",
                                                               style: poppinsRegular.copyWith(
                                                                   fontSize:
                                                                       Dimensions

@@ -54,10 +54,8 @@ class DailyItemView extends StatelessWidget {
                         //     horizontal: Dimensions.PADDING_SIZE_SMALL),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-
-                          print(" signle item is: ${  productProvider
-                              .dailyItemList[
-                          index].discount}");
+                          print(
+                              " signle item is: ${productProvider.dailyItemList[index].discount}");
                           return Padding(
                             padding: EdgeInsets.only(
                                 right: Dimensions.PADDING_SIZE_SMALL),
@@ -211,13 +209,21 @@ class DailyItemView extends StatelessWidget {
                                                                   .discount >
                                                               0
                                                           ? Text(
-                                                              PriceConverter
-                                                                  .convertWithDiscount(
-                                                                context,
-                                                                productProvider.dailyItemList[index].price,
-                                                                productProvider.dailyItemList[index].discount,
-                                                                 productProvider.dailyItemList[index].discountType).toString()
-                                                              ,
+                                                              PriceConverter.convertWithDiscount(
+                                                                          context,
+                                                                          productProvider
+                                                                              .dailyItemList[
+                                                                                  index]
+                                                                              .price,
+                                                                          productProvider
+                                                                              .dailyItemList[
+                                                                                  index]
+                                                                              .discount,
+                                                                          productProvider
+                                                                              .dailyItemList[index]
+                                                                              .discountType)
+                                                                      .toString() +
+                                                                  ".00",
                                                               style: poppinsRegular.copyWith(
                                                                   fontSize:
                                                                       Dimensions

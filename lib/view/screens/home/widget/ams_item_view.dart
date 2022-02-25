@@ -206,22 +206,21 @@ class AmsItemView extends StatelessWidget {
                                                                   .discount >
                                                               0
                                                           ? Text(
-                                                              PriceConverter
-                                                                  .convertPrice(
-                                                                context,
-                                                                productProvider
-                                                                    .amsItemList[
-                                                                        index]
-                                                                    .price,
-                                                                discount: productProvider
-                                                                    .amsItemList[
-                                                                        index]
-                                                                    .discount,
-                                                                discountType: productProvider
-                                                                    .amsItemList[
-                                                                        index]
-                                                                    .discountType,
-                                                              ),
+                                                              PriceConverter.convertWithDiscount(
+                                                                          context,
+                                                                          productProvider
+                                                                              .amsItemList[
+                                                                                  index]
+                                                                              .price,
+                                                                          productProvider
+                                                                              .amsItemList[
+                                                                                  index]
+                                                                              .discount,
+                                                                          productProvider
+                                                                              .amsItemList[index]
+                                                                              .discountType)
+                                                                      .toString() +
+                                                                  ".00",
                                                               style: poppinsRegular.copyWith(
                                                                   fontSize:
                                                                       Dimensions
