@@ -47,7 +47,7 @@ class _HomeCategoryState extends State<HomeCategory> {
     return Container(
       margin: EdgeInsets.only(top: 10.0),
       child: Card(
-        elevation: 6.0,
+        elevation: 1.0,
 
         child: Column(
               children: [

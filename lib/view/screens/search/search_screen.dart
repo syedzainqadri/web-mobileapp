@@ -30,6 +30,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var weidth = MediaQuery.of(context).size.width;
     Provider.of<SearchProvider>(context, listen: false).initializeAllSortBy(context, notify: false);
 
     return Scaffold(
@@ -40,7 +41,8 @@ class _SearchScreenState extends State<SearchScreen> {
             padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_LARGE),
             child: Center(
               child: Container(
-                width: 1170,
+                padding:
+                EdgeInsets.symmetric(horizontal: weidth > 800 ? weidth*0.14  : 40),
                 child: Consumer<SearchProvider>(
                   builder: (context, searchProvider, child) => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -74,6 +74,7 @@ class BannersView extends StatelessWidget {
                       }
                     },
                     child: Container(
+                      height: 300,
                       margin: EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
                       child: ClipRRect(
@@ -82,7 +83,7 @@ class BannersView extends StatelessWidget {
                           placeholder: Images.placeholder,
                           image: '${Provider.of<SplashProvider>(context,listen: false).baseUrls.bannerImageUrl}'
                               '/${banner.bannerList[index].image}',
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                           imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder, fit: BoxFit.cover),
                         ),
                       ),

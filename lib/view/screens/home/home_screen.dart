@@ -14,6 +14,7 @@ import 'package:flutter_grocery/view/screens/home/widget/categories_on_home.dart
 import 'package:flutter_grocery/view/screens/home/widget/category_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/daily_item_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/product_view.dart';
+import 'package:flutter_grocery/view/screens/home/widget/search_bar.dart';
 import 'package:provider/provider.dart';
 import '../../../data/model/response/category_model.dart';
 import '../../../helper/route_helper.dart';
@@ -28,7 +29,12 @@ import 'widget/categorylistview.dart';
 import 'widget/fresh_item_view.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   Future<void> _loadData(BuildContext context, bool reload) async {
     // await Provider.of<CategoryProvider>(context, listen: false).getCategoryList(context, reload);
 
@@ -76,10 +82,18 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+var searchController=TextEditingController();
+
+   ScrollController _scrollController;
+
   @override
   Widget build(BuildContext context) {
+    _scrollController= ScrollController(
+    initialScrollOffset: 0.0
+    );
     var weidth = MediaQuery.of(context).size.width;
-    final ScrollController _scrollController = ScrollController();
+
+    final ScrollController _scrollController2= ScrollController();
     _loadData(context, false);
 
     return RefreshIndicator(
@@ -91,14 +105,22 @@ class HomeScreen extends StatelessWidget {
         appBar: ResponsiveHelper.isDesktop(context) ? MainAppBar() : null,
         body: Scrollbar(
           child: SingleChildScrollView(
-            // controller: _scrollController,
+
+            controller: _scrollController,
+
             child: Container(
               // height: 7000,
               padding:
-                  EdgeInsets.symmetric(horizontal: weidth > 800 ? 130 : 40),
+                  EdgeInsets.symmetric(horizontal: weidth > 800 ? weidth*0.14  : 40),
               child: Column(
-                  // controller: _scrollController,
+
                   children: [
+                    Container(
+                        height: 70.0,
+                        child: SearchBar(searchControlller: searchController,categoryClick: (){
+                          Navigator.pushNamed(context, RouteHelper.categorys);
+                        },)
+                  ),
                     Consumer<CategoryProvider>(
                         builder: (context, category, child) {
                       return category.categoryList == null
@@ -106,7 +128,11 @@ class HomeScreen extends StatelessWidget {
                           : category.categoryList.length == 0
                               ? SizedBox()
                               : Container(
-                                  height: 335, child: CategoryListView());
+                                  height: 335, child: CategoryListView(
+
+
+
+                      ));
                     }),
                     //banner
                     Consumer<BannerProvider>(builder: (context, banner, child) {
@@ -200,11 +226,31 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ProductView(
                         productType: ProductType.POPULAR_PRODUCT,
-                        scrollController: _scrollController),
+                        scrollController: _scrollController2),
                   ]),
             ),
           ),
         ),
+
+        floatingActionButton:
+        // _scrollController.hasClients?_scrollController.position.pixels<800 ?Offstage():
+        FloatingActionButton(
+
+          child: Icon(
+            Icons.keyboard_arrow_up_outlined
+          ),
+          backgroundColor: Colors.green,
+          onPressed: (){
+
+            _scrollController.animateTo(
+             0.0,
+              duration: Duration(milliseconds: 300),
+              curve: Curves.fastOutSlowIn,);
+          },
+
+
+        )
+              // :Offstage(),
       ),
     );
   }

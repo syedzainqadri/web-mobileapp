@@ -24,7 +24,7 @@ class BannerTwoView extends StatelessWidget {
         return Container(
           width: MediaQuery.of(context).size.width,
           height: ResponsiveHelper.isDesktop(context)
-              ? 300
+              ? 320
               : MediaQuery.of(context).size.width * 0.4,
           // height: MediaQuery.of(context).size.width * 0.4,
           padding: EdgeInsets.only(
@@ -97,6 +97,7 @@ class BannerTwoView extends StatelessWidget {
                                 }
                               },
                               child: Container(
+                                height: 300,
                                 margin: EdgeInsets.symmetric(horizontal: 10),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10)),
@@ -107,7 +108,7 @@ class BannerTwoView extends StatelessWidget {
                                     image:
                                         'https://admin.akbarimandi.online/storage/app/public/bannertwo'
                                         '/${bannerTwo.bannerTwoList[index].image}',
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.fill,
                                     imageErrorBuilder: (c, o, s) => Image.asset(
                                         Images.placeholder,
                                         fit: BoxFit.cover),

@@ -82,11 +82,11 @@ class MenuBar extends StatelessWidget {
         //onTap: () => RouteHelper.router.navigateTo(context, Routes.WISHLIST_SCREEN),
       ),*/
 
-      MenuItem(
-        title: getTranslated('search', context),
-        icon: Icons.search,
-        onTap: () =>  Navigator.pushNamed(context, RouteHelper.searchProduct),
-      ),
+      // MenuItem(
+      //   title: getTranslated('search', context),
+      //   icon: Icons.search,
+      //   onTap: () =>  Navigator.pushNamed(context, RouteHelper.searchProduct),
+      // ),
 
       MenuItem(
         title: getTranslated('menu', context),
