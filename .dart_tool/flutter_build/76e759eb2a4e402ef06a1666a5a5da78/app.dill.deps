@@ -135,8 +135,11 @@ file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/c
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/daily_item_view.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/fresh_item_view.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/on_hover_affect.dart
+file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/on_hover_widget.dart
+file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/on_hover_widget_for_banners.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/product_view.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/search_bar.dart
+file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/sub_category_view.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/html/html_viewer_screen.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/menu/main_screen.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/menu/menu_screen.dart
@@ -374,6 +377,7 @@ file:///Users/xain/development/flutter/.pub-cache/hosted/pub.dartlang.org/fluro-
 file:///Users/xain/development/flutter/.pub-cache/hosted/pub.dartlang.org/fluro-2.0.3/lib/src/extensions.dart
 file:///Users/xain/development/flutter/.pub-cache/hosted/pub.dartlang.org/fluro-2.0.3/lib/src/fluro_router.dart
 file:///Users/xain/development/flutter/.pub-cache/hosted/pub.dartlang.org/fluro-2.0.3/lib/src/tree.dart
+file:///Users/xain/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_html-2.1.5/lib/shims/dart_ui_real.dart
 file:///Users/xain/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_keyboard_visibility-5.1.1/lib/flutter_keyboard_visibility.dart
 file:///Users/xain/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_keyboard_visibility-5.1.1/lib/src/keyboard_visibility_controller.dart
 file:///Users/xain/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_keyboard_visibility-5.1.1/lib/src/keyboard_visibility_handler.dart
