@@ -61,6 +61,7 @@ class ProductView extends StatelessWidget {
         }
       }
     });
+
     return Consumer<ProductProvider>(
       builder: (context, prodProvider, child) {
         List<Product> productList;

@@ -51,6 +51,7 @@ class ProductProvider extends ChangeNotifier {
         if (reload) {
           _popularProductList = [];
         }
+        _popularProductList.clear();
         _popularProductList
             .addAll(ProductModel.fromJson(apiResponse.response.data).products);
         _popularPageSize =

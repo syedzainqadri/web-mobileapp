@@ -12,11 +12,15 @@ import 'package:flutter_grocery/provider/splash_provider.dart';
 import 'package:flutter_grocery/utill/color_resources.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/utill/images.dart';
+import 'package:flutter_grocery/view/screens/home/widget/on_hover_affect.dart';
+import 'package:flutter_grocery/view/screens/home/widget/on_hover_widget_for_banners.dart';
 import 'package:flutter_grocery/view/screens/product/product_details_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class BannerTwoView extends StatelessWidget {
+  CarouselController carouselController = CarouselController();
+  int currentIndex;
   @override
   Widget build(BuildContext context) {
     return Consumer<BannerTwoProvider>(
@@ -32,114 +36,126 @@ class BannerTwoView extends StatelessWidget {
               bottom: Dimensions.PADDING_SIZE_SMALL),
           child: bannerTwo.bannerTwoList != null
               ? bannerTwo.bannerTwoList.length != 0
-                  ? Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        CarouselSlider.builder(
-                          options: CarouselOptions(
-                            autoPlay: true,
-                            enlargeCenterPage: true,
-                            viewportFraction: 1,
-                            disableCenter: true,
-                            onPageChanged: (index, reason) {
-                              Provider.of<BannerProvider>(context,
-                                      listen: false)
-                                  .setCurrentIndex(index);
-                            },
-                          ),
-                          itemCount: bannerTwo.bannerTwoList.length == 0
-                              ? 1
-                              : bannerTwo.bannerTwoList.length,
-                          itemBuilder: (context, index, _) {
-                            return InkWell(
-                              onTap: () {
-                                if (bannerTwo.bannerTwoList[index].brandId !=
-                                    null) {
-                                  Product product;
-                                  for (Product prod in bannerTwo.productList) {
-                                    if (prod.id ==
-                                        bannerTwo
-                                            .bannerTwoList[index].brandId) {
-                                      product = prod;
-                                      break;
-                                    }
-                                  }
-                                  if (product != null) {
-                                    Navigator.pushNamed(
-                                      context,
-                                      RouteHelper.getProductDetailsRoute(
-                                          product.id),
-                                      arguments: ProductDetailsScreen(
-                                          product: product),
-                                    );
-                                  }
-                                } else if (bannerTwo
-                                        .bannerTwoList[index].brandId !=
-                                    null) {
-                                  CategoryModel category;
-                                  for (CategoryModel categoryModel
-                                      in Provider.of<CategoryProvider>(context,
-                                              listen: false)
-                                          .categoryList) {
-                                    if (categoryModel.id ==
-                                        bannerTwo
-                                            .bannerTwoList[index].brandId) {
-                                      category = categoryModel;
-                                      break;
-                                    }
-                                  }
-                                  if (category != null) {
-                                    Navigator.of(context).pushNamed(
-                                      RouteHelper.getCategoryProductsRoute(
-                                          category.id),
-                                    );
-                                  }
-                                }
-                              },
-                              child: Container(
-                                height: 300,
-                                margin: EdgeInsets.symmetric(horizontal: 10),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: FadeInImage.assetNetwork(
-                                    placeholder: Images.placeholder,
-                                    image:
-                                        'https://admin.akbarimandi.online/storage/app/public/bannertwo'
-                                        '/${bannerTwo.bannerTwoList[index].image}',
-                                    fit: BoxFit.fill,
-                                    imageErrorBuilder: (c, o, s) => Image.asset(
-                                        Images.placeholder,
-                                        fit: BoxFit.cover),
-                                  ),
-                                ),
+                  ? OnHover(
+                    builder: (isHover) {
+                      return Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            CarouselSlider.builder(
+                              carouselController: carouselController, // Give the controller
+                              options: CarouselOptions(
+                                autoPlay: true,
+                                enlargeCenterPage: true,
+                                viewportFraction: 1,
+                                disableCenter: true,
+                                onPageChanged: (index, reason) {
+
+                                  currentIndex=index;
+                                  Provider.of<BannerProvider>(context,
+                                          listen: false)
+                                      .setCurrentIndex(index);
+
+                                },
                               ),
-                            );
-                          },
-                        ),
-                        Positioned(
-                          bottom: 5,
-                          left: 0,
-                          right: 0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: bannerTwo.bannerTwoList.map((bnr) {
-                              int index = bannerTwo.bannerTwoList.indexOf(bnr);
-                              return TabPageSelectorIndicator(
-                                backgroundColor: index == bannerTwo.currentIndex
-                                    ? Theme.of(context).primaryColor
-                                    : ColorResources.getCardBgColor(context),
-                                borderColor: index == bannerTwo.currentIndex
-                                    ? Theme.of(context).primaryColor
-                                    : Theme.of(context).primaryColor,
-                                size: 10,
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    )
+                              itemCount: bannerTwo.bannerTwoList.length == 0
+                                  ? 1
+                                  : bannerTwo.bannerTwoList.length,
+                              itemBuilder: (context, index, _) {
+                                return InkWell(
+                                  onTap: () {
+                                    if (bannerTwo.bannerTwoList[index].brandId !=
+                                        null) {
+                                      Product product;
+                                      for (Product prod in bannerTwo.productList) {
+                                        if (prod.id ==
+                                            bannerTwo
+                                                .bannerTwoList[index].brandId) {
+                                          product = prod;
+                                          break;
+                                        }
+                                      }
+                                      if (product != null) {
+                                        Navigator.pushNamed(
+                                          context,
+                                          RouteHelper.getProductDetailsRoute(
+                                              product.id),
+                                          arguments: ProductDetailsScreen(
+                                              product: product),
+                                        );
+                                      }
+                                    } else if (bannerTwo
+                                            .bannerTwoList[index].brandId !=
+                                        null) {
+                                      CategoryModel category;
+                                      for (CategoryModel categoryModel
+                                          in Provider.of<CategoryProvider>(context,
+                                                  listen: false)
+                                              .categoryList) {
+                                        if (categoryModel.id ==
+                                            bannerTwo
+                                                .bannerTwoList[index].brandId) {
+                                          category = categoryModel;
+                                          break;
+                                        }
+                                      }
+                                      if (category != null) {
+                                        Navigator.of(context).pushNamed(
+                                          RouteHelper.getCategoryProductsRoute(
+                                              category.id),
+                                        );
+                                      }
+                                    }
+                                  },
+                                  child: Container(
+                                    height: 300,
+                                    margin: EdgeInsets.symmetric(horizontal: 10),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10)),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: FadeInImage.assetNetwork(
+                                        placeholder: Images.placeholder,
+                                        image:
+                                            'https://admin.akbarimandi.online/storage/app/public/bannertwo'
+                                            '/${bannerTwo.bannerTwoList[index].image}',
+                                        fit: BoxFit.fill,
+                                        imageErrorBuilder: (c, o, s) => Image.asset(
+                                            Images.placeholder,
+                                            fit: BoxFit.cover),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+
+                            isHover?OnHoverWidgetForBanner(currentIndex: carouselController ,length: currentIndex ,)
+
+                                :Offstage(),
+                            Positioned(
+                              bottom: 5,
+                              left: 0,
+                              right: 0,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: bannerTwo.bannerTwoList.map((bnr) {
+                                  int index = bannerTwo.bannerTwoList.indexOf(bnr);
+                                  return TabPageSelectorIndicator(
+                                    backgroundColor: index == bannerTwo.currentIndex
+                                        ? Theme.of(context).primaryColor
+                                        : ColorResources.getCardBgColor(context),
+                                    borderColor: index == bannerTwo.currentIndex
+                                        ? Theme.of(context).primaryColor
+                                        : Theme.of(context).primaryColor,
+                                    size: 10,
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ],
+                        );
+                    }
+                  )
                   : Center(
                       child:
                           Text(getTranslated('no_banner_available', context)))

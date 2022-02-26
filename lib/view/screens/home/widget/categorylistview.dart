@@ -13,6 +13,7 @@ import 'package:flutter_grocery/utill/images.dart';
 import 'package:flutter_grocery/utill/styles.dart';
 import 'package:flutter_grocery/view/base/title_widget.dart';
 import 'package:flutter_grocery/view/screens/home/widget/on_hover_affect.dart';
+import 'package:flutter_grocery/view/screens/home/widget/on_hover_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
@@ -167,38 +168,7 @@ class _CategoryListViewState extends State<CategoryListView> {
                             ),
                           ),
 
-                          isHover?Container(
-                            height: 90,
-                            child: Row(
-                              children: [
-                                MaterialButton(onPressed: (){
-                                  controller.animateTo(
-                                    controller.position.pixels-300,
-                                    duration: Duration(milliseconds: 300),
-                                    curve: Curves.fastOutSlowIn,);
-                                },
-                                color: Colors.white,
-                                  elevation: 4.0,
-                                  minWidth: 60,
-                                  height: 85,
-                                  child: Icon(Icons.arrow_back_ios),
-                                ),
-                                   Spacer(),
-                                MaterialButton(onPressed:(){
-                                  controller.animateTo(
-                                    controller.position.pixels+300,
-                                    duration: Duration(milliseconds: 300),
-                                    curve: Curves.fastOutSlowIn,);
-                                },
-                                  color: Colors.white,
-                                  elevation: 4.0,
-                                  minWidth: 60,
-                                  height: 85,
-                                  child: Icon(Icons.arrow_forward_ios),
-                                )
-                              ],
-                            ),
-                          ):Offstage(),
+                          isHover?OnHoverWidget(controller: controller,):Offstage(),
                         ],
                       );
                     }
