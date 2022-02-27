@@ -13,7 +13,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Container(
           color: Theme.of(context).cardColor,
           // width: 1170.0,
-          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.14),
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.14),
           height: 45.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,8 +25,10 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                     onTap: () => Navigator.pushNamed(context, RouteHelper.menu),
                     child: Row(
                       children: [
-                        Image.asset(Images.app_logo,
-                            color: Theme.of(context).primaryColor),
+                        Image.asset(
+                          Images.app_logo,
+                        ),
+                        // color: Theme.of(context).primaryColor),
                         SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
                         Text(AppConstants.APP_NAME,
                             style: poppinsMedium.copyWith(

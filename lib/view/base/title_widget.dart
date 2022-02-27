@@ -13,16 +13,20 @@ class TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Text(title, style: poppinsMedium),
-      onTap != null ? InkWell(
-        onTap: onTap,
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(10, 5, 0, 5),
-          child: Text(
-            getTranslated('view_all', context),
-            style: poppinsRegular.copyWith(fontSize: Dimensions.FONT_SIZE_SMALL, color: ColorResources.getHintColor(context)),
-          ),
-        ),
-      ) : SizedBox(),
+      onTap != null
+          ? InkWell(
+              onTap: onTap,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(10, 5, 0, 5),
+                child: Text(
+                  getTranslated('view_all', context),
+                  style: poppinsBold.copyWith(
+                      fontSize: Dimensions.FONT_SIZE_SMALL,
+                      color: ColorResources.getHintColor(context)),
+                ),
+              ),
+            )
+          : SizedBox(),
     ]);
   }
 }
