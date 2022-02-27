@@ -25,10 +25,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                     onTap: () => Navigator.pushNamed(context, RouteHelper.menu),
                     child: Row(
                       children: [
-                        Image.asset(
-                          Images.app_logo,
-                        ),
-                        // color: Theme.of(context).primaryColor),
+                        Image.asset(Images.app_logo,
+                            color: Theme.of(context).primaryColor),
                         SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
                         Text(AppConstants.APP_NAME,
                             style: poppinsMedium.copyWith(

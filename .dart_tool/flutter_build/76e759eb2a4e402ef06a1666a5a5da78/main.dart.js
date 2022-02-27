@@ -92044,7 +92044,7 @@ s.d=!s.d},
 $S:1}
 A.d7.prototype={
 w(a,b){var s=null,r=A.r(b).ch,q=b.G(t.w).f.a.a*0.14,p=t.t
-return A.am(A.N(s,A.ao(A.a([new A.a5(B.ao,A.b7(!1,!0,A.ao(A.a([A.bV("assets/image/logo.png",s,s,s,s,s),new A.C(10,s,s,s),A.z("Akbari Mandi Online",s,s,s,s,s,B.u.ar(A.r(b).b),s,s)],p),B.l,B.m,B.h),s,!0,s,s,s,s,s,s,s,s,s,new A.ard(b),s,s,s),s),new A.Xz(s)],p),B.l,B.N,B.h),B.e,r,s,s,s,45,s,new A.A(q,0,q,0),s,s,s),s,s,s)},
+return A.am(A.N(s,A.ao(A.a([new A.a5(B.ao,A.b7(!1,!0,A.ao(A.a([A.bV("assets/image/logo.png",A.r(b).b,s,s,s,s),new A.C(10,s,s,s),A.z("Akbari Mandi Online",s,s,s,s,s,B.u.ar(A.r(b).b),s,s)],p),B.l,B.m,B.h),s,!0,s,s,s,s,s,s,s,s,s,new A.ard(b),s,s,s),s),new A.Xz(s)],p),B.l,B.N,B.h),B.e,r,s,s,s,45,s,new A.A(q,0,q,0),s,s,s),s,s,s)},
 gjz(){return new A.Z(17976931348623157e292,50)}}
 A.ard.prototype={
 $0(){return A.az(this.a,!1).bj("/",null,t._)},
