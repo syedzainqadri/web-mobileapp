@@ -55,17 +55,16 @@ class _HomeCategoryState extends State<HomeCategory> {
       child: Card(
         elevation: 1.0,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               color: Colors.yellow.shade200,
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 2.0),
-              child: Center(
-                child: Text(
-                  widget.title,
-                  style: poppinsBold.copyWith(
-                    fontSize: Dimensions.FONT_SIZE_SMALL,
-                  ),
+              child: Text(
+                widget.title,
+                style: poppinsBold.copyWith(
+                  fontSize: Dimensions.FONT_SIZE_SMALL,
                 ),
               ),
             ),
