@@ -48,8 +48,8 @@ class SubCategoryItem extends StatelessWidget {
                 image:
                     '${Provider.of<SplashProvider>(context, listen: false).baseUrls.categoryImageUrl}/$icon',
                 fit: BoxFit.cover,
-                width: 100,
-                height: 100,
+                width: 150,
+                height: 150,
                 imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder,
                     height: 100, width: 100, fit: BoxFit.cover),
               ),
