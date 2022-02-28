@@ -12,7 +12,7 @@ class _OnHoverState extends State<OnHover> {
   bool isHovered = false;
   @override
   Widget build(BuildContext context) {
-    final hovered = Matrix4.translationValues(0, -5, 0);
+    final hovered = Matrix4.translationValues(0, -1, 0);
     final transform = isHovered ? hovered : Matrix4.identity();
     return MouseRegion(
       onEnter: (val) => onEntered(true),

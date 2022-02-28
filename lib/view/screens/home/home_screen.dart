@@ -146,10 +146,10 @@ var searchController=TextEditingController();
                     Consumer<ProductProvider>(
                         builder: (context, product, child) {
                       return product.dailyItemList == null
-                          ? Container(height: 335, child: DailyItemView())
+                          ? Container(height: 340, child: DailyItemView())
                           : product.dailyItemList.length == 0
                               ? SizedBox()
-                              : Container(height: 380, child: DailyItemView());
+                              : Container(height: 382, child: DailyItemView());
                     }),
                     // Banner Two
                     Consumer<BannerTwoProvider>(
