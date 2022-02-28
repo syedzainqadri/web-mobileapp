@@ -13,6 +13,7 @@ import 'package:flutter_grocery/view/screens/home/widget/banners_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/categories_on_home.dart';
 import 'package:flutter_grocery/view/screens/home/widget/category_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/daily_item_view.dart';
+import 'package:flutter_grocery/view/screens/home/widget/footer.dart';
 import 'package:flutter_grocery/view/screens/home/widget/product_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/search_bar.dart';
 import 'package:provider/provider.dart';
@@ -227,6 +228,8 @@ var searchController=TextEditingController();
                     ProductView(
                         productType: ProductType.POPULAR_PRODUCT,
                         scrollController: _scrollController2),
+
+                    Footer()
                   ]),
             ),
           ),
