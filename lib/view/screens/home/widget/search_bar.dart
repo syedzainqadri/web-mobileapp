@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_grocery/helper/route_helper.dart';
 import 'package:flutter_grocery/localization/language_constrants.dart';
 import 'package:flutter_grocery/view/base/custom_button.dart';
 import 'package:flutter_grocery/view/base/custom_text_field.dart';
@@ -41,6 +42,9 @@ class SearchBar extends StatelessWidget {
             hintText: getTranslated('search', context),
             isShowBorder: true,
             isPassword: false,
+            onTap: (){
+              Navigator.pushNamed(context, RouteHelper.searchProduct);
+            },
             isShowSuffixIcon: true,
             prefixIconUrl: Icons.search,
            suffixIconUrl: Icons.search,
