@@ -30,8 +30,8 @@ class SubCategoryItem extends StatelessWidget {
       child: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           Container(
-            height: 60,
-            width: 60,
+            height: 100,
+            width: 100,
             alignment: Alignment.center,
             //padding: EdgeInsets.all(5),
             decoration: BoxDecoration(

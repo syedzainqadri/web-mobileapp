@@ -51,22 +51,22 @@ class AllCategoryScreen extends StatelessWidget {
               return categoryProvider.categoryList.length != 0
                   ? Row(children: [
                       Container(
-                        width: 100,
+                        width: 150,
                         margin: EdgeInsets.only(top: 3),
                         height: double.infinity,
                         decoration: BoxDecoration(
-                          //color: ColorResources.WHITE,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey[
-                                    Provider.of<ThemeProvider>(context)
-                                            .darkTheme
-                                        ? 600
-                                        : 200],
-                                spreadRadius: 3,
-                                blurRadius: 10)
-                          ],
-                        ),
+                            //color: ColorResources.WHITE,
+                            // boxShadow: [
+                            //   BoxShadow(
+                            //       color: Colors.grey[
+                            //           Provider.of<ThemeProvider>(context)
+                            //                   .darkTheme
+                            //               ? 600
+                            //               : 200],
+                            //       spreadRadius: 3,
+                            //       blurRadius: 10)
+                            // ],
+                            ),
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(),
                           itemCount: categoryProvider.categoryList.length,
@@ -166,9 +166,6 @@ class AllCategoryScreen extends StatelessWidget {
   }
 }
 
-
-
-
 class CategoryItem extends StatelessWidget {
   final String title;
   final String icon;
@@ -179,8 +176,8 @@ class CategoryItem extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
-      height: 110,
+      width: 150,
+      height: 200,
       margin: EdgeInsets.symmetric(
           vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL, horizontal: 2),
       decoration: BoxDecoration(
@@ -192,8 +189,8 @@ class CategoryItem extends StatelessWidget {
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
           Container(
-            height: 60,
-            width: 60,
+            height: 80,
+            width: 80,
             alignment: Alignment.center,
             //padding: EdgeInsets.all(5),
             decoration: BoxDecoration(
@@ -224,7 +221,7 @@ class CategoryItem extends StatelessWidget {
                 // overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
                 style: poppinsSemiBold.copyWith(
-                    fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
+                    fontSize: Dimensions.FONT_SIZE_SMALL,
                     color: isSelected
                         ? ColorResources.getBackgroundColor(context)
                         : ColorResources.getTextColor(context))),
