@@ -23597,7 +23597,7 @@ _.Q=h},
 x4:function x4(){var _=this
 _.x=_.r=_.f=_.e=_.d=_.c=_.b=_.a=null},
 t0:function t0(){var _=this
-_.r=_.f=_.e=_.d=_.c=_.b=_.a=null},
+_.x=_.r=_.f=_.e=_.d=_.c=_.b=_.a=null},
 aN:function aN(a,b){this.a=a
 this.b=b},
 biv(a){var s=new A.akR()
@@ -87657,18 +87657,20 @@ QO(a){var s=this,r=J.R(a)
 s.a=r.h(a,"id")
 s.b=r.h(a,"title")
 s.c=r.h(a,"image")
-s.d=r.h(a,"brand_id")
-s.e=r.h(a,"status")
-s.f=r.h(a,"created_at")
-s.r=r.h(a,"updated_at")},
+s.d=r.h(a,"product_id")
+s.e=r.h(a,"category_id")
+s.f=r.h(a,"status")
+s.r=r.h(a,"created_at")
+s.x=r.h(a,"updated_at")},
 ai(){var s=this,r=new A.bg(t.r)
 r.k(0,"id",s.a)
 r.k(0,"title",s.b)
 r.k(0,"image",s.c)
-r.k(0,"brand_id",s.d)
-r.k(0,"status",s.e)
-r.k(0,"created_at",s.f)
-r.k(0,"updated_at",s.r)
+r.k(0,"product_id",s.d)
+r.k(0,"category_id",s.e)
+r.k(0,"status",s.f)
+r.k(0,"created_at",s.r)
+r.k(0,"updated_at",s.x)
 return r}}
 A.aN.prototype={}
 A.akR.prototype={
