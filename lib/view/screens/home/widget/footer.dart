@@ -141,8 +141,10 @@ class Footer extends StatelessWidget {
             Divider(color: Colors.grey.shade300,height: 1,),
             SizedBox(height: 20,),
             topHeading(text: "Top Brands"),
-
-            SizedBox(height: 80,),
+                Column(
+                  children: List.generate(brands.length, (index) => normalText(text: brands[index])),
+                ),
+            SizedBox(height: 20,),
             Divider(color: Colors.grey.shade300,height: 1,),
             SizedBox(height: 20,),
             topHeading(text: "Useful Links"),
