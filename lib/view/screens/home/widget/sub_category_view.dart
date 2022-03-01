@@ -23,6 +23,7 @@ class SubCategoryItem extends StatelessWidget {
           vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL, horizontal: 2),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7),
+        //Color needs attention
         // color: isSelected
         //     ? Theme.of(context).primaryColor
         //     : ColorResources.getBackgroundColor(context)
@@ -30,12 +31,13 @@ class SubCategoryItem extends StatelessWidget {
       child: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           Container(
-            height: 60,
-            width: 60,
+            height: 100,
+            width: 100,
             alignment: Alignment.center,
             //padding: EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
+              //color needs attention
               // color: isSelected
               //     ? ColorResources.getCategoryBgColor(context)
               //     : ColorResources.getGreyLightColor(context)
@@ -48,8 +50,8 @@ class SubCategoryItem extends StatelessWidget {
                 image:
                     '${Provider.of<SplashProvider>(context, listen: false).baseUrls.categoryImageUrl}/$icon',
                 fit: BoxFit.cover,
-                width: 100,
-                height: 100,
+                width: 150,
+                height: 150,
                 imageErrorBuilder: (c, o, s) => Image.asset(Images.placeholder,
                     height: 100, width: 100, fit: BoxFit.cover),
               ),
