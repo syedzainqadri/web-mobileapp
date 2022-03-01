@@ -62,14 +62,15 @@ class BannerTwoView extends StatelessWidget {
                             itemBuilder: (context, index, _) {
                               return InkWell(
                                 onTap: () {
-                                  if (bannerTwo.bannerTwoList[index].brandId !=
+                                  if (bannerTwo
+                                          .bannerTwoList[index].productId !=
                                       null) {
                                     Product product;
                                     for (Product prod
                                         in bannerTwo.productList) {
                                       if (prod.id ==
                                           bannerTwo
-                                              .bannerTwoList[index].brandId) {
+                                              .bannerTwoList[index].productId) {
                                         product = prod;
                                         break;
                                       }
@@ -84,7 +85,7 @@ class BannerTwoView extends StatelessWidget {
                                       );
                                     }
                                   } else if (bannerTwo
-                                          .bannerTwoList[index].brandId !=
+                                          .bannerTwoList[index].productId !=
                                       null) {
                                     CategoryModel category;
                                     for (CategoryModel categoryModel
@@ -94,7 +95,7 @@ class BannerTwoView extends StatelessWidget {
                                             .categoryList) {
                                       if (categoryModel.id ==
                                           bannerTwo
-                                              .bannerTwoList[index].brandId) {
+                                              .bannerTwoList[index].productId) {
                                         category = categoryModel;
                                         break;
                                       }
