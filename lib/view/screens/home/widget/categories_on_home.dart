@@ -118,61 +118,7 @@ class _HomeCategoryState extends State<HomeCategory> {
                             },
                           ),
                         )
-                      :
-                      // GridView.builder(
-                      //   scrollDirection: Axis.horizontal,
-                      //   // itemCount: titles.length,
-                      //   itemCount: category.length,
-                      //   itemBuilder: (context,index){
-                      //
-                      //
-                      //     return InkWell(
-                      //       onTap: () {
-                      //
-                      //         Navigator.of(context).pushNamed(
-                      //           RouteHelper.getCategoryProductsRoute(
-                      //           category[index]
-                      //                 .id,
-                      //           ),
-                      //           arguments: CategoryProductScreen(
-                      //               categoryModel: CategoryModel(
-                      //                 id: category[index]
-                      //                     .id,
-                      //                 name: category[index]
-                      //                     .name,
-                      //               )),
-                      //         );
-                      //         // categoryProvider.changeSelectedIndex(index);
-                      //         // categoryProvider.getSubCategoryList(
-                      //         //     context,
-                      //         //     _category.id.toString(),
-                      //         //     Provider.of<LocalizationProvider>(context,
-                      //         //         listen: false)
-                      //         //         .locale
-                      //         //         .languageCode);
-                      //       },
-                      //       child: CategoryItem(
-                      //         title: category[index].name,
-                      //         icon: category[index].image,
-                      //         isSelected:false
-                      //         // categoryProvider.categorySelectedIndex ==
-                      //         //     index,
-                      //       ),
-                      //     );
-                      //
-                      //   },
-                      //   gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                      //     crossAxisSpacing: 10.0,
-                      //     mainAxisSpacing: 10.0,
-                      //     crossAxisCount: category.length<8?2:category.length<16?3:4,
-                      //
-                      //     // crossAxisCount: width>800?1:width>600?2:3,
-                      //     // mainAxisExtent: width>800?width*0.15:width>600?width*0.3:width*0.5,
-                      //   ),
-                      //
-                      //
-                      // ):
-                      Text("No Sub Categories For This Category"),
+                      : Text("No Sub Categories For This Category"),
             )
           ],
         ),

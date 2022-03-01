@@ -1,4 +1,9 @@
+import 'dart:js';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_grocery/data/datasource/remote/dio/dio_client.dart';
+import 'package:flutter_grocery/data/datasource/remote/exception/api_error_handler.dart';
 import 'package:flutter_grocery/data/model/response/base/api_response.dart';
 import 'package:flutter_grocery/data/model/response/cart_model.dart';
 import 'package:flutter_grocery/data/model/response/category_model.dart';
@@ -6,6 +11,10 @@ import 'package:flutter_grocery/data/model/response/product_model.dart';
 import 'package:flutter_grocery/data/repository/product_repo.dart';
 import 'package:flutter_grocery/data/repository/search_repo.dart';
 import 'package:flutter_grocery/helper/api_checker.dart';
+import 'package:flutter_grocery/models/brands_model.dart';
+import 'package:flutter_grocery/provider/localization_provider.dart';
+import 'package:flutter_grocery/utill/app_constants.dart';
+import 'package:provider/provider.dart';
 
 class ProductProvider extends ChangeNotifier {
   final ProductRepo productRepo;
@@ -15,6 +24,7 @@ class ProductProvider extends ChangeNotifier {
 
   // Latest products
   Product _product;
+
   List<Product> _popularProductList;
   List<Product> _dailyItemList;
   List<Product> _amsItemList;
@@ -36,6 +46,30 @@ class ProductProvider extends ChangeNotifier {
   int get quantity => _quantity;
   List<int> get variationIndex => _variationIndex;
   int get imageSliderIndex => _imageSliderIndex;
+   DioClient dioClient;
+
+  Future<List<BrandsModel>> getBrands(cnxt)async{
+
+    try {
+      var response = await Dio().get('https://admin.akbarimandi.online/api/v1/brands');
+      print(response);
+      // final response = await dioClient.get(
+      //   AppConstants.POPULAR_PRODUCT_URI,
+      //   options: Options(headers: {'X-localization':  Provider.of<LocalizationProvider>(cnxt, listen: false)
+      //       .locale
+      //       .languageCode,}),
+      // );
+      print(" brands api called ");
+      return brandsModelFromJson(response.data);
+    } catch (e) {
+      print(e);
+    }
+    final response = await Dio().get(
+      "https://admin.akbarimandi.online/api/v1/brands",
+    );
+print(" resopnse data of brads is:  ${response.data}");
+    return brandsModelFromJson(response.data);
+  }
 
   Future<void> getPopularProductList(BuildContext context, String offset,
       bool reload, String languageCode) async {

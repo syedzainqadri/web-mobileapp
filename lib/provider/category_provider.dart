@@ -1,9 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery/data/model/response/base/api_response.dart';
 import 'package:flutter_grocery/data/model/response/category_model.dart';
 import 'package:flutter_grocery/data/model/response/product_model.dart';
 import 'package:flutter_grocery/data/repository/category_repo.dart';
 import 'package:flutter_grocery/helper/api_checker.dart';
+import 'package:flutter_grocery/models/brands_model.dart';
 
 class CategoryProvider extends ChangeNotifier {
   final CategoryRepo categoryRepo;
@@ -20,8 +22,9 @@ class CategoryProvider extends ChangeNotifier {
   List<CategoryModel> _subCategoryList = [];
   List<Product> _categoryProductList = [];
   List<Product> _categoryAllProductList = [];
+  List<BrandsModel> _brands = [];
   CategoryModel _categoryModel;
-
+  List<BrandsModel> get brands => _brands;
   List<CategoryModel> get categoryList => _categoryList;
   List<CategoryModel> get subCategoryList => _subCategoryList;
   List<Product> get categoryProductList => _categoryProductList;
@@ -38,6 +41,20 @@ class CategoryProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+
+  Future<void> getBrands( BuildContext context) async {
+    final apiResponse =  await Dio().get('https://admin.akbarimandi.online/api/v1/brands');
+    if (apiResponse.data != null && apiResponse.statusCode == 200) {
+      _brands = [];
+      apiResponse.data.forEach((model) => _brands.add(BrandsModel.fromJson(model)));
+    } else {
+      print(" error");
+      // ApiChecker.checkApi(context, apiResponse);
+    }
+    notifyListeners();
+  }
+
 
   void getCategory(int id, BuildContext context) async {
     if(_categoryList == null) {

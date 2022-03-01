@@ -10,6 +10,7 @@ class AppConstants {
   static const String SUB_CATEGORY_URI = '/api/v1/categories/childes/';
   static const String CATEGORY_PRODUCT_URI = '/api/v1/categories/products/';
   static const String POPULAR_PRODUCT_URI = '/api/v1/products/latest';
+  static const String brands_url = '/api/v1/brands';
   static const String DAILY_ITEM_URI = '/api/v1/products/daily-needs';
   static const String AMS_ITEM_URI = '/api/v1/products/akbari-special-product';
   static const String FRESH_ITEM_URI = '/api/v1/products/fresh-item-product';

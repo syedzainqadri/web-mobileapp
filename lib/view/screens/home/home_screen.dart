@@ -36,6 +36,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isLoading=true;
   Future<void> _loadData(BuildContext context, bool reload) async {
     // await Provider.of<CategoryProvider>(context, listen: false).getCategoryList(context, reload);
 
@@ -57,7 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
           .locale
           .languageCode,
     );
-
+    await Provider.of<CategoryProvider>(context, listen: false).getBrands(
+      context,
+    );
     await Provider.of<ProductProvider>(context, listen: false).getFreshItemList(
       context,
       reload,
@@ -81,6 +84,10 @@ class _HomeScreenState extends State<HomeScreen> {
           .locale
           .languageCode,
     );
+
+    setState(() {
+      isLoading=false;
+    });
   }
 
 var searchController=TextEditingController();
@@ -229,7 +236,12 @@ var searchController=TextEditingController();
                         productType: ProductType.POPULAR_PRODUCT,
                         scrollController: _scrollController2),
 
-                    Footer()
+                    isLoading?CircularProgressIndicator():Footer(
+                      categoriesList: Provider.of<CategoryProvider>(context, listen: false).categoryList,
+                      brandsList: Provider.of<CategoryProvider>(context, listen: false).brands,
+
+
+                    )
                   ]),
             ),
           ),
