@@ -119,55 +119,52 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.pushNamed(context, RouteHelper.categorys);
                         },
                       )),
-                  Consumer<CategoryProvider>(
-                      builder: (context, category, child) {
-                    return category.categoryList == null
-                        ? Container(height: 335, child: CategoryListView())
-                        : category.categoryList.length == 0
-                            ? SizedBox()
-                            : Container(height: 335, child: CategoryListView());
-                  }),
+                  //categories
+                  Provider.of<CategoryProvider>(context, listen: false).categoryList == null
+                      ? Container(height: 335, child: CategoryListView())
+                      :  Provider.of<CategoryProvider>(context, listen: false).categoryList.length == 0
+                      ? SizedBox()
+                      : Container(
+                      height: 335, child: CategoryListView(
+                  )),
+
                   //banner
-                  Consumer<BannerProvider>(builder: (context, banner, child) {
-                    return banner.bannerList == null
-                        ? BannersView()
-                        : banner.bannerList.length == 0
-                            ? SizedBox()
-                            : BannersView();
-                  }),
-                  // DailyNeeds
-                  Consumer<ProductProvider>(builder: (context, product, child) {
-                    return product.dailyItemList == null
-                        ? Container(height: 340, child: DailyItemView())
-                        : product.dailyItemList.length == 0
-                            ? SizedBox()
-                            : Container(height: 382, child: DailyItemView());
-                  }),
+                  Provider.of<BannerProvider>(context, listen: false).bannerList == null
+                      ? BannersView()
+                      : Provider.of<BannerProvider>(context, listen: false).bannerList.length == 0
+                      ? SizedBox()
+                      : BannersView(),
+
+                  // daily item view
+                  Provider.of<ProductProvider>(context, listen: false).dailyItemList == null
+                      ? Container(height: 340, child: DailyItemView())
+                      :  Provider.of<ProductProvider>(context, listen: false).dailyItemList.length == 0
+                      ? SizedBox()
+                      : Container(height: 382, child: DailyItemView()),
+
                   // Banner Two
-                  Consumer<BannerTwoProvider>(
-                      builder: (context, bannerTwo, child) {
-                    return bannerTwo.bannerTwoList == null
-                        ? BannerTwoView()
-                        : bannerTwo.bannerTwoList.length == 0
-                            ? SizedBox()
-                            : BannerTwoView();
-                  }),
+                  Provider.of<BannerTwoProvider>(context, listen: false).bannerTwoList == null
+                      ? BannerTwoView()
+                      :   Provider.of<BannerTwoProvider>(context, listen: false).bannerTwoList.length == 0
+                      ? SizedBox()
+                      : BannerTwoView(),
+
                   // Akbari Mandi Special
-                  Consumer<ProductProvider>(builder: (context, product, child) {
-                    return product.amsItemList == null
-                        ? AmsItemView()
-                        : product.amsItemList.length == 0
-                            ? SizedBox()
-                            : AmsItemView();
-                  }),
+
+                  Provider.of<ProductProvider>(context, listen: false).amsItemList == null
+                      ? AmsItemView()
+                      : Provider.of<ProductProvider>(context, listen: false).amsItemList.length == 0
+                      ? SizedBox()
+                      : AmsItemView(),
+
                   // Fresh Items
-                  Consumer<ProductProvider>(builder: (context, product, child) {
-                    return product.freshItemList == null
-                        ? FreshItemView()
-                        : product.freshItemList.length == 0
-                            ? SizedBox()
-                            : FreshItemView();
-                  }),
+
+                  Provider.of<ProductProvider>(context, listen: false).freshItemList == null
+                      ? FreshItemView()
+                      :  Provider.of<ProductProvider>(context, listen: false).freshItemList.length == 0
+                      ? SizedBox()
+                      : FreshItemView(),
+
                   //All Categories with sub Categories
                   Container(
                     padding: EdgeInsets.all(10),
