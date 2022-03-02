@@ -33,7 +33,7 @@ class _FooterCategoriesState extends State<FooterCategories> {
     );
     setState(() {
       category =
-          Provider.of<CategoryProvider>(context, listen: false).subCategoryList;
+          Provider.of<CategoryProvider>(context, listen: false).categoryList;
       isLoading = false;
     });
   }
@@ -72,41 +72,41 @@ class _FooterCategoriesState extends State<FooterCategories> {
                 : category != null || category != []
                     ? Padding(
                         padding: const EdgeInsets.only(bottom: 20.0),
-                        child: MasonryGridView.count(
-                          crossAxisCount: width > 1100
-                              ? 7
-                              : width > 800
-                                  ? 5
-                                  : width > 600
-                                      ? 4
-                                      : 3,
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: category.length,
-                          mainAxisSpacing: 5,
-                          crossAxisSpacing: 5,
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                Navigator.of(context).pushNamed(
-                                  RouteHelper.getCategoryProductsRoute(
-                                    category[index].id,
-                                  ),
-                                  arguments: CategoryProductScreen(
-                                      categoryModel: CategoryModel(
-                                    id: category[index].id,
-                                    name: category[index].name,
-                                  )),
-                                );
-                              },
-                              child: Text(
-                                 category[index].name,
-                                  // categoryProvider.categorySelectedIndex ==
-                                  //     index,
-                                  ),
-                            );
-                          },
-                        ),
+                        // child: MasonryGridView.count(
+                        //   crossAxisCount: width > 1100
+                        //       ? 7
+                        //       : width > 800
+                        //           ? 5
+                        //           : width > 600
+                        //               ? 4
+                        //               : 3,
+                        //   shrinkWrap: true,
+                        //   physics: NeverScrollableScrollPhysics(),
+                        //   itemCount: category.length,
+                        //   mainAxisSpacing: 5,
+                        //   crossAxisSpacing: 5,
+                        //   itemBuilder: (context, index) {
+                        //     return InkWell(
+                        //       onTap: () {
+                        //         Navigator.of(context).pushNamed(
+                        //           RouteHelper.getCategoryProductsRoute(
+                        //             category[index].id,
+                        //           ),
+                        //           arguments: CategoryProductScreen(
+                        //               categoryModel: CategoryModel(
+                        //                   // id: category[index].id,
+                        //                   // name: category[index].name,
+                        //                   )),
+                        //         );
+                        //       },
+                        //       child: Text(
+                        //         category[index].name,
+                        //         // categoryProvider.categorySelectedIndex ==
+                        //         //     index,
+                        //       ),
+                        //     );
+                        //   },
+                        // ),
                       )
                     : Text("No Sub Categories For This Category"),
           )
