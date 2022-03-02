@@ -4,7 +4,7 @@ class BannerTwoModel {
   int _id;
   String _title;
   String _image;
-  // int _brandId;
+  int _brandId;
   int _productId;
   int _categoryId;
   int _status;
@@ -15,7 +15,7 @@ class BannerTwoModel {
     int id,
     String title,
     String image,
-    // int brandId,
+    int brandId,
     int productId,
     int status,
     String createdAt,
@@ -25,7 +25,7 @@ class BannerTwoModel {
     this._title = title;
     this._image = image;
     this._productId = productId;
-    // this._brandId = brandId;
+    this._brandId = brandId;
     this._status = status;
     this._createdAt = createdAt;
     this._updatedAt = updatedAt;
@@ -36,7 +36,7 @@ class BannerTwoModel {
   String get image => _image;
   int get productId => _productId;
   int get categoryId => _categoryId;
-  // int get brandId => _brandId;
+  int get brandId => _brandId;
   int get status => _status;
   String get createdAt => _createdAt;
   String get updatedAt => _updatedAt;
@@ -47,7 +47,7 @@ class BannerTwoModel {
     _image = json['image'];
     _productId = json['product_id'];
     _categoryId = json['category_id'];
-    // _brandId = json['brand_id'];
+    _brandId = json['brand_id'];
     _status = json['status'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
@@ -60,7 +60,7 @@ class BannerTwoModel {
     data['image'] = this._image;
     data['product_id'] = this._productId;
     data['category_id'] = this._categoryId;
-    // data['brand_id'] = this._brandId;
+    data['brand_id'] = this._brandId;
     data['status'] = this._status;
     data['created_at'] = this._createdAt;
     data['updated_at'] = this._updatedAt;
