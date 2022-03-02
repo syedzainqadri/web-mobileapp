@@ -5,7 +5,6 @@ import 'package:flutter_grocery/provider/category_provider.dart';
 import 'package:flutter_grocery/provider/localization_provider.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/utill/styles.dart';
-import 'package:flutter_grocery/view/screens/category/all_category_screen.dart';
 import 'package:flutter_grocery/view/screens/home/widget/sub_category_view.dart';
 import 'package:flutter_grocery/view/screens/product/category_product_screen.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

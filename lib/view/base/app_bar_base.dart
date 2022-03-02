@@ -28,9 +28,8 @@ class AppBarBase extends StatelessWidget implements PreferredSizeWidget {
                 right: -2,
                 child: Container(
                   padding: EdgeInsets.all(3),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Theme.of(context).primaryColor),
+                  decoration: BoxDecoration(shape: BoxShape.circle),
+                  // color: Theme.of(context).primaryColor),
                   child: Text(
                       '${Provider.of<CartProvider>(context).cartList.length}',
                       style: TextStyle(
@@ -44,8 +43,8 @@ class AppBarBase extends StatelessWidget implements PreferredSizeWidget {
               // Navigator.of(context).push(MaterialPageRoute(builder: (_) => MenuScreen()));
             }),
         IconButton(
-            icon: Icon(Icons.search,
-                size: 30, color: Theme.of(context).textTheme.bodyText1.color),
+            icon: Icon(Icons.search, size: 30),
+            // color: Theme.of(context).textTheme.bodyText1.color),
             onPressed: () {
               Navigator.pushNamed(context, RouteHelper.searchProduct);
               // Navigator.of(context).push(MaterialPageRoute(builder: (_) => SearchScreen()));

@@ -57,6 +57,7 @@ file:///Users/xain/Documents/GitHub/web-mobileapp/lib/helper/route_helper.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/localization/app_localization.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/localization/language_constrants.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/main.dart
+file:///Users/xain/Documents/GitHub/web-mobileapp/lib/models/brands_model.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/provider/auth_provider.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/provider/banner_provider.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/provider/banner_two_provider.dart
@@ -130,9 +131,9 @@ file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/a
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/banners_two_view.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/banners_view.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/categories_on_home.dart
-file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/category_view.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/categorylistview.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/daily_item_view.dart
+file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/footer.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/fresh_item_view.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/on_hover_affect.dart
 file:///Users/xain/Documents/GitHub/web-mobileapp/lib/view/screens/home/widget/on_hover_widget.dart

@@ -289,21 +289,21 @@ class CartScreen extends StatelessWidget {
                                           ]),
                                       SizedBox(height: 10),
 
-                                      Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(getTranslated('tax', context),
-                                                style: poppinsRegular.copyWith(
-                                                    fontSize: Dimensions
-                                                        .FONT_SIZE_LARGE)),
-                                            Text(
-                                                '(+) ${PriceConverter.convertPrice(context, _tax)}',
-                                                style: poppinsRegular.copyWith(
-                                                    fontSize: Dimensions
-                                                        .FONT_SIZE_LARGE)),
-                                          ]),
-                                      SizedBox(height: 10),
+                                      // Row(
+                                      //     mainAxisAlignment:
+                                      //         MainAxisAlignment.spaceBetween,
+                                      //     children: [
+                                      //       Text(getTranslated('tax', context),
+                                      //           style: poppinsRegular.copyWith(
+                                      //               fontSize: Dimensions
+                                      //                   .FONT_SIZE_LARGE)),
+                                      //       Text(
+                                      //           '(+) ${PriceConverter.convertPrice(context, _tax)}',
+                                      //           style: poppinsRegular.copyWith(
+                                      //               fontSize: Dimensions
+                                      //                   .FONT_SIZE_LARGE)),
+                                      //     ]),
+                                      // SizedBox(height: 10),
 
                                       Row(
                                           mainAxisAlignment:
@@ -400,6 +400,18 @@ class CartScreen extends StatelessWidget {
                                                       .primaryColor),
                                             ),
                                           ]),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Center(
+                                            child: Text('* Gst Included'),
+                                          ),
+                                        ],
+                                      ),
                                     ]),
                               ),
                             ),
