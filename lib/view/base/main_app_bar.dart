@@ -15,7 +15,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           // width: 1170.0,
           padding: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width * 0.14),
-          height: 45.0,
+          height: 100.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -27,6 +27,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                       children: [
                         Image.asset(
                           Images.app_logo,
+                          height: 60,
+                          width: 60,
                           // color: Theme.of(context).primaryColor,
                         ),
                         SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
@@ -47,5 +49,5 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(double.maxFinite, 50);
+  Size get preferredSize => Size(double.maxFinite, 100);
 }

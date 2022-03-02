@@ -57,7 +57,14 @@ class _FooterState extends State<Footer> {
                   icon: Icons.assignment_return,
                   title: "Easy Returns",
                   subTitle:
-                      "Not satisfied with a product? Return it at the doorstep & get a refund within hours."),
+                      ". What is Akbari Mandi Online App return & refund policy? \n"
+                      ". If your product is defective/damaged or incorrect/incomplete at the time of delivery, please contact us within 24 hours. We will offer return or refund. \n"
+                      ". What is Akbari Mandi Online App Cancellation policy?\n"
+                      ". Akbari Mandi Online App provides easy and hassle free cancellation policy. You can cancel your order any time before the order is out for delivery. You can also reject the delivery or ask for replacement if you are not satisfied with any product.\n"
+                      ". How do I cancel my order?\n"
+                      ". You can cancel your order by simple calling 0304-1110055 before your order is confirmed.\n"
+                      ". What if I have complaint regarding my order or Akbari Mandi Online App service?\n"
+                      ". Complaints/Feedback/Queries are always welcome. Drop us at akbarimandionline@gmail.com or give us a call at 0304-1110055 and we will be more than happy to help you."),
               SizedBox(
                 height: 20,
               ),
@@ -72,13 +79,21 @@ class _FooterState extends State<Footer> {
               SizedBox(
                 height: 20,
               ),
-
               Wrap(
+                alignment: WrapAlignment.start,
+                crossAxisAlignment: WrapCrossAlignment.end,
                 direction: Axis.horizontal,
-                spacing: 10.0,
-                runSpacing: 10.0,
-                children: List.generate(widget.categoriesList.length,
-                    (index) => Text(widget.categoriesList[index].name)),
+                spacing: 20.0,
+                runSpacing: 20.0,
+                children: List.generate(
+                    widget.categoriesList.length,
+                    (index) => InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                              RouteHelper.getCategoryProductsRoute(
+                                  widget.categoriesList[index].id));
+                        },
+                        child: Text(widget.categoriesList[index].name + ','))),
               ),
               SizedBox(
                 height: 10.0,
@@ -99,8 +114,9 @@ class _FooterState extends State<Footer> {
                   direction: Axis.horizontal,
                   children: List.generate(
                       widget.brandsList.length,
-                      (index) =>
-                          normalText(text: widget.brandsList[index].brandName)),
+                      (index) => normalText(
+                            text: widget.brandsList[index].brandName + ',',
+                          )),
                 ),
               ),
               SizedBox(
@@ -173,7 +189,7 @@ class _FooterState extends State<Footer> {
               subHeading(text: "One stop shop for all your daily needs"),
               normalText(
                   text:
-                      "GrocerApp is a low-price online supermarket that allows you to order products across categories like grocery, vegetables, beauty & wellness, household care, baby care, pet care and meats & seafood and gets them delivered to your doorstep."),
+                      "Akbari Mandi Online is a low-price online supermarket that allows you to order products across categories like grocery, vegetables, beauty & wellness, household care, baby care, pet care and meats & seafood and gets them delivered to your doorstep."),
 
               SizedBox(
                 height: 15,
