@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ? SizedBox()
                             : FreshItemView();
                   }),
-                  //AllCategories with sub Categories
+                  //All Categories with sub Categories
                   Container(
                     padding: EdgeInsets.all(10),
                     // padding: EdgeInsets.symmetric(
