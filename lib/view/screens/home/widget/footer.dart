@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_grocery/helper/route_helper.dart';
-
-import 'package:flutter_grocery/view/screens/home/widget/categories_on_footer.dart';
 
 class Footer extends StatefulWidget {
   final categoriesList;
@@ -80,12 +77,8 @@ class _FooterState extends State<Footer> {
                 direction: Axis.horizontal,
                 spacing: 10.0,
                 runSpacing: 10.0,
-                children: List.generate(
-                    widget.categoriesList.length,
-                    (index) => FooterCategories(
-                          title: widget.categoriesList[index].name,
-                          // id: widget.categoriesList[index].id,
-                        )),
+                children: List.generate(widget.categoriesList.length,
+                    (index) => Text(widget.categoriesList[index].name)),
               ),
               SizedBox(
                 height: 10.0,

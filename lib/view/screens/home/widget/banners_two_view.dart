@@ -5,10 +5,8 @@ import 'package:flutter_grocery/data/model/response/product_model.dart';
 import 'package:flutter_grocery/helper/responsive_helper.dart';
 import 'package:flutter_grocery/helper/route_helper.dart';
 import 'package:flutter_grocery/localization/language_constrants.dart';
-import 'package:flutter_grocery/provider/banner_provider.dart';
 import 'package:flutter_grocery/provider/banner_two_provider.dart';
 import 'package:flutter_grocery/provider/category_provider.dart';
-import 'package:flutter_grocery/provider/splash_provider.dart';
 import 'package:flutter_grocery/utill/color_resources.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/utill/images.dart';
@@ -29,7 +27,7 @@ class BannerTwoView extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: ResponsiveHelper.isDesktop(context)
               ? 450
-              : MediaQuery.of(context).size.width * 0.2,
+              : MediaQuery.of(context).size.width * 0.4,
           // height: MediaQuery.of(context).size.width * 0.4,
           padding: EdgeInsets.only(
               top: Dimensions.PADDING_SIZE_LARGE,
@@ -51,7 +49,7 @@ class BannerTwoView extends StatelessWidget {
                               autoPlayInterval: Duration(seconds: 5),
                               onPageChanged: (index, reason) {
                                 currentIndex = index;
-                                Provider.of<BannerProvider>(context,
+                                Provider.of<BannerTwoProvider>(context,
                                         listen: false)
                                     .setCurrentIndex(index);
                               },
@@ -85,7 +83,7 @@ class BannerTwoView extends StatelessWidget {
                                       );
                                     }
                                   } else if (bannerTwo
-                                          .bannerTwoList[index].productId !=
+                                          .bannerTwoList[index].categoryId !=
                                       null) {
                                     CategoryModel category;
                                     for (CategoryModel categoryModel
@@ -94,8 +92,8 @@ class BannerTwoView extends StatelessWidget {
                                                 listen: false)
                                             .categoryList) {
                                       if (categoryModel.id ==
-                                          bannerTwo
-                                              .bannerTwoList[index].productId) {
+                                          bannerTwo.bannerTwoList[index]
+                                              .categoryId) {
                                         category = categoryModel;
                                         break;
                                       }

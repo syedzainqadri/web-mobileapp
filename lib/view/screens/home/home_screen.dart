@@ -11,7 +11,6 @@ import 'package:flutter_grocery/view/base/main_app_bar.dart';
 import 'package:flutter_grocery/view/base/title_widget.dart';
 import 'package:flutter_grocery/view/screens/home/widget/banners_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/categories_on_home.dart';
-import 'package:flutter_grocery/view/screens/home/widget/category_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/daily_item_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/footer.dart';
 import 'package:flutter_grocery/view/screens/home/widget/product_view.dart';
@@ -19,11 +18,6 @@ import 'package:flutter_grocery/view/screens/home/widget/search_bar.dart';
 import 'package:provider/provider.dart';
 import '../../../data/model/response/category_model.dart';
 import '../../../helper/route_helper.dart';
-import '../../../provider/theme_provider.dart';
-import '../../../utill/color_resources.dart';
-import '../../../utill/styles.dart';
-import '../category/all_category_screen.dart';
-import '../product/category_product_screen.dart';
 import 'widget/ams_item_view.dart';
 import 'widget/banners_two_view.dart';
 import 'widget/categorylistview.dart';
@@ -36,7 +30,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isLoading=true;
+  bool isLoading = true;
   Future<void> _loadData(BuildContext context, bool reload) async {
     // await Provider.of<CategoryProvider>(context, listen: false).getCategoryList(context, reload);
 
@@ -86,22 +80,20 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     setState(() {
-      isLoading=false;
+      isLoading = false;
     });
   }
 
-var searchController=TextEditingController();
+  var searchController = TextEditingController();
 
-   ScrollController _scrollController;
+  ScrollController _scrollController;
 
   @override
   Widget build(BuildContext context) {
-    _scrollController= ScrollController(
-    initialScrollOffset: 0.0
-    );
+    _scrollController = ScrollController(initialScrollOffset: 0.0);
     var weidth = MediaQuery.of(context).size.width;
 
-    final ScrollController _scrollController2= ScrollController();
+    final ScrollController _scrollController2 = ScrollController();
     _loadData(context, false);
 
     return RefreshIndicator(
@@ -110,163 +102,150 @@ var searchController=TextEditingController();
       },
       backgroundColor: Theme.of(context).primaryColor,
       child: Scaffold(
-        appBar: ResponsiveHelper.isDesktop(context) ? MainAppBar() : null,
-        body: Scrollbar(
-          child: SingleChildScrollView(
-
-            controller: _scrollController,
-
-            child: Container(
-              // height: 7000,
-              padding:
-                  EdgeInsets.symmetric(horizontal: weidth > 800 ? weidth*0.14  : 40),
-              child: Column(
-
-                  children: [
-                    Container(
-                        height: 70.0,
-                        child: SearchBar(searchControlller: searchController,categoryClick: (){
+          appBar: ResponsiveHelper.isDesktop(context) ? MainAppBar() : null,
+          body: Scrollbar(
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: Container(
+                // height: 7000,
+                padding: EdgeInsets.symmetric(
+                    horizontal: weidth > 800 ? weidth * 0.14 : 40),
+                child: Column(children: [
+                  Container(
+                      height: 70.0,
+                      child: SearchBar(
+                        searchControlller: searchController,
+                        categoryClick: () {
                           Navigator.pushNamed(context, RouteHelper.categorys);
-                        },)
-                  ),
-                    Consumer<CategoryProvider>(
-                        builder: (context, category, child) {
-                      return category.categoryList == null
-                          ? Container(height: 335, child: CategoryListView())
-                          : category.categoryList.length == 0
-                              ? SizedBox()
-                              : Container(
-                                  height: 335, child: CategoryListView(
-
-
-
-                      ));
-                    }),
-                    //banner
-                    Consumer<BannerProvider>(builder: (context, banner, child) {
-                      return banner.bannerList == null
-                          ? BannersView()
-                          : banner.bannerList.length == 0
-                              ? SizedBox()
-                              : BannersView();
-                    }),
-                    // DailyNeeds
-                    Consumer<ProductProvider>(
-                        builder: (context, product, child) {
-                      return product.dailyItemList == null
-                          ? Container(height: 340, child: DailyItemView())
-                          : product.dailyItemList.length == 0
-                              ? SizedBox()
-                              : Container(height: 382, child: DailyItemView());
-                    }),
-                    // Banner Two
-                    Consumer<BannerTwoProvider>(
-                        builder: (context, bannerTwo, child) {
-                      return bannerTwo.bannerTwoList == null
-                          ? BannerTwoView()
-                          : bannerTwo.bannerTwoList.length == 0
-                              ? SizedBox()
-                              : BannerTwoView();
-                    }),
-                    // Akbari Mandi Special
-                    Consumer<ProductProvider>(
-                        builder: (context, product, child) {
-                      return product.amsItemList == null
-                          ? AmsItemView()
-                          : product.amsItemList.length == 0
-                              ? SizedBox()
-                              : AmsItemView();
-                    }),
-                    // Fresh Items
-                    Consumer<ProductProvider>(
-                        builder: (context, product, child) {
-                      return product.freshItemList == null
-                          ? FreshItemView()
-                          : product.freshItemList.length == 0
-                              ? SizedBox()
-                              : FreshItemView();
-                    }),
-                    //AllCategories with sub Categories
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      // padding: EdgeInsets.symmetric(
-                      //     horizontal: weidth > 1150
-                      //         ? weidth * 0.08
-                      //         : weidth > 1000
-                      //             ? weidth * 0.05
-                      //             : 8),
-                      child: Consumer<CategoryProvider>(
-                        builder: (context, categoryProvider, child) {
-                          return categoryProvider.categoryList.length != 0
-                              ? ListView.builder(
-                                  itemCount:
-                                      categoryProvider.categoryList.length,
-                                  primary: false,
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  padding: EdgeInsets.all(4.0),
-                                  itemBuilder: (context, index) {
-                                    CategoryModel _category =
-                                        categoryProvider.categoryList[index];
-
-                                    var category =
-                                        Provider.of<CategoryProvider>(context,
-                                                listen: false)
-                                            .subCategoryList;
-                                    print("sub categoris list $category");
-
-                                    return HomeCategory(
-                                      title: _category.name,
-                                      id: _category.id,
-                                    );
-                                  })
-                              : Container(
-                                  child: Text('category View'),
-                                );
                         },
-                      ),
+                      )),
+                  Consumer<CategoryProvider>(
+                      builder: (context, category, child) {
+                    return category.categoryList == null
+                        ? Container(height: 335, child: CategoryListView())
+                        : category.categoryList.length == 0
+                            ? SizedBox()
+                            : Container(height: 335, child: CategoryListView());
+                  }),
+                  //banner
+                  Consumer<BannerProvider>(builder: (context, banner, child) {
+                    return banner.bannerList == null
+                        ? BannersView()
+                        : banner.bannerList.length == 0
+                            ? SizedBox()
+                            : BannersView();
+                  }),
+                  // DailyNeeds
+                  Consumer<ProductProvider>(builder: (context, product, child) {
+                    return product.dailyItemList == null
+                        ? Container(height: 340, child: DailyItemView())
+                        : product.dailyItemList.length == 0
+                            ? SizedBox()
+                            : Container(height: 382, child: DailyItemView());
+                  }),
+                  // Banner Two
+                  Consumer<BannerTwoProvider>(
+                      builder: (context, bannerTwo, child) {
+                    return bannerTwo.bannerTwoList == null
+                        ? BannerTwoView()
+                        : bannerTwo.bannerTwoList.length == 0
+                            ? SizedBox()
+                            : BannerTwoView();
+                  }),
+                  // Akbari Mandi Special
+                  Consumer<ProductProvider>(builder: (context, product, child) {
+                    return product.amsItemList == null
+                        ? AmsItemView()
+                        : product.amsItemList.length == 0
+                            ? SizedBox()
+                            : AmsItemView();
+                  }),
+                  // Fresh Items
+                  Consumer<ProductProvider>(builder: (context, product, child) {
+                    return product.freshItemList == null
+                        ? FreshItemView()
+                        : product.freshItemList.length == 0
+                            ? SizedBox()
+                            : FreshItemView();
+                  }),
+                  //AllCategories with sub Categories
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    // padding: EdgeInsets.symmetric(
+                    //     horizontal: weidth > 1150
+                    //         ? weidth * 0.08
+                    //         : weidth > 1000
+                    //             ? weidth * 0.05
+                    //             : 8),
+                    child: Consumer<CategoryProvider>(
+                      builder: (context, categoryProvider, child) {
+                        return categoryProvider.categoryList.length != 0
+                            ? ListView.builder(
+                                itemCount: categoryProvider.categoryList.length,
+                                primary: false,
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.all(4.0),
+                                itemBuilder: (context, index) {
+                                  CategoryModel _category =
+                                      categoryProvider.categoryList[index];
+
+                                  var category = Provider.of<CategoryProvider>(
+                                          context,
+                                          listen: false)
+                                      .subCategoryList;
+                                  print("sub categoris list $category");
+
+                                  return HomeCategory(
+                                    title: _category.name,
+                                    id: _category.id,
+                                  );
+                                })
+                            : Container(
+                                child: Text('category View'),
+                              );
+                      },
                     ),
-                    // Popular Item
-                    Padding(
-                      padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                      child: TitleWidget(
-                          title: getTranslated('popular_item', context)),
-                    ),
-                    ProductView(
-                        productType: ProductType.POPULAR_PRODUCT,
-                        scrollController: _scrollController2),
-
-                    isLoading?CircularProgressIndicator():Footer(
-                      categoriesList: Provider.of<CategoryProvider>(context, listen: false).categoryList,
-                      brandsList: Provider.of<CategoryProvider>(context, listen: false).brands,
-
-
-                    )
-                  ]),
+                  ),
+                  // Popular Item
+                  Padding(
+                    padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                    child: TitleWidget(
+                        title: getTranslated('popular_item', context)),
+                  ),
+                  ProductView(
+                      productType: ProductType.POPULAR_PRODUCT,
+                      scrollController: _scrollController2),
+                  //Footer
+                  isLoading
+                      ? CircularProgressIndicator()
+                      : Footer(
+                          categoriesList: Provider.of<CategoryProvider>(context,
+                                  listen: false)
+                              .categoryList,
+                          brandsList: Provider.of<CategoryProvider>(context,
+                                  listen: false)
+                              .brands,
+                        )
+                ]),
+              ),
             ),
           ),
-        ),
-
-        floatingActionButton:
-        // _scrollController.hasClients?_scrollController.position.pixels<800 ?Offstage():
-        FloatingActionButton(
-
-          child: Icon(
-            Icons.keyboard_arrow_up_outlined
+          floatingActionButton:
+              // _scrollController.hasClients?_scrollController.position.pixels<800 ?Offstage():
+              FloatingActionButton(
+            child: Icon(Icons.keyboard_arrow_up_outlined),
+            backgroundColor: Colors.green,
+            onPressed: () {
+              _scrollController.animateTo(
+                0.0,
+                duration: Duration(milliseconds: 300),
+                curve: Curves.fastOutSlowIn,
+              );
+            },
+          )
+          // :Offstage(),
           ),
-          backgroundColor: Colors.green,
-          onPressed: (){
-
-            _scrollController.animateTo(
-             0.0,
-              duration: Duration(milliseconds: 300),
-              curve: Curves.fastOutSlowIn,);
-          },
-
-
-        )
-              // :Offstage(),
-      ),
     );
   }
 }

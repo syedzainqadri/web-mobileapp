@@ -1,3 +1,2 @@
-2022/03/02-05:42:36.753 5003 Reusing MANIFEST /private/var/folders/8y/jgx4zhx94vvd8052zgtrqkn80000gq/T/flutter_tools.xTXZHk/flutter_tools_chrome_device.yR0OyB/Default/Session Storage/MANIFEST-000001
-2022/03/02-05:42:36.755 5003 Recovering log #3
-2022/03/02-05:42:36.757 5003 Reusing old log /private/var/folders/8y/jgx4zhx94vvd8052zgtrqkn80000gq/T/flutter_tools.xTXZHk/flutter_tools_chrome_device.yR0OyB/Default/Session Storage/000003.log 
+2022/03/02-08:43:25.716 3403 Creating DB /private/var/folders/8y/jgx4zhx94vvd8052zgtrqkn80000gq/T/flutter_tools.NfSLki/flutter_tools_chrome_device.TrS1bz/Default/Session Storage since it was missing.
+2022/03/02-08:43:25.769 3403 Reusing MANIFEST /private/var/folders/8y/jgx4zhx94vvd8052zgtrqkn80000gq/T/flutter_tools.NfSLki/flutter_tools_chrome_device.TrS1bz/Default/Session Storage/MANIFEST-000001
