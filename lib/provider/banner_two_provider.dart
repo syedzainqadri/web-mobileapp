@@ -24,8 +24,8 @@ class BannerTwoProvider extends ChangeNotifier {
       if (apiResponse.response != null &&
           apiResponse.response.statusCode == 200) {
         _bannerTwoList = [];
-        apiResponse.response.data.forEach((brand) {
-          BannerTwoModel bannerTwoModel = BannerTwoModel.fromJson(brand);
+        apiResponse.response.data.forEach((category) {
+          BannerTwoModel bannerTwoModel = BannerTwoModel.fromJson(category);
           if (bannerTwoModel.productId != null) {
             getBannerDetails(context, bannerTwoModel.productId.toString());
           }
