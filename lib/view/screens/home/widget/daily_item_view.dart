@@ -19,9 +19,8 @@ class DailyItemView extends StatelessWidget {
   final ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProductProvider>(
-        builder: (context, productProvider, child) {
-      return productProvider.dailyItemList != null
+
+      return Provider.of<ProductProvider>(context, listen: false).dailyItemList != null
           ? Column(children: [
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 10, 15, 10),
@@ -55,13 +54,13 @@ class DailyItemView extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: ListView.builder(
                               controller: controller,
-                              itemCount: productProvider.dailyItemList.length,
+                              itemCount: Provider.of<ProductProvider>(context, listen: false).dailyItemList.length,
                               // padding: EdgeInsets.symmetric(
                               //     horizontal: Dimensions.PADDING_SIZE_SMALL),
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 print(
-                                    " signle item is: ${productProvider.dailyItemList[index].discount}");
+                                    " signle item is: ${Provider.of<ProductProvider>(context, listen: false).dailyItemList[index].discount}");
                                 return Padding(
                                   padding: EdgeInsets.only(
                                       right: Dimensions.PADDING_SIZE_SMALL),
@@ -69,10 +68,10 @@ class DailyItemView extends StatelessWidget {
                                     onTap: () {
                                       Navigator.of(context).pushNamed(
                                           RouteHelper.getProductDetailsRoute(
-                                              productProvider
+                                              Provider.of<ProductProvider>(context, listen: false)
                                                   .dailyItemList[index].id),
                                           arguments: ProductDetailsScreen(
-                                              product: productProvider
+                                              product: Provider.of<ProductProvider>(context, listen: false)
                                                   .dailyItemList[index],
                                               cart: null));
                                     },
@@ -112,7 +111,7 @@ class DailyItemView extends StatelessWidget {
                                                   fit: BoxFit.cover,
                                                   image:
                                                       '${Provider.of<SplashProvider>(context, listen: false).baseUrls.productImageUrl}'
-                                                      '/${productProvider.dailyItemList[index].image[0]}',
+                                                      '/${Provider.of<ProductProvider>(context, listen: false).dailyItemList[index].image[0]}',
                                                   imageErrorBuilder:
                                                       (c, o, s) => Image.asset(
                                                           Images.placeholder,
@@ -136,7 +135,7 @@ class DailyItemView extends StatelessWidget {
                                                         const EdgeInsets.only(
                                                             bottom: 20.0),
                                                     child: Text(
-                                                      productProvider
+                                                      Provider.of<ProductProvider>(context, listen: false)
                                                           .dailyItemList[index]
                                                           .name,
                                                       style: poppinsMedium.copyWith(
@@ -150,7 +149,7 @@ class DailyItemView extends StatelessWidget {
                                                         const EdgeInsets.only(
                                                             bottom: 8.0),
                                                     child: Text(
-                                                      '${productProvider.dailyItemList[index].capacity} ${productProvider.dailyItemList[index].unit}',
+                                                      '${Provider.of<ProductProvider>(context, listen: false).dailyItemList[index].capacity} ${Provider.of<ProductProvider>(context, listen: false).dailyItemList[index].unit}',
                                                       style: poppinsRegular.copyWith(
                                                           fontSize: Dimensions
                                                               .FONT_SIZE_EXTRA_SMALL),
@@ -192,15 +191,15 @@ class DailyItemView extends StatelessWidget {
                                                                   PriceConverter
                                                                       .convertPrice(
                                                                     context,
-                                                                    productProvider
+                                                                    Provider.of<ProductProvider>(context, listen: false)
                                                                         .dailyItemList[
                                                                             index]
                                                                         .price,
-                                                                    discount: productProvider
+                                                                    discount: Provider.of<ProductProvider>(context, listen: false)
                                                                         .dailyItemList[
                                                                             index]
                                                                         .discount,
-                                                                    discountType: productProvider
+                                                                    discountType: Provider.of<ProductProvider>(context, listen: false)
                                                                         .dailyItemList[
                                                                             index]
                                                                         .discountType,
@@ -214,7 +213,7 @@ class DailyItemView extends StatelessWidget {
                                                                 ),
                                                               ),
                                                             ),
-                                                            productProvider
+                                                            Provider.of<ProductProvider>(context, listen: false)
                                                                         .dailyItemList[
                                                                             index]
                                                                         .discount >
@@ -222,9 +221,9 @@ class DailyItemView extends StatelessWidget {
                                                                 ? Text(
                                                                     PriceConverter.convertWithDiscount(
                                                                                 context,
-                                                                                productProvider.dailyItemList[index].price,
-                                                                                productProvider.dailyItemList[index].discount,
-                                                                                productProvider.dailyItemList[index].discountType)
+                                                                        Provider.of<ProductProvider>(context, listen: false).dailyItemList[index].price,
+                                                                        Provider.of<ProductProvider>(context, listen: false).dailyItemList[index].discount,
+                                                                        Provider.of<ProductProvider>(context, listen: false).dailyItemList[index].discountType)
                                                                             .toString() +
                                                                         ".00",
                                                                     style: poppinsRegular.copyWith(
@@ -290,6 +289,6 @@ class DailyItemView extends StatelessWidget {
               }),
             ])
           : SizedBox();
-    });
+
   }
 }

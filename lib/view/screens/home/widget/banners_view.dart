@@ -22,8 +22,6 @@ class BannersView extends StatelessWidget {
   int currentIndex;
   @override
   Widget build(BuildContext context) {
-    return Consumer<BannerProvider>(
-      builder: (context, banner, child) {
         return Container(
           width: MediaQuery.of(context).size.width,
           height: ResponsiveHelper.isDesktop(context)
@@ -33,8 +31,8 @@ class BannersView extends StatelessWidget {
           padding: EdgeInsets.only(
               top: Dimensions.PADDING_SIZE_LARGE,
               bottom: Dimensions.PADDING_SIZE_SMALL),
-          child: banner.bannerList != null
-              ? banner.bannerList.length != 0
+          child: Provider.of<BannerProvider>(context, listen: false).bannerList != null
+              ? Provider.of<BannerProvider>(context, listen: false).bannerList.length != 0
                   ? OnHover(builder: (isHover) {
                       return Stack(
                         fit: StackFit.expand,
@@ -55,18 +53,18 @@ class BannersView extends StatelessWidget {
                                     .setCurrentIndex(index);
                               },
                             ),
-                            itemCount: banner.bannerList.length == 0
+                            itemCount: Provider.of<BannerProvider>(context, listen: false).bannerList.length == 0
                                 ? 1
-                                : banner.bannerList.length,
+                                : Provider.of<BannerProvider>(context, listen: false).bannerList.length,
                             itemBuilder: (context, index, _) {
                               return InkWell(
                                 onTap: () {
-                                  if (banner.bannerList[index].productId !=
+                                  if (Provider.of<BannerProvider>(context, listen: false).bannerList[index].productId !=
                                       null) {
                                     Product product;
-                                    for (Product prod in banner.productList) {
+                                    for (Product prod in Provider.of<BannerProvider>(context, listen: false).productList) {
                                       if (prod.id ==
-                                          banner.bannerList[index].productId) {
+                                          Provider.of<BannerProvider>(context, listen: false).bannerList[index].productId) {
                                         product = prod;
                                         break;
                                       }
@@ -80,7 +78,7 @@ class BannersView extends StatelessWidget {
                                             product: product),
                                       );
                                     }
-                                  } else if (banner
+                                  } else if (Provider.of<BannerProvider>(context, listen: false)
                                           .bannerList[index].categoryId !=
                                       null) {
                                     CategoryModel category;
@@ -90,7 +88,7 @@ class BannersView extends StatelessWidget {
                                                 listen: false)
                                             .categoryList) {
                                       if (categoryModel.id ==
-                                          banner.bannerList[index].categoryId) {
+                                          Provider.of<BannerProvider>(context, listen: false).bannerList[index].categoryId) {
                                         category = categoryModel;
                                         break;
                                       }
@@ -114,7 +112,7 @@ class BannersView extends StatelessWidget {
                                       placeholder: Images.placeholder,
                                       image:
                                           '${Provider.of<SplashProvider>(context, listen: false).baseUrls.bannerImageUrl}'
-                                          '/${banner.bannerList[index].image}',
+                                          '/${Provider.of<BannerProvider>(context, listen: false).bannerList[index].image}',
                                       fit: BoxFit.fill,
                                       imageErrorBuilder: (c, o, s) =>
                                           Image.asset(Images.placeholder,
@@ -137,13 +135,13 @@ class BannersView extends StatelessWidget {
                             right: 0,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: banner.bannerList.map((bnr) {
-                                int index = banner.bannerList.indexOf(bnr);
+                              children: Provider.of<BannerProvider>(context, listen: false).bannerList.map((bnr) {
+                                int index = Provider.of<BannerProvider>(context, listen: false).bannerList.indexOf(bnr);
                                 return TabPageSelectorIndicator(
-                                  backgroundColor: index == banner.currentIndex
+                                  backgroundColor: index == Provider.of<BannerProvider>(context, listen: false).currentIndex
                                       ? Theme.of(context).primaryColor
                                       : ColorResources.getCardBgColor(context),
-                                  borderColor: index == banner.currentIndex
+                                  borderColor: index == Provider.of<BannerProvider>(context, listen: false).currentIndex
                                       ? Theme.of(context).primaryColor
                                       : Theme.of(context).primaryColor,
                                   size: 10,
@@ -159,7 +157,7 @@ class BannersView extends StatelessWidget {
                           Text(getTranslated('no_banner_available', context)))
               : Shimmer(
                   duration: Duration(seconds: 2),
-                  enabled: banner.bannerList == null,
+                  enabled: Provider.of<BannerProvider>(context, listen: false).bannerList == null,
                   child: Container(
                       margin: EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
@@ -167,8 +165,7 @@ class BannersView extends StatelessWidget {
                         color: Colors.grey[300],
                       )),
                 ),
-        );
-      },
+
     );
   }
 }

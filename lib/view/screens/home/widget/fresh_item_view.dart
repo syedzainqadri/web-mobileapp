@@ -22,9 +22,8 @@ class FreshItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProductProvider>(
-        builder: (context, productProvider, child) {
-      return productProvider.freshItemList != null
+
+      return Provider.of<ProductProvider>(context, listen: false).freshItemList != null
           ? Column(children: [
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 20, 15, 10),
@@ -58,7 +57,7 @@ class FreshItemView extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: ListView.builder(
                               controller: controller,
-                              itemCount: productProvider.freshItemList.length,
+                              itemCount: Provider.of<ProductProvider>(context, listen: false).freshItemList.length,
                               // padding: EdgeInsets.symmetric(
                               //     horizontal: Dimensions.PADDING_SIZE_SMALL),
                               scrollDirection: Axis.horizontal,
@@ -70,10 +69,10 @@ class FreshItemView extends StatelessWidget {
                                     onTap: () {
                                       Navigator.of(context).pushNamed(
                                           RouteHelper.getProductDetailsRoute(
-                                              productProvider
+                                              Provider.of<ProductProvider>(context, listen: false)
                                                   .freshItemList[index].id),
                                           arguments: ProductDetailsScreen(
-                                              product: productProvider
+                                              product: Provider.of<ProductProvider>(context, listen: false)
                                                   .freshItemList[index],
                                               cart: null));
                                     },
@@ -113,7 +112,7 @@ class FreshItemView extends StatelessWidget {
                                                   fit: BoxFit.cover,
                                                   image:
                                                       '${Provider.of<SplashProvider>(context, listen: false).baseUrls.productImageUrl}'
-                                                      '/${productProvider.freshItemList[index].image[0]}',
+                                                      '/${Provider.of<ProductProvider>(context, listen: false).freshItemList[index].image[0]}',
                                                   imageErrorBuilder:
                                                       (c, o, s) => Image.asset(
                                                           Images.placeholder,
@@ -137,7 +136,7 @@ class FreshItemView extends StatelessWidget {
                                                         const EdgeInsets.only(
                                                             bottom: 20.0),
                                                     child: Text(
-                                                      productProvider
+                                                      Provider.of<ProductProvider>(context, listen: false)
                                                           .freshItemList[index]
                                                           .name,
                                                       style: poppinsMedium.copyWith(
@@ -151,7 +150,7 @@ class FreshItemView extends StatelessWidget {
                                                         const EdgeInsets.only(
                                                             bottom: 8.0),
                                                     child: Text(
-                                                      '${productProvider.freshItemList[index].capacity} ${productProvider.freshItemList[index].unit}',
+                                                      '${Provider.of<ProductProvider>(context, listen: false).freshItemList[index].capacity} ${Provider.of<ProductProvider>(context, listen: false).freshItemList[index].unit}',
                                                       style: poppinsRegular.copyWith(
                                                           fontSize: Dimensions
                                                               .FONT_SIZE_EXTRA_SMALL),
@@ -193,15 +192,15 @@ class FreshItemView extends StatelessWidget {
                                                                   PriceConverter
                                                                       .convertPrice(
                                                                     context,
-                                                                    productProvider
+                                                                    Provider.of<ProductProvider>(context, listen: false)
                                                                         .freshItemList[
                                                                             index]
                                                                         .price,
-                                                                    discount: productProvider
+                                                                    discount: Provider.of<ProductProvider>(context, listen: false)
                                                                         .freshItemList[
                                                                             index]
                                                                         .discount,
-                                                                    discountType: productProvider
+                                                                    discountType: Provider.of<ProductProvider>(context, listen: false)
                                                                         .freshItemList[
                                                                             index]
                                                                         .discountType,
@@ -215,7 +214,7 @@ class FreshItemView extends StatelessWidget {
                                                                 ),
                                                               ),
                                                             ),
-                                                            productProvider
+                                                            Provider.of<ProductProvider>(context, listen: false)
                                                                         .freshItemList[
                                                                             index]
                                                                         .discount >
@@ -224,13 +223,13 @@ class FreshItemView extends StatelessWidget {
                                                                     PriceConverter
                                                                             .convertWithDiscount(
                                                                           context,
-                                                                          productProvider
+                                                                      Provider.of<ProductProvider>(context, listen: false)
                                                                               .freshItemList[index]
                                                                               .price,
-                                                                          productProvider
+                                                                      Provider.of<ProductProvider>(context, listen: false)
                                                                               .freshItemList[index]
                                                                               .discount,
-                                                                          productProvider
+                                                                      Provider.of<ProductProvider>(context, listen: false)
                                                                               .freshItemList[index]
                                                                               .discountType,
                                                                         ).toString() +
@@ -298,6 +297,6 @@ class FreshItemView extends StatelessWidget {
               }),
             ])
           : SizedBox();
-    });
+
   }
 }

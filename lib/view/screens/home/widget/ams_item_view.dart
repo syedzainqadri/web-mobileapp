@@ -19,9 +19,8 @@ class AmsItemView extends StatelessWidget {
   final ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProductProvider>(
-        builder: (context, productProvider, child) {
-      return productProvider.amsItemList != null
+
+      return Provider.of<ProductProvider>(context, listen: false).amsItemList != null
           ? Column(children: [
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 20, 15, 10),
@@ -55,7 +54,7 @@ class AmsItemView extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: ListView.builder(
                               controller: controller,
-                              itemCount: productProvider.amsItemList.length,
+                              itemCount: Provider.of<ProductProvider>(context, listen: false).amsItemList.length,
                               // padding: EdgeInsets.symmetric(
                               //     horizontal: Dimensions.PADDING_SIZE_SMALL),
                               scrollDirection: Axis.horizontal,
@@ -67,10 +66,10 @@ class AmsItemView extends StatelessWidget {
                                     onTap: () {
                                       Navigator.of(context).pushNamed(
                                           RouteHelper.getProductDetailsRoute(
-                                              productProvider
+                                              Provider.of<ProductProvider>(context, listen: false)
                                                   .amsItemList[index].id),
                                           arguments: ProductDetailsScreen(
-                                              product: productProvider
+                                              product: Provider.of<ProductProvider>(context, listen: false)
                                                   .amsItemList[index],
                                               cart: null));
                                     },
@@ -110,7 +109,7 @@ class AmsItemView extends StatelessWidget {
                                                   fit: BoxFit.cover,
                                                   image:
                                                       '${Provider.of<SplashProvider>(context, listen: false).baseUrls.productImageUrl}'
-                                                      '/${productProvider.amsItemList[index].image[0]}',
+                                                      '/${Provider.of<ProductProvider>(context, listen: false).amsItemList[index].image[0]}',
                                                   imageErrorBuilder:
                                                       (c, o, s) => Image.asset(
                                                           Images.placeholder,
@@ -134,7 +133,7 @@ class AmsItemView extends StatelessWidget {
                                                         const EdgeInsets.only(
                                                             bottom: 20.0),
                                                     child: Text(
-                                                      productProvider
+                                                      Provider.of<ProductProvider>(context, listen: false)
                                                           .amsItemList[index]
                                                           .name,
                                                       style: poppinsMedium.copyWith(
@@ -148,7 +147,7 @@ class AmsItemView extends StatelessWidget {
                                                         const EdgeInsets.only(
                                                             bottom: 8.0),
                                                     child: Text(
-                                                      '${productProvider.amsItemList[index].capacity} ${productProvider.amsItemList[index].unit}',
+                                                      '${Provider.of<ProductProvider>(context, listen: false).amsItemList[index].capacity} ${Provider.of<ProductProvider>(context, listen: false).amsItemList[index].unit}',
                                                       style: poppinsRegular.copyWith(
                                                           fontSize: Dimensions
                                                               .FONT_SIZE_EXTRA_SMALL),
@@ -190,15 +189,15 @@ class AmsItemView extends StatelessWidget {
                                                                   PriceConverter
                                                                       .convertPrice(
                                                                     context,
-                                                                    productProvider
+                                                                    Provider.of<ProductProvider>(context, listen: false)
                                                                         .amsItemList[
                                                                             index]
                                                                         .price,
-                                                                    discount: productProvider
+                                                                    discount: Provider.of<ProductProvider>(context, listen: false)
                                                                         .amsItemList[
                                                                             index]
                                                                         .discount,
-                                                                    discountType: productProvider
+                                                                    discountType: Provider.of<ProductProvider>(context, listen: false)
                                                                         .amsItemList[
                                                                             index]
                                                                         .discountType,
@@ -212,7 +211,7 @@ class AmsItemView extends StatelessWidget {
                                                                 ),
                                                               ),
                                                             ),
-                                                            productProvider
+                                                            Provider.of<ProductProvider>(context, listen: false)
                                                                         .amsItemList[
                                                                             index]
                                                                         .discount >
@@ -221,13 +220,13 @@ class AmsItemView extends StatelessWidget {
                                                                     PriceConverter
                                                                             .convertWithDiscount(
                                                                           context,
-                                                                          productProvider
+                                                                      Provider.of<ProductProvider>(context, listen: false)
                                                                               .amsItemList[index]
                                                                               .price,
-                                                                          productProvider
+                                                                      Provider.of<ProductProvider>(context, listen: false)
                                                                               .amsItemList[index]
                                                                               .discount,
-                                                                          productProvider
+                                                                      Provider.of<ProductProvider>(context, listen: false)
                                                                               .amsItemList[index]
                                                                               .discountType,
                                                                         ).toString() +
@@ -295,6 +294,5 @@ class AmsItemView extends StatelessWidget {
               }),
             ])
           : SizedBox();
-    });
   }
 }

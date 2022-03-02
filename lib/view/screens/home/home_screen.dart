@@ -87,16 +87,24 @@ class _HomeScreenState extends State<HomeScreen> {
   var searchController = TextEditingController();
 
   ScrollController _scrollController;
-
+@override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+  _loadData(context, false);
+  setState(() {
+    isLoading=false;
+  });
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     _scrollController = ScrollController(initialScrollOffset: 0.0);
     var weidth = MediaQuery.of(context).size.width;
 
     final ScrollController _scrollController2 = ScrollController();
-    _loadData(context, false);
+    // _loadData(context, false);
 
-    return RefreshIndicator(
+    return isLoading?Center(child: CircularProgressIndicator(),):RefreshIndicator(
       onRefresh: () async {
         await _loadData(context, true);
       },
@@ -174,18 +182,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     //         : weidth > 1000
                     //             ? weidth * 0.05
                     //             : 8),
-                    child: Consumer<CategoryProvider>(
-                      builder: (context, categoryProvider, child) {
-                        return categoryProvider.categoryList.length != 0
-                            ? ListView.builder(
-                                itemCount: categoryProvider.categoryList.length,
+
+                    child:Provider.of<CategoryProvider>(context, listen: false).categoryList==null?
+                    SizedBox():
+                    Provider.of<CategoryProvider>(context, listen: false).categoryList.length == 0
+                            ?SizedBox(): ListView.builder(
+                                itemCount: Provider.of<CategoryProvider>(context, listen: false).categoryList.length,
                                 primary: false,
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 padding: EdgeInsets.all(4.0),
                                 itemBuilder: (context, index) {
                                   CategoryModel _category =
-                                      categoryProvider.categoryList[index];
+                                  Provider.of<CategoryProvider>(context, listen: false).categoryList[index];
 
                                   var category = Provider.of<CategoryProvider>(
                                           context,
@@ -197,12 +206,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     title: _category.name,
                                     id: _category.id,
                                   );
-                                })
-                            : Container(
-                                child: Text('category View'),
-                              );
-                      },
-                    ),
+                                }),
+
+
                   ),
                   // Popular Item
                   Padding(

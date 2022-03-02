@@ -29,9 +29,7 @@ class _CategoryListViewState extends State<CategoryListView> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CategoryProvider>(
-      builder: (context, category, child) {
-        return category.categoryList != null
+        return Provider.of<CategoryProvider>(context, listen: false).categoryList != null
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,7 +73,7 @@ class _CategoryListViewState extends State<CategoryListView> {
                                           Navigator.of(context).pushNamed(
                                             RouteHelper
                                                 .getCategoryProductsRoute(
-                                                    category.categoryList[index]
+                                                Provider.of<CategoryProvider>(context, listen: false).categoryList[index]
                                                         .id),
                                           );
                                         },
@@ -130,7 +128,7 @@ class _CategoryListViewState extends State<CategoryListView> {
                                                       placeholder:
                                                           Images.placeholder,
                                                       image:
-                                                          '${Provider.of<SplashProvider>(context, listen: false).baseUrls.categoryImageUrl}/${category.categoryList[index].image}',
+                                                          '${Provider.of<SplashProvider>(context, listen: false).baseUrls.categoryImageUrl}/${Provider.of<CategoryProvider>(context, listen: false).categoryList[index].image}',
                                                       fit: BoxFit.cover,
                                                       height: 100,
                                                       width: 100,
@@ -155,8 +153,8 @@ class _CategoryListViewState extends State<CategoryListView> {
                                                 padding: EdgeInsets.all(Dimensions
                                                     .PADDING_SIZE_EXTRA_SMALL),
                                                 child: Text(
-                                                  category
-                                                      .categoryList[index].name,
+                                                  Provider.of<CategoryProvider>(context, listen: false).categoryList
+                                                  [index].name,
                                                   style: poppinsRegular,
                                                   textAlign: TextAlign.center,
                                                   // maxLines: 2,
@@ -312,8 +310,7 @@ class _CategoryListViewState extends State<CategoryListView> {
                 ],
               )
             : CategoryShimmer();
-      },
-    );
+
   }
 }
 
