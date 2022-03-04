@@ -114,20 +114,6 @@ class BannersView extends StatelessWidget {
                             );
                           },
                         ),
-                        // Positioned(
-                        //   bottom: 5, left: 0, right: 0,
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.center,
-                        //     children: banner.bannerList.map((bnr) {
-                        //       int index = banner.bannerList.indexOf(bnr);
-                        //       return TabPageSelectorIndicator(
-                        //         backgroundColor: index == banner.currentIndex ? Theme.of(context).primaryColor : ColorResources.getCardBgColor(context),
-                        //         borderColor: index == banner.currentIndex ? Theme.of(context).primaryColor : Theme.of(context).primaryColor,
-                        //         size: 10,
-                        //       );
-                        //     }).toList(),
-                        //   ),
-                        // ),
                       ],
                     )
                   : Center(

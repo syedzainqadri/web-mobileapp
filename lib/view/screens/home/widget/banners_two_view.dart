@@ -8,8 +8,6 @@ import 'package:flutter_grocery/localization/language_constrants.dart';
 import 'package:flutter_grocery/provider/banner_provider.dart';
 import 'package:flutter_grocery/provider/banner_two_provider.dart';
 import 'package:flutter_grocery/provider/category_provider.dart';
-import 'package:flutter_grocery/provider/splash_provider.dart';
-import 'package:flutter_grocery/utill/color_resources.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/utill/images.dart';
 import 'package:flutter_grocery/view/screens/product/product_details_screen.dart';
@@ -20,18 +18,17 @@ class BannerTwoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<BannerTwoProvider>(
-      builder: (context, bannerTwo, child) {
+      builder: (context, banner, child) {
         return Container(
           width: MediaQuery.of(context).size.width,
           height: ResponsiveHelper.isDesktop(context)
               ? 300
               : MediaQuery.of(context).size.width * 0.4,
-          // height: MediaQuery.of(context).size.width * 0.4,
           padding: EdgeInsets.only(
               top: Dimensions.PADDING_SIZE_LARGE,
               bottom: Dimensions.PADDING_SIZE_SMALL),
-          child: bannerTwo.bannerTwoList != null
-              ? bannerTwo.bannerTwoList.length != 0
+          child: banner.bannerTwoList != null
+              ? banner.bannerTwoList.length != 0
                   ? Stack(
                       fit: StackFit.expand,
                       children: [
@@ -47,19 +44,27 @@ class BannerTwoView extends StatelessWidget {
                                   .setCurrentIndex(index);
                             },
                           ),
-                          itemCount: bannerTwo.bannerTwoList.length == 0
+                          itemCount: banner.bannerTwoList.length == 0
                               ? 1
-                              : bannerTwo.bannerTwoList.length,
+                              : banner.bannerTwoList.length,
                           itemBuilder: (context, index, _) {
                             return InkWell(
                               onTap: () {
-                                if (bannerTwo.bannerTwoList[index].brandId !=
+                                if (Provider.of<BannerTwoProvider>(context,
+                                            listen: false)
+                                        .bannerTwoList[index]
+                                        .productId !=
                                     null) {
                                   Product product;
-                                  for (Product prod in bannerTwo.productList) {
+                                  for (Product prod
+                                      in Provider.of<BannerTwoProvider>(context,
+                                              listen: false)
+                                          .productList) {
                                     if (prod.id ==
-                                        bannerTwo
-                                            .bannerTwoList[index].brandId) {
+                                        Provider.of<BannerTwoProvider>(context,
+                                                listen: false)
+                                            .bannerTwoList[index]
+                                            .productId) {
                                       product = prod;
                                       break;
                                     }
@@ -73,8 +78,11 @@ class BannerTwoView extends StatelessWidget {
                                           product: product),
                                     );
                                   }
-                                } else if (bannerTwo
-                                        .bannerTwoList[index].brandId !=
+                                } else if (Provider.of<BannerTwoProvider>(
+                                            context,
+                                            listen: false)
+                                        .bannerTwoList[index]
+                                        .categoryId !=
                                     null) {
                                   CategoryModel category;
                                   for (CategoryModel categoryModel
@@ -82,8 +90,10 @@ class BannerTwoView extends StatelessWidget {
                                               listen: false)
                                           .categoryList) {
                                     if (categoryModel.id ==
-                                        bannerTwo
-                                            .bannerTwoList[index].brandId) {
+                                        Provider.of<BannerTwoProvider>(context,
+                                                listen: false)
+                                            .bannerTwoList[index]
+                                            .categoryId) {
                                       category = categoryModel;
                                       break;
                                     }
@@ -106,7 +116,7 @@ class BannerTwoView extends StatelessWidget {
                                     placeholder: Images.placeholder,
                                     image:
                                         'https://admin.akbarimandi.online/storage/app/public/bannertwo'
-                                        '/${bannerTwo.bannerTwoList[index].image}',
+                                        '/${banner.bannerTwoList[index].image}',
                                     fit: BoxFit.cover,
                                     imageErrorBuilder: (c, o, s) => Image.asset(
                                         Images.placeholder,
@@ -117,26 +127,6 @@ class BannerTwoView extends StatelessWidget {
                             );
                           },
                         ),
-                        // Positioned(
-                        //   bottom: 5,
-                        //   left: 0,
-                        //   right: 0,
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.center,
-                        //     children: bannerTwo.bannerTwoList.map((bnr) {
-                        //       int index = bannerTwo.bannerTwoList.indexOf(bnr);
-                        //       return TabPageSelectorIndicator(
-                        //         backgroundColor: index == bannerTwo.currentIndex
-                        //             ? Theme.of(context).primaryColor
-                        //             : ColorResources.getCardBgColor(context),
-                        //         borderColor: index == bannerTwo.currentIndex
-                        //             ? Theme.of(context).primaryColor
-                        //             : Theme.of(context).primaryColor,
-                        //         size: 10,
-                        //       );
-                        //     }).toList(),
-                        //   ),
-                        // ),
                       ],
                     )
                   : Center(
@@ -144,7 +134,7 @@ class BannerTwoView extends StatelessWidget {
                           Text(getTranslated('no_banner_available', context)))
               : Shimmer(
                   duration: Duration(seconds: 2),
-                  enabled: bannerTwo.bannerTwoList == null,
+                  enabled: banner.bannerTwoList == null,
                   child: Container(
                       margin: EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(

@@ -10,14 +10,22 @@ import 'package:flutter_grocery/provider/product_provider.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/view/base/main_app_bar.dart';
 import 'package:flutter_grocery/view/base/title_widget.dart';
+import 'package:flutter_grocery/view/screens/home/widget/ams_list_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/banners_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/category_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/daily_item_view.dart';
 import 'package:flutter_grocery/view/screens/home/widget/product_view.dart';
 import 'package:provider/provider.dart';
 import 'widget/banners_two_view.dart';
+import 'widget/fresh_item_view.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool isLoading = true;
   Future<void> _loadData(BuildContext context, bool reload) async {
     // await Provider.of<CategoryProvider>(context, listen: false).getCategoryList(context, reload);
 
@@ -39,6 +47,23 @@ class HomeScreen extends StatelessWidget {
           .locale
           .languageCode,
     );
+    await Provider.of<CategoryProvider>(context, listen: false).getBrands(
+      context,
+    );
+    await Provider.of<ProductProvider>(context, listen: false).getFreshItemList(
+      context,
+      reload,
+      Provider.of<LocalizationProvider>(context, listen: false)
+          .locale
+          .languageCode,
+    );
+    await Provider.of<ProductProvider>(context, listen: false).getAmsItemList(
+      context,
+      reload,
+      Provider.of<LocalizationProvider>(context, listen: false)
+          .locale
+          .languageCode,
+    );
     // await Provider.of<ProductProvider>(context, listen: false).getPopularProductList(context, '1', true);
     Provider.of<ProductProvider>(context, listen: false).getPopularProductList(
       context,
@@ -48,12 +73,21 @@ class HomeScreen extends StatelessWidget {
           .locale
           .languageCode,
     );
+
+    setState(() {
+      isLoading = false;
+    });
   }
 
+  var searchController = TextEditingController();
+
+  ScrollController _scrollController;
   @override
   Widget build(BuildContext context) {
     final ScrollController _scrollController = ScrollController();
     _loadData(context, false);
+    var weidth = MediaQuery.of(context).size.width;
+    final ScrollController _scrollController2 = ScrollController();
 
     return RefreshIndicator(
       onRefresh: () async {
@@ -97,16 +131,43 @@ class HomeScreen extends StatelessWidget {
                                 ? SizedBox()
                                 : BannerTwoView();
                       }),
-                      // Category
-                      Consumer<ProductProvider>(
-                          builder: (context, product, child) {
-                        return product.dailyItemList == null
-                            ? DailyItemView()
-                            : product.dailyItemList.length == 0
-                                ? SizedBox()
-                                : DailyItemView();
-                      }),
+                      // daily item view
+                      Provider.of<ProductProvider>(context, listen: false)
+                                  .dailyItemList ==
+                              null
+                          ? Container(height: 340, child: DailyItemView())
+                          : Provider.of<ProductProvider>(context, listen: false)
+                                      .dailyItemList
+                                      .length ==
+                                  0
+                              ? SizedBox()
+                              : Container(height: 382, child: DailyItemView()),
+                      // Ams Item View
+                      Provider.of<ProductProvider>(context, listen: false)
+                                  .amsItemList ==
+                              null
+                          ? AmsItemView()
+                          : Provider.of<ProductProvider>(context, listen: false)
+                                      .amsItemList
+                                      .length ==
+                                  0
+                              ? SizedBox()
+                              : AmsItemView(),
 
+                      // Fresh Items
+
+                      Provider.of<ProductProvider>(context, listen: false)
+                                  .freshItemList ==
+                              null
+                          ? FreshItemView()
+                          : Provider.of<ProductProvider>(context, listen: false)
+                                      .freshItemList
+                                      .length ==
+                                  0
+                              ? SizedBox()
+                              : FreshItemView(),
+
+                      // Popular Item
                       // Popular Item
                       Padding(
                         padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
@@ -115,7 +176,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       ProductView(
                           productType: ProductType.POPULAR_PRODUCT,
-                          scrollController: _scrollController),
+                          scrollController: _scrollController2),
                     ]),
               ),
             ),

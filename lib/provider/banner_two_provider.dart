@@ -11,11 +11,11 @@ class BannerTwoProvider extends ChangeNotifier {
   BannerTwoProvider({@required this.bannerTwoRepo});
 
   List<BannerTwoModel> _bannerTwoList;
-  List<Product> _brandList = [];
+  List<Product> _productList = [];
   int _currentIndex = 0;
 
   List<BannerTwoModel> get bannerTwoList => _bannerTwoList;
-  List<Product> get productList => _brandList;
+  List<Product> get productList => _productList;
   int get currentIndex => _currentIndex;
 
   Future<void> getBannerTwoList(BuildContext context, bool reload) async {
@@ -24,10 +24,10 @@ class BannerTwoProvider extends ChangeNotifier {
       if (apiResponse.response != null &&
           apiResponse.response.statusCode == 200) {
         _bannerTwoList = [];
-        apiResponse.response.data.forEach((brand) {
-          BannerTwoModel bannerTwoModel = BannerTwoModel.fromJson(brand);
-          if (bannerTwoModel.brandId != null) {
-            // getBannerDetails(context, bannerTwoModel.brandId.toString());
+        apiResponse.response.data.forEach((category) {
+          BannerTwoModel bannerTwoModel = BannerTwoModel.fromJson(category);
+          if (bannerTwoModel.productId != null) {
+            getBannerDetails(context, bannerTwoModel.productId.toString());
           }
           _bannerTwoList.add(bannerTwoModel);
         });
@@ -43,13 +43,13 @@ class BannerTwoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void getBannerDetails(BuildContext context, String brandID) async {
-  //   ApiResponse apiResponse = await bannerTwoRepo.getBannerDetails(brandID);
-  //   if (apiResponse.response != null &&
-  //       apiResponse.response.statusCode == 200) {
-  //     _bannerTwoList.add(BannerTwoModel.fromJson(apiResponse.response.data));
-  //   } else {
-  //     ApiChecker.checkApi(context, apiResponse);
-  //   }
-  // }
+  void getBannerDetails(BuildContext context, String productID) async {
+    ApiResponse apiResponse = await bannerTwoRepo.getBannerDetails(productID);
+    if (apiResponse.response != null &&
+        apiResponse.response.statusCode == 200) {
+      _bannerTwoList.add(BannerTwoModel.fromJson(apiResponse.response.data));
+    } else {
+      ApiChecker.checkApi(context, apiResponse);
+    }
+  }
 }

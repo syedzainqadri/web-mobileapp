@@ -17,13 +17,13 @@ class BannerTwoRepo {
     }
   }
 
-  // Future<ApiResponse> getBannerDetails(String brandID) async {
-  //   try {
-  //     final response =
-  //         await dioClient.get('${AppConstants.BANNERTWO_URI}$brandID');
-  //     return ApiResponse.withSuccess(response);
-  //   } catch (e) {
-  //     return ApiResponse.withError(ApiErrorHandler.getMessage(e));
-  //   }
-  // }
+  Future<ApiResponse> getBannerDetails(String productID) async {
+    try {
+      final response =
+          await dioClient.get('${AppConstants.PRODUCT_DETAILS_URI}$productID');
+      return ApiResponse.withSuccess(response);
+    } catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
 }
