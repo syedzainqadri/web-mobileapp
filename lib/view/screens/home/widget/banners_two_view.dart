@@ -53,48 +53,48 @@ class BannerTwoView extends StatelessWidget {
                           itemBuilder: (context, index, _) {
                             return InkWell(
                               onTap: () {
-                                // if (bannerTwo.bannerTwoList[index].brandId !=
-                                //     null) {
-                                //   Product product;
-                                //   for (Product prod in bannerTwo.productList) {
-                                //     if (prod.id ==
-                                //         bannerTwo
-                                //             .bannerTwoList[index].brandId) {
-                                //       product = prod;
-                                //       break;
-                                //     }
-                                //   }
-                                //   if (product != null) {
-                                //     Navigator.pushNamed(
-                                //       context,
-                                //       RouteHelper.getProductDetailsRoute(
-                                //           product.id),
-                                //       arguments: ProductDetailsScreen(
-                                //           product: product),
-                                //     );
-                                //   }
-                                // } else if (bannerTwo
-                                //         .bannerTwoList[index].brandId !=
-                                //     null) {
-                                //   CategoryModel category;
-                                //   for (CategoryModel categoryModel
-                                //       in Provider.of<CategoryProvider>(context,
-                                //               listen: false)
-                                //           .categoryList) {
-                                //     if (categoryModel.id ==
-                                //         bannerTwo
-                                //             .bannerTwoList[index].brandId) {
-                                //       category = categoryModel;
-                                //       break;
-                                //     }
-                                //   }
-                                //   if (category != null) {
-                                //     Navigator.of(context).pushNamed(
-                                //       RouteHelper.getCategoryProductsRoute(
-                                //           category.id),
-                                //     );
-                                //   }
-                                // }
+                                if (bannerTwo.bannerTwoList[index].brandId !=
+                                    null) {
+                                  Product product;
+                                  for (Product prod in bannerTwo.productList) {
+                                    if (prod.id ==
+                                        bannerTwo
+                                            .bannerTwoList[index].brandId) {
+                                      product = prod;
+                                      break;
+                                    }
+                                  }
+                                  if (product != null) {
+                                    Navigator.pushNamed(
+                                      context,
+                                      RouteHelper.getProductDetailsRoute(
+                                          product.id),
+                                      arguments: ProductDetailsScreen(
+                                          product: product),
+                                    );
+                                  }
+                                } else if (bannerTwo
+                                        .bannerTwoList[index].brandId !=
+                                    null) {
+                                  CategoryModel category;
+                                  for (CategoryModel categoryModel
+                                      in Provider.of<CategoryProvider>(context,
+                                              listen: false)
+                                          .categoryList) {
+                                    if (categoryModel.id ==
+                                        bannerTwo
+                                            .bannerTwoList[index].brandId) {
+                                      category = categoryModel;
+                                      break;
+                                    }
+                                  }
+                                  if (category != null) {
+                                    Navigator.of(context).pushNamed(
+                                      RouteHelper.getCategoryProductsRoute(
+                                          category.id),
+                                    );
+                                  }
+                                }
                               },
                               child: Container(
                                 margin: EdgeInsets.symmetric(horizontal: 10),
@@ -117,26 +117,26 @@ class BannerTwoView extends StatelessWidget {
                             );
                           },
                         ),
-                        Positioned(
-                          bottom: 5,
-                          left: 0,
-                          right: 0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: bannerTwo.bannerTwoList.map((bnr) {
-                              int index = bannerTwo.bannerTwoList.indexOf(bnr);
-                              return TabPageSelectorIndicator(
-                                backgroundColor: index == bannerTwo.currentIndex
-                                    ? Theme.of(context).primaryColor
-                                    : ColorResources.getCardBgColor(context),
-                                borderColor: index == bannerTwo.currentIndex
-                                    ? Theme.of(context).primaryColor
-                                    : Theme.of(context).primaryColor,
-                                size: 10,
-                              );
-                            }).toList(),
-                          ),
-                        ),
+                        // Positioned(
+                        //   bottom: 5,
+                        //   left: 0,
+                        //   right: 0,
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: bannerTwo.bannerTwoList.map((bnr) {
+                        //       int index = bannerTwo.bannerTwoList.indexOf(bnr);
+                        //       return TabPageSelectorIndicator(
+                        //         backgroundColor: index == bannerTwo.currentIndex
+                        //             ? Theme.of(context).primaryColor
+                        //             : ColorResources.getCardBgColor(context),
+                        //         borderColor: index == bannerTwo.currentIndex
+                        //             ? Theme.of(context).primaryColor
+                        //             : Theme.of(context).primaryColor,
+                        //         size: 10,
+                        //       );
+                        //     }).toList(),
+                        //   ),
+                        // ),
                       ],
                     )
                   : Center(
