@@ -10,9 +10,11 @@ class ProductRepo {
 
   ProductRepo({@required this.dioClient});
 
-  Future<ApiResponse> getPopularProductList(String offset, String languageCode) async {
+  Future<ApiResponse> getPopularProductList(
+      String offset, String languageCode) async {
     try {
-      final response = await dioClient.get('${AppConstants.POPULAR_PRODUCT_URI}?limit=10&&offset=$offset',
+      final response = await dioClient.get(
+        '${AppConstants.POPULAR_PRODUCT_URI}?limit=10&&offset=$offset',
         options: Options(headers: {'X-localization': languageCode}),
       );
       return ApiResponse.withSuccess(response);
@@ -23,7 +25,8 @@ class ProductRepo {
 
   Future<ApiResponse> getDailyItemList(String languageCode) async {
     try {
-      final response = await dioClient.get(AppConstants.DAILY_ITEM_URI,
+      final response = await dioClient.get(
+        AppConstants.DAILY_ITEM_URI,
         options: Options(headers: {'X-localization': languageCode}),
       );
       return ApiResponse.withSuccess(response);
@@ -32,9 +35,10 @@ class ProductRepo {
     }
   }
 
-  Future<ApiResponse> getProductDetails(String productID, String languageCode) async {
+  Future<ApiResponse> getAmsItemList(String languageCode) async {
     try {
-      final response = await dioClient.get('${AppConstants.PRODUCT_DETAILS_URI}$productID',
+      final response = await dioClient.get(
+        AppConstants.AMS_ITEM_URI,
         options: Options(headers: {'X-localization': languageCode}),
       );
       return ApiResponse.withSuccess(response);
@@ -43,7 +47,33 @@ class ProductRepo {
     }
   }
 
-  Future<ApiResponse> searchProduct(String productId, String languageCode) async {
+  Future<ApiResponse> getFreshItemList(String languageCode) async {
+    try {
+      final response = await dioClient.get(
+        AppConstants.FRESH_ITEM_URI,
+        options: Options(headers: {'X-localization': languageCode}),
+      );
+      return ApiResponse.withSuccess(response);
+    } catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
+  Future<ApiResponse> getProductDetails(
+      String productID, String languageCode) async {
+    try {
+      final response = await dioClient.get(
+        '${AppConstants.PRODUCT_DETAILS_URI}$productID',
+        options: Options(headers: {'X-localization': languageCode}),
+      );
+      return ApiResponse.withSuccess(response);
+    } catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
+  Future<ApiResponse> searchProduct(
+      String productId, String languageCode) async {
     try {
       final response = await dioClient.get(
         '${AppConstants.SEARCH_PRODUCT_URI}$productId',
@@ -55,15 +85,16 @@ class ProductRepo {
     }
   }
 
-  Future<ApiResponse> getBrandOrCategoryProductList(String id, String languageCode) async {
+  Future<ApiResponse> getBrandOrCategoryProductList(
+      String id, String languageCode) async {
     try {
       String uri = '${AppConstants.CATEGORY_PRODUCT_URI}$id';
 
-      final response = await dioClient.get(uri, options: Options(headers: {'X-localization': languageCode}));
+      final response = await dioClient.get(uri,
+          options: Options(headers: {'X-localization': languageCode}));
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
-
 }

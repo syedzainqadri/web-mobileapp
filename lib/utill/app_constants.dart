@@ -2,7 +2,6 @@ import 'package:flutter_grocery/data/model/response/language_model.dart';
 
 class AppConstants {
   static const String APP_NAME = 'Akbari Mandi Online';
-
   static const String BASE_URL = 'https://admin.akbarimandi.online';
   static const String CONFIG_URI = '/api/v1/config';
   static const String BANNER_URI = '/api/v1/banners';
@@ -11,7 +10,10 @@ class AppConstants {
   static const String SUB_CATEGORY_URI = '/api/v1/categories/childes/';
   static const String CATEGORY_PRODUCT_URI = '/api/v1/categories/products/';
   static const String POPULAR_PRODUCT_URI = '/api/v1/products/latest';
+  static const String brands_url = '/api/v1/brands';
   static const String DAILY_ITEM_URI = '/api/v1/products/daily-needs';
+  static const String AMS_ITEM_URI = '/api/v1/products/akbari-special-product';
+  static const String FRESH_ITEM_URI = '/api/v1/products/fresh-item-product';
   static const String SEARCH_PRODUCT_URI = '/api/v1/products/details/';
   static const String SEARCH_URI = '/api/v1/products/search?name=';
   static const String MESSAGE_URI = '/api/v1/customer/message/get';
