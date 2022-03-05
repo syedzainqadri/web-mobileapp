@@ -35,20 +35,27 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     bool _firstTime = true;
-    _onConnectivityChanged = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      if(!_firstTime) {
-        bool isNotConnected = result != ConnectivityResult.wifi && result != ConnectivityResult.mobile;
+    _onConnectivityChanged = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      if (!_firstTime) {
+        bool isNotConnected = result != ConnectivityResult.wifi &&
+            result != ConnectivityResult.mobile;
         print('-----------------${isNotConnected ? 'Not' : 'Yes'}');
-        isNotConnected ? SizedBox() : ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        isNotConnected
+            ? SizedBox()
+            : ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: isNotConnected ? Colors.red : Colors.green,
           duration: Duration(seconds: isNotConnected ? 6000 : 3),
           content: Text(
-            isNotConnected ? getTranslated('no_connection', context) : getTranslated('connected', context),
+            isNotConnected
+                ? getTranslated('no_connection', context)
+                : getTranslated('connected', context),
             textAlign: TextAlign.center,
           ),
         ));
-        if(!isNotConnected) {
+        if (!isNotConnected) {
           _route();
         }
       }
@@ -61,17 +68,27 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _route() {
-    Provider.of<SplashProvider>(context, listen: false).initConfig(context).then((bool isSuccess) {
+    Provider.of<SplashProvider>(context, listen: false)
+        .initConfig(context)
+        .then((bool isSuccess) {
       if (isSuccess) {
-        if(Provider.of<SplashProvider>(context, listen: false).configModel.maintenanceMode) {
-          Navigator.pushNamedAndRemoveUntil(context, RouteHelper.getMaintenanceRoute(), (route) => false);
-        }else {
+        if (Provider.of<SplashProvider>(context, listen: false)
+            .configModel
+            .maintenanceMode) {
+          Navigator.pushNamedAndRemoveUntil(
+              context, RouteHelper.getMaintenanceRoute(), (route) => false);
+        } else {
           Timer(Duration(seconds: 1), () async {
-            if (Provider.of<AuthProvider>(context, listen: false).isLoggedIn()) {
+            if (Provider.of<AuthProvider>(context, listen: false)
+                .isLoggedIn()) {
               Provider.of<AuthProvider>(context, listen: false).updateToken();
-              Navigator.of(context).pushNamedAndRemoveUntil(RouteHelper.menu, (route) => false, arguments: MenuScreen());
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  RouteHelper.menu, (route) => false,
+                  arguments: MenuScreen());
             } else {
-              Navigator.pushNamedAndRemoveUntil(context, RouteHelper.onBoarding, (route) => false, arguments: OnBoardingScreen());
+              Navigator.pushNamedAndRemoveUntil(
+                  context, RouteHelper.onBoarding, (route) => false,
+                  arguments: OnBoardingScreen());
             }
           });
         }
@@ -87,11 +104,12 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Image.asset(Images.app_logo, height: 130, color: Theme.of(context).primaryColor),
+          Image.asset(Images.app_logo, height: 130),
+          // color: Theme.of(context).primaryColor),
           SizedBox(height: 30),
           Text(AppConstants.APP_NAME,
               textAlign: TextAlign.center,
-              style: poppinsMedium.copyWith(
+              style: poppinsSemiBold.copyWith(
                 color: Theme.of(context).primaryColor,
                 fontSize: 50,
               )),
