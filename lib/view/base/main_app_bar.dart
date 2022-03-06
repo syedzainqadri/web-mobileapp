@@ -13,7 +13,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Container(
           color: Theme.of(context).cardColor,
           width: 1170.0,
-          height: 50.0,
+          height: 70.0,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -24,7 +24,9 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                     child: Row(
                       children: [
                         Image.asset(Images.app_logo,
-                            height: 50, color: Theme.of(context).primaryColor),
+                            height: 70,
+                            width: 70,
+                            color: Theme.of(context).primaryColor),
                         SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
                         Text(AppConstants.APP_NAME,
                             style: poppinsMedium.copyWith(
@@ -39,5 +41,5 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(double.maxFinite, 50);
+  Size get preferredSize => Size(double.maxFinite, 70);
 }

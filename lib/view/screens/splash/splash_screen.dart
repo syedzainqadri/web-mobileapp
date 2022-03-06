@@ -8,6 +8,7 @@ import 'package:flutter_grocery/provider/cart_provider.dart';
 import 'package:flutter_grocery/provider/splash_provider.dart';
 import 'package:flutter_grocery/helper/route_helper.dart';
 import 'package:flutter_grocery/utill/app_constants.dart';
+import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/utill/images.dart';
 import 'package:flutter_grocery/utill/styles.dart';
 import 'package:flutter_grocery/view/screens/menu/menu_screen.dart';
@@ -109,9 +110,9 @@ class _SplashScreenState extends State<SplashScreen> {
           SizedBox(height: 30),
           Text(AppConstants.APP_NAME,
               textAlign: TextAlign.center,
-              style: poppinsSemiBold.copyWith(
+              style: poppinsBold.copyWith(
                 color: Theme.of(context).primaryColor,
-                fontSize: 50,
+                fontSize: 30,
               )),
         ],
       ),
