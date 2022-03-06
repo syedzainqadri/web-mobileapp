@@ -27,6 +27,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String phoneNumber;
+  String cCode;
   FocusNode _emailFocus = FocusNode();
   FocusNode _numberFocus = FocusNode();
   FocusNode _passwordFocus = FocusNode();
@@ -151,6 +153,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 CodePickerWidget(
                                   onChanged: (CountryCode countryCode) {
                                     _countryDialCode = countryCode.dialCode;
+                                    setState(() {
+                                      cCode = _countryDialCode;
+                                    });
                                   },
                                   initialSelection: _countryDialCode,
                                   favorite: [_countryDialCode],
@@ -311,6 +316,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                       .emailVerification) {
                                     _email = _countryDialCode +
                                         _emailController.text.trim();
+                                    setState(() {
+                                      phoneNumber = _email;
+                                    });
                                   }
                                   String _password =
                                       _passwordController.text.trim();

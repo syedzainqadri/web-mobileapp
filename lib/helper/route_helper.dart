@@ -173,11 +173,10 @@ class RouteHelper {
 
   static Handler _verificationHandler =
       Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-    VerificationScreen _verificationScreen =
-        ModalRoute.of(context).settings.arguments;
+    OtpScreen _verificationScreen = ModalRoute.of(context).settings.arguments;
     return _verificationScreen != null
         ? _verificationScreen
-        : VerificationScreen(
+        : OtpScreen(
             fromSignUp: params['page'][0] == 'sign-up',
             emailAddress: params['email'][0],
           );
