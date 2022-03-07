@@ -17,9 +17,7 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 class BannerTwoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<BannerTwoProvider>(
-      builder: (context, banner, child) {
-        return Container(
+    return Container(
           width: MediaQuery.of(context).size.width,
           height: ResponsiveHelper.isDesktop(context)
               ? 300
@@ -27,8 +25,8 @@ class BannerTwoView extends StatelessWidget {
           padding: EdgeInsets.only(
               top: Dimensions.PADDING_SIZE_LARGE,
               bottom: Dimensions.PADDING_SIZE_SMALL),
-          child: banner.bannerTwoList != null
-              ? banner.bannerTwoList.length != 0
+          child: Provider.of<BannerTwoProvider>(context, listen: false).bannerTwoList != null
+              ? Provider.of<BannerTwoProvider>(context, listen: false).bannerTwoList.length != 0
                   ? Stack(
                       fit: StackFit.expand,
                       children: [
@@ -44,9 +42,9 @@ class BannerTwoView extends StatelessWidget {
                                   .setCurrentIndex(index);
                             },
                           ),
-                          itemCount: banner.bannerTwoList.length == 0
+                          itemCount: Provider.of<BannerTwoProvider>(context, listen: false).bannerTwoList.length == 0
                               ? 1
-                              : banner.bannerTwoList.length,
+                              : Provider.of<BannerTwoProvider>(context, listen: false).bannerTwoList.length,
                           itemBuilder: (context, index, _) {
                             return InkWell(
                               onTap: () {
@@ -116,7 +114,7 @@ class BannerTwoView extends StatelessWidget {
                                     placeholder: Images.placeholder,
                                     image:
                                         'https://admin.akbarimandi.online/storage/app/public/bannertwo'
-                                        '/${banner.bannerTwoList[index].image}',
+                                        '/${Provider.of<BannerTwoProvider>(context, listen: false).bannerTwoList[index].image}',
                                     fit: BoxFit.cover,
                                     imageErrorBuilder: (c, o, s) => Image.asset(
                                         Images.placeholder,
@@ -134,7 +132,7 @@ class BannerTwoView extends StatelessWidget {
                           Text(getTranslated('no_banner_available', context)))
               : Shimmer(
                   duration: Duration(seconds: 2),
-                  enabled: banner.bannerTwoList == null,
+                  enabled: Provider.of<BannerTwoProvider>(context, listen: false).bannerTwoList == null,
                   child: Container(
                       margin: EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
@@ -143,7 +141,5 @@ class BannerTwoView extends StatelessWidget {
                       )),
                 ),
         );
-      },
-    );
   }
 }
