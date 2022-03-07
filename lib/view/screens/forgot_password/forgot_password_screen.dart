@@ -16,6 +16,7 @@ import 'package:flutter_grocery/view/base/custom_snackbar.dart';
 import 'package:flutter_grocery/view/base/custom_text_field.dart';
 import 'package:flutter_grocery/view/base/main_app_bar.dart';
 import 'package:flutter_grocery/view/screens/auth/widget/code_picker_widget.dart';
+import 'package:flutter_grocery/view/screens/forgot_password/verification.dart';
 import 'package:flutter_grocery/view/screens/forgot_password/verification_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -180,11 +181,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                                 if (value.isSuccess) {
                                                   Navigator.of(context)
                                                       .pushNamed(
-                                                    RouteHelper.getVerifyRoute(
-                                                        'forget-password',
-                                                        _phone),
-                                                    arguments: OtpScreen(
-                                                        emailAddress: _phone),
+                                                    RouteHelper
+                                                        .getEmailVerifyRoute(
+                                                            'forget-password',
+                                                            _phone),
+                                                    arguments:
+                                                        VerificationScreen(
+                                                            emailAddress:
+                                                                _phone),
                                                   );
                                                 } else {
                                                   showCustomSnackBar(
@@ -214,11 +218,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                                 if (value.isSuccess) {
                                                   Navigator.of(context)
                                                       .pushNamed(
-                                                    RouteHelper.getVerifyRoute(
-                                                        'forget-password',
-                                                        _email),
-                                                    arguments: OtpScreen(
-                                                        emailAddress: _email),
+                                                    RouteHelper
+                                                        .getEmailVerifyRoute(
+                                                            'forget-password',
+                                                            _email),
+                                                    arguments:
+                                                        VerificationScreen(
+                                                            emailAddress:
+                                                                _email),
                                                   );
                                                 } else {
                                                   showCustomSnackBar(
