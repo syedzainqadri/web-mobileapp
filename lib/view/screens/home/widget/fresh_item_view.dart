@@ -187,28 +187,7 @@ class FreshItemView extends StatelessWidget {
                                                             .discount >
                                                         0
                                                     ? Text(
-                                                        PriceConverter
-                                                            .convertWithDiscount(
-                                                          context,
-                                                          Provider.of<ProductProvider>(
-                                                                  context,
-                                                                  listen: false)
-                                                              .freshItemList[
-                                                                  index]
-                                                              .price,
-                                                          Provider.of<ProductProvider>(
-                                                                  context,
-                                                                  listen: false)
-                                                              .freshItemList[
-                                                                  index]
-                                                              .discount,
-                                                          Provider.of<ProductProvider>(
-                                                                  context,
-                                                                  listen: false)
-                                                              .freshItemList[
-                                                                  index]
-                                                              .discountType,
-                                                        ).toString(),
+                                                        '${Provider.of<ProductProvider>(context, listen: false).freshItemList[index].price}',
                                                         style: poppinsRegular.copyWith(
                                                             fontSize: Dimensions
                                                                 .FONT_SIZE_SMALL,

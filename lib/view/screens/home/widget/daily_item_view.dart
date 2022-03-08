@@ -196,30 +196,7 @@ class DailyItemView extends StatelessWidget {
                                                             .discount >
                                                         0
                                                     ? Text(
-                                                        PriceConverter.convertWithDiscount(
-                                                                context,
-                                                                Provider.of<ProductProvider>(
-                                                                        context,
-                                                                        listen:
-                                                                            false)
-                                                                    .dailyItemList[
-                                                                        index]
-                                                                    .price,
-                                                                Provider.of<ProductProvider>(
-                                                                        context,
-                                                                        listen:
-                                                                            false)
-                                                                    .dailyItemList[
-                                                                        index]
-                                                                    .discount,
-                                                                Provider.of<ProductProvider>(
-                                                                        context,
-                                                                        listen:
-                                                                            false)
-                                                                    .dailyItemList[
-                                                                        index]
-                                                                    .discountType)
-                                                            .toString(),
+                                                        '${Provider.of<ProductProvider>(context, listen: false).dailyItemList[index].price}',
                                                         style: poppinsRegular.copyWith(
                                                             fontSize: Dimensions
                                                                 .FONT_SIZE_SMALL,
