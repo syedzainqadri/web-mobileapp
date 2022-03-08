@@ -109,9 +109,9 @@ class _SplashScreenState extends State<SplashScreen> {
           SizedBox(height: 30),
           Text(AppConstants.APP_NAME,
               textAlign: TextAlign.center,
-              style: poppinsSemiBold.copyWith(
+              style: poppinsBold.copyWith(
                 color: Theme.of(context).primaryColor,
-                fontSize: 50,
+                fontSize: 30,
               )),
         ],
       ),

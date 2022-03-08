@@ -23,6 +23,7 @@ import 'package:flutter_grocery/view/screens/checkout/payment_screen.dart';
 import 'package:flutter_grocery/view/screens/coupon/coupon_screen.dart';
 import 'package:flutter_grocery/view/screens/forgot_password/create_new_password_screen.dart';
 import 'package:flutter_grocery/view/screens/forgot_password/forgot_password_screen.dart';
+import 'package:flutter_grocery/view/screens/forgot_password/verification.dart';
 import 'package:flutter_grocery/view/screens/forgot_password/verification_screen.dart';
 import 'package:flutter_grocery/view/screens/html/html_viewer_screen.dart';
 import 'package:flutter_grocery/view/screens/menu/menu_screen.dart';
@@ -56,6 +57,7 @@ class RouteHelper {
   static String forgetPassword = '/forget-password';
   static String signUp = '/sign-up';
   static String verification = '/verification';
+  static String emailVerification = '/emailVerification';
   static String createAccount = '/create-account';
   static String resetPassword = '/reset-password';
   static String addAddress = '/add-address';
@@ -99,6 +101,8 @@ class RouteHelper {
   static String getOrderDetailsRoute(int id) => '$orderDetails?id=$id';
   static String getVerifyRoute(String page, String email) =>
       '$verification?page=$page&email=$email';
+  static String getEmailVerifyRoute(String page, String email) =>
+      '$emailVerification?page=$page&email=$email';
   static String getNewPassRoute(String email, String token) =>
       '$resetPassword?email=$email&token=$token';
   static String getAddAddressRoute(String page) => '$addAddress?page=$page';
@@ -173,10 +177,21 @@ class RouteHelper {
 
   static Handler _verificationHandler =
       Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-    VerificationScreen _verificationScreen =
-        ModalRoute.of(context).settings.arguments;
+    OtpScreen _verificationScreen = ModalRoute.of(context).settings.arguments;
     return _verificationScreen != null
         ? _verificationScreen
+        : OtpScreen(
+            fromSignUp: params['page'][0] == 'sign-up',
+            emailAddress: params['email'][0],
+          );
+  });
+
+  static Handler _emailverificationHandler =
+      Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+    VerificationScreen _emailverificationScreen =
+        ModalRoute.of(context).settings.arguments;
+    return _emailverificationScreen != null
+        ? _emailverificationScreen
         : VerificationScreen(
             fromSignUp: params['page'][0] == 'sign-up',
             emailAddress: params['email'][0],
@@ -446,6 +461,9 @@ class RouteHelper {
         handler: _signUpHandler, transitionType: TransitionType.fadeIn);
     router.define(verification,
         handler: _verificationHandler, transitionType: TransitionType.fadeIn);
+    router.define(emailVerification,
+        handler: _emailverificationHandler,
+        transitionType: TransitionType.fadeIn);
     router.define(createAccount,
         handler: _createAccountHandler, transitionType: TransitionType.fadeIn);
     router.define(resetPassword,
