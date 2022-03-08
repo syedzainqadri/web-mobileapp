@@ -16,9 +16,11 @@ class CartProvider extends ChangeNotifier {
   void getCartData() {
     _cartList = [];
     _amount = 0.0;
+
     _cartList.addAll(cartRepo.getCartList());
     _cartList.forEach((cart) {
       _amount = _amount + (cart.discountedPrice * cart.quantity);
+
     });
   }
 
