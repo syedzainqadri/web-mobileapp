@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery/helper/price_converter.dart';
 import 'package:flutter_grocery/helper/route_helper.dart';
