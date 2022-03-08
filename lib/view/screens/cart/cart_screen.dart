@@ -295,20 +295,20 @@ class CartScreen extends StatelessWidget {
                                           ]),
                                       SizedBox(height: 10),
 
-                                      Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(getTranslated('tax', context),
-                                                style: poppinsRegular.copyWith(
-                                                    fontSize: Dimensions
-                                                        .FONT_SIZE_LARGE)),
-                                            Text(
-                                                '(+) ${PriceConverter.convertPrice(context, _tax)}',
-                                                style: poppinsRegular.copyWith(
-                                                    fontSize: Dimensions
-                                                        .FONT_SIZE_LARGE)),
-                                          ]),
+                                      // Row(
+                                      //     mainAxisAlignment:
+                                      //         MainAxisAlignment.spaceBetween,
+                                      //     children: [
+                                      //       Text(getTranslated('tax', context),
+                                      //           style: poppinsRegular.copyWith(
+                                      //               fontSize: Dimensions
+                                      //                   .FONT_SIZE_LARGE)),
+                                      //       Text(
+                                      //           '(+) ${PriceConverter.convertPrice(context, _tax)}',
+                                      //           style: poppinsRegular.copyWith(
+                                      //               fontSize: Dimensions
+                                      //                   .FONT_SIZE_LARGE)),
+                                      //     ]),
                                       SizedBox(height: 10),
 
                                       Row(
@@ -321,7 +321,8 @@ class CartScreen extends StatelessWidget {
                                                 style: poppinsRegular.copyWith(
                                                     fontSize: Dimensions
                                                         .FONT_SIZE_LARGE)),
-                                            Text('(-) ${_discount} Rs',
+                                            Text(
+                                                '(-) ${PriceConverter.convertPrice(context, _discount)}',
                                                 style: poppinsRegular.copyWith(
                                                     fontSize: Dimensions
                                                         .FONT_SIZE_LARGE)),
