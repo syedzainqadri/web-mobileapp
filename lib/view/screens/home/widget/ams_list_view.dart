@@ -185,31 +185,27 @@ class AmsItemView extends StatelessWidget {
                                                         0
                                                     ? Text(
                                                         PriceConverter
-                                                                .convertWithDiscount(
-                                                              context,
-                                                              Provider.of<ProductProvider>(
-                                                                      context,
-                                                                      listen:
-                                                                          false)
-                                                                  .amsItemList[
-                                                                      index]
-                                                                  .price,
-                                                              Provider.of<ProductProvider>(
-                                                                      context,
-                                                                      listen:
-                                                                          false)
-                                                                  .amsItemList[
-                                                                      index]
-                                                                  .discount,
-                                                              Provider.of<ProductProvider>(
-                                                                      context,
-                                                                      listen:
-                                                                          false)
-                                                                  .amsItemList[
-                                                                      index]
-                                                                  .discountType,
-                                                            ).toString() +
-                                                            '.00',
+                                                            .convertWithDiscount(
+                                                          context,
+                                                          Provider.of<ProductProvider>(
+                                                                  context,
+                                                                  listen: false)
+                                                              .amsItemList[
+                                                                  index]
+                                                              .price,
+                                                          Provider.of<ProductProvider>(
+                                                                  context,
+                                                                  listen: false)
+                                                              .amsItemList[
+                                                                  index]
+                                                              .discount,
+                                                          Provider.of<ProductProvider>(
+                                                                  context,
+                                                                  listen: false)
+                                                              .amsItemList[
+                                                                  index]
+                                                              .discountType,
+                                                        ).toString(),
                                                         style: poppinsRegular.copyWith(
                                                             fontSize: Dimensions
                                                                 .FONT_SIZE_SMALL,
