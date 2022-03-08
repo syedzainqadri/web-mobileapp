@@ -1,5 +1,7 @@
+import 'package:alt_sms_autofill/alt_sms_autofill.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/utill/images.dart';
 import 'package:flutter_grocery/utill/styles.dart';
@@ -18,6 +20,7 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   String _verificationCode;
+  TextEditingController textEditingController1;
   final TextEditingController _pinPutController = TextEditingController();
   final FocusNode _pinPutFocusNode = FocusNode();
   final BoxDecoration pinPutDecoration = BoxDecoration(
@@ -27,6 +30,31 @@ class _OtpScreenState extends State<OtpScreen> {
       color: const Color.fromRGBO(0, 0, 0, 1),
     ),
   );
+
+  String _comingSms = 'Unknown';
+
+  Future<void> initSmsListener() async {
+    String comingSms;
+    try {
+      comingSms = await AltSmsAutofill().listenForSms;
+    } on PlatformException {
+      comingSms = 'Failed to get Sms.';
+    }
+    if (!mounted) return;
+    setState(() {
+      _comingSms = comingSms;
+      print("====>Message: ${_comingSms}");
+      print("${_comingSms[1]}");
+      textEditingController1.text = _comingSms[0] +
+          _comingSms[1] +
+          _comingSms[2] +
+          _comingSms[3] +
+          _comingSms[4] +
+          _comingSms[
+              5]; //used to set the code in the message to a string and setting it to a textcontroller. message length is 38. so my code is in string index 32-37.
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +96,8 @@ class _OtpScreenState extends State<OtpScreen> {
               eachFieldWidth: 40.0,
               eachFieldHeight: 55.0,
               focusNode: _pinPutFocusNode,
-              controller: _pinPutController,
+              controller: textEditingController1,
+              // controller: _pinPutController,
               submittedFieldDecoration: pinPutDecoration,
               selectedFieldDecoration: pinPutDecoration,
               followingFieldDecoration: pinPutDecoration,
@@ -136,5 +165,14 @@ class _OtpScreenState extends State<OtpScreen> {
   void initState() {
     super.initState();
     _verifyPhone();
+    textEditingController1 = TextEditingController();
+    initSmsListener();
+  }
+
+  @override
+  void dispose() {
+    textEditingController1.dispose();
+    AltSmsAutofill().unregisterListener();
+    super.dispose();
   }
 }
