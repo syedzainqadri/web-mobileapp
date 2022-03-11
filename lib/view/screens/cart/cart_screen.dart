@@ -381,31 +381,44 @@ class CartScreen extends StatelessWidget {
                                       ),
 
                                       Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                                getTranslated(
-                                                    _kmWiseCharge
-                                                        ? 'subtotal'
-                                                        : 'total_amount',
-                                                    context),
-                                                style: poppinsMedium.copyWith(
-                                                  fontSize: Dimensions
-                                                      .FONT_SIZE_EXTRA_LARGE,
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                )),
-                                            Text(
-                                              PriceConverter.convertPrice(
-                                                  context, _total),
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                              getTranslated(
+                                                  _kmWiseCharge
+                                                      ? 'subtotal'
+                                                      : 'total_amount',
+                                                  context),
                                               style: poppinsMedium.copyWith(
-                                                  fontSize: Dimensions
-                                                      .FONT_SIZE_EXTRA_LARGE,
-                                                  color: Theme.of(context)
-                                                      .primaryColor),
-                                            ),
-                                          ]),
+                                                fontSize: Dimensions
+                                                    .FONT_SIZE_EXTRA_LARGE,
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                              )),
+                                          Text(
+                                            PriceConverter.convertPrice(
+                                                context, _total),
+                                            style: poppinsMedium.copyWith(
+                                                fontSize: Dimensions
+                                                    .FONT_SIZE_EXTRA_LARGE,
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Center(
+                                            child: Text('* Gst Included'),
+                                          ),
+                                        ],
+                                      ),
                                     ]),
                               ),
                             ),
