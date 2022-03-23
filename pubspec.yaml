@@ -4,6 +4,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 version: 1.1.0+9
 =======
 version: 1.1.0+6
@@ -11,6 +12,9 @@ version: 1.1.0+6
 =======
 version: 1.1.0+5
 >>>>>>> parent of d3dae20 (NO PERMISSION REQUIRED)
+=======
+version: 1.1.0+8
+>>>>>>> parent of 64389f3 (trying to build a new release)
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
