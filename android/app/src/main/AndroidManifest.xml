@@ -9,33 +9,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_WAP_PUSH"/>
-    <uses-permission android:name="android.permission.WRITE_SMS" />
 
-<<<<<<< HEAD
-=======
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="https" />
-        </intent>
-        <intent>
-            <action android:name="android.intent.action.DIAL" />
-            <data android:scheme="tel" />
-        </intent>
-        <intent>
-            <action android:name="android.intent.action.SEND" />
-            <data android:mimeType="*/*" />
-        </intent>
-        <intent>
-            <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
-        </intent>
-    </queries>
 
->>>>>>> parent of f0b45ee (permission issue)
     <application
         android:name=".Application"
         android:icon="@mipmap/ic_launcher"
