@@ -14,9 +14,7 @@ import 'package:flutter_grocery/view/base/custom_button.dart';
 import 'package:flutter_grocery/view/base/custom_snackbar.dart';
 import 'package:flutter_grocery/view/base/custom_text_field.dart';
 import 'package:flutter_grocery/view/base/main_app_bar.dart';
-import 'package:flutter_grocery/view/screens/auth/create_account_screen.dart';
 import 'package:flutter_grocery/view/screens/auth/widget/code_picker_widget.dart';
-import 'package:flutter_grocery/view/screens/forgot_password/otp_screen.dart';
 import 'package:flutter_grocery/view/screens/forgot_password/verification_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -26,9 +24,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String phoneNumber;
+  // String phoneNumber;
   String cCode;
-  TextEditingController _emailController;
+  TextEditingController _phoneNumber;
   final FocusNode _emailFocus = FocusNode();
   bool email = true;
   bool phone = false;
@@ -36,7 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController();
+    _phoneNumber = TextEditingController();
     _countryDialCode = CountryCode.fromCountryCode(
             Provider.of<SplashProvider>(context, listen: false)
                 .configModel
@@ -122,7 +120,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 isShowBorder: true,
                                 inputAction: TextInputAction.done,
                                 inputType: TextInputType.emailAddress,
-                                controller: _emailController,
+                                controller: _phoneNumber,
                                 focusNode: _emailFocus,
                               )
                             : Row(children: [
@@ -146,7 +144,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   hintText:
                                       getTranslated('number_hint', context),
                                   isShowBorder: true,
-                                  controller: _emailController,
+                                  controller: _phoneNumber,
                                   inputType: TextInputType.phone,
                                   inputAction: TextInputAction.done,
                                 )),
@@ -190,8 +188,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ? CustomButton(
                                 buttonText: getTranslated('continue', context),
                                 onPressed: () {
-                                  String _email = _emailController.text.trim();
-                                  if (_email.isEmpty) {
+                                  String _phone = _phoneNumber.text.trim();
+                                  if (_phone.isEmpty) {
                                     if (Provider.of<SplashProvider>(context,
                                             listen: false)
                                         .configModel
@@ -211,7 +209,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               listen: false)
                                           .configModel
                                           .emailVerification &&
-                                      EmailChecker.isNotValid(_email)) {
+                                      EmailChecker.isNotValid(_phone)) {
                                     showCustomSnackBar(
                                         getTranslated(
                                             'enter_valid_email', context),
@@ -222,53 +220,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         .configModel
                                         .emailVerification) {
                                       authProvider
-                                          .checkEmail(_email)
+                                          .checkEmail(_phone)
                                           .then((value) async {
                                         if (value.isSuccess) {
-                                          authProvider.updateEmail(_email);
+                                          authProvider.updateEmail(_phone);
                                           if (value.message == 'active') {
                                             Navigator.of(context).pushNamed(
                                               RouteHelper.getVerifyRoute(
-                                                  'sign-up', _email),
+                                                  'sign-up', _phone),
                                               arguments: OtpScreen(
-                                                  emailAddress: _email,
+                                                  phoneNumber: _phone,
                                                   fromSignUp: true),
                                             );
                                           } else {
                                             Navigator.of(context).pushNamed(
                                                 RouteHelper.getVerifyRoute(
-                                                    'sign-up', _email),
+                                                    'sign-up', _phone),
                                                 arguments: OtpScreen(
-                                                  emailAddress:
-                                                      _countryDialCode + _email,
+                                                  phoneNumber:
+                                                      _countryDialCode + _phone,
                                                 ));
                                           }
                                         }
                                       });
                                     } else {
                                       authProvider
-                                          .checkPhone(_countryDialCode + _email)
+                                          .checkPhone(_countryDialCode + _phone)
                                           .then((value) async {
                                         if (value.isSuccess) {
                                           authProvider.updateEmail(
-                                              _countryDialCode + _email);
+                                              _countryDialCode + _phone);
                                           if (value.message == 'active') {
                                             Navigator.of(context).pushNamed(
                                               RouteHelper.getVerifyRoute(
                                                   'sign-up',
-                                                  _countryDialCode + _email),
+                                                  _countryDialCode + _phone),
                                               arguments: OtpScreen(
-                                                  emailAddress:
-                                                      _countryDialCode + _email,
+                                                  phoneNumber:
+                                                      _countryDialCode + _phone,
                                                   fromSignUp: true),
                                             );
                                           } else {
                                             Navigator.of(context).pushNamed(
                                                 RouteHelper.getVerifyRoute(
-                                                    'sign-up', _email),
+                                                    'sign-up', _phone),
                                                 arguments: OtpScreen(
-                                                  emailAddress:
-                                                      _countryDialCode + _email,
+                                                  phoneNumber:
+                                                      _countryDialCode + _phone,
                                                   fromSignUp: true,
                                                 ));
                                           }

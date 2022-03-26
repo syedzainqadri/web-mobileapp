@@ -182,7 +182,7 @@ class RouteHelper {
         ? _verificationScreen
         : OtpScreen(
             fromSignUp: params['page'][0] == 'sign-up',
-            emailAddress: params['email'][0],
+            phoneNumber: params['email'][0],
           );
   });
 

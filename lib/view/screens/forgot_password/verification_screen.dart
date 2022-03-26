@@ -1,4 +1,3 @@
-import 'package:alt_sms_autofill/alt_sms_autofill.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,9 +8,9 @@ import 'package:flutter_grocery/view/screens/auth/create_account_screen.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 class OtpScreen extends StatefulWidget {
-  String emailAddress;
+  String phoneNumber;
   final bool fromSignUp;
-  OtpScreen({@required this.emailAddress, this.fromSignUp});
+  OtpScreen({@required this.phoneNumber, this.fromSignUp});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -21,7 +20,6 @@ class _OtpScreenState extends State<OtpScreen> {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   String _verificationCode;
   TextEditingController textEditingController1;
-  final TextEditingController _pinPutController = TextEditingController();
   final FocusNode _pinPutFocusNode = FocusNode();
   final BoxDecoration pinPutDecoration = BoxDecoration(
     color: const Color.fromRGBO(0, 0, 0, 0),
@@ -31,29 +29,31 @@ class _OtpScreenState extends State<OtpScreen> {
     ),
   );
 
-  String _comingSms = 'Unknown';
+  FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<void> initSmsListener() async {
-    String comingSms;
-    try {
-      comingSms = await AltSmsAutofill().listenForSms;
-    } on PlatformException {
-      comingSms = 'Failed to get Sms.';
-    }
-    if (!mounted) return;
-    setState(() {
-      _comingSms = comingSms;
-      print("====>Message: ${_comingSms}");
-      print("${_comingSms[1]}");
-      textEditingController1.text = _comingSms[0] +
-          _comingSms[1] +
-          _comingSms[2] +
-          _comingSms[3] +
-          _comingSms[4] +
-          _comingSms[
-              5]; //used to set the code in the message to a string and setting it to a textcontroller. message length is 38. so my code is in string index 32-37.
-    });
-  }
+  // String _comingSms = 'Unknown';
+
+  // Future<void> initSmsListener() async {
+  //   String comingSms;
+  //   try {
+  //     comingSms = await AltSmsAutofill().listenForSms;
+  //   } on PlatformException {
+  //     comingSms = 'Failed to get Sms.';
+  //   }
+  //   if (!mounted) return;
+  //   setState(() {
+  //     _comingSms = comingSms;
+  //     print("====>Message: ${_comingSms}");
+  //     print("${_comingSms[1]}");
+  //     textEditingController1.text = _comingSms[0] +
+  //         _comingSms[1] +
+  //         _comingSms[2] +
+  //         _comingSms[3] +
+  //         _comingSms[4] +
+  //         _comingSms[
+  //             5]; //used to set the code in the message to a string and setting it to a textcontroller. message length is 38. so my code is in string index 32-37.
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class _OtpScreenState extends State<OtpScreen> {
               pinAnimationType: PinAnimationType.fade,
               onSubmit: (pin) async {
                 try {
-                  await FirebaseAuth.instance
+                  await auth
                       .signInWithCredential(PhoneAuthProvider.credential(
                           verificationId: _verificationCode, smsCode: pin))
                       .then((value) async {
@@ -129,29 +129,49 @@ class _OtpScreenState extends State<OtpScreen> {
     );
   }
 
+  // _onVerificationCompleted(PhoneAuthCredential authCredential) async {
+  //   print("verification completed ${authCredential.smsCode}");
+  //   User user = FirebaseAuth.instance.currentUser;
+  //   print('code is ${authCredential.smsCode}');
+  //   setState(() {
+  //     this.textEditingController1.text = authCredential.smsCode;
+  //   });
+  //   if (authCredential.smsCode != null) {
+  //     try {
+  //       UserCredential credential =
+  //           await user.linkWithCredential(authCredential);
+  //     } on FirebaseAuthException catch (e) {
+  //       if (e.code == 'provider-already-linked') {
+  //         await FirebaseAuth.instance.signInWithCredential(authCredential);
+  //       }
+  //     }
+  //     Navigator.pushAndRemoveUntil(
+  //         context,
+  //         MaterialPageRoute(builder: (context) => CreateAccountScreen()),
+  //         (route) => false);
+  //   }
+  // }
+
   _verifyPhone() async {
-    await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: widget.emailAddress,
+    await auth.verifyPhoneNumber(
+        phoneNumber: widget.phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) async {
-          await FirebaseAuth.instance
-              .signInWithCredential(credential)
-              .then((value) async {
-            if (value.user != null) {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CreateAccountScreen()),
-                  (route) => false);
-            }
-          });
+          await auth.signInWithCredential(credential);
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => CreateAccountScreen()),
+              (route) => false);
         },
         verificationFailed: (FirebaseAuthException e) {
           print(e.message);
         },
         codeSent: (String verficationID, int resendToken) {
+          String smsCode;
           setState(() {
             _verificationCode = verficationID;
           });
+          auth.signInWithCredential(PhoneAuthProvider.credential(
+              verificationId: _verificationCode, smsCode: smsCode));
         },
         codeAutoRetrievalTimeout: (String verificationID) {
           setState(() {
@@ -166,13 +186,13 @@ class _OtpScreenState extends State<OtpScreen> {
     super.initState();
     _verifyPhone();
     textEditingController1 = TextEditingController();
-    initSmsListener();
+    // initSmsListener();
   }
 
   @override
   void dispose() {
     textEditingController1.dispose();
-    AltSmsAutofill().unregisterListener();
+    // AltSmsAutofill().unregisterListener();
     super.dispose();
   }
 }
