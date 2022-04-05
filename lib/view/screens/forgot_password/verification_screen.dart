@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/utill/images.dart';
 import 'package:flutter_grocery/utill/styles.dart';
@@ -30,30 +29,6 @@ class _OtpScreenState extends State<OtpScreen> {
   );
 
   FirebaseAuth auth = FirebaseAuth.instance;
-
-  // String _comingSms = 'Unknown';
-
-  // Future<void> initSmsListener() async {
-  //   String comingSms;
-  //   try {
-  //     comingSms = await AltSmsAutofill().listenForSms;
-  //   } on PlatformException {
-  //     comingSms = 'Failed to get Sms.';
-  //   }
-  //   if (!mounted) return;
-  //   setState(() {
-  //     _comingSms = comingSms;
-  //     print("====>Message: ${_comingSms}");
-  //     print("${_comingSms[1]}");
-  //     textEditingController1.text = _comingSms[0] +
-  //         _comingSms[1] +
-  //         _comingSms[2] +
-  //         _comingSms[3] +
-  //         _comingSms[4] +
-  //         _comingSms[
-  //             5]; //used to set the code in the message to a string and setting it to a textcontroller. message length is 38. so my code is in string index 32-37.
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +72,6 @@ class _OtpScreenState extends State<OtpScreen> {
               eachFieldHeight: 55.0,
               focusNode: _pinPutFocusNode,
               controller: textEditingController1,
-              // controller: _pinPutController,
               submittedFieldDecoration: pinPutDecoration,
               selectedFieldDecoration: pinPutDecoration,
               followingFieldDecoration: pinPutDecoration,
@@ -129,34 +103,10 @@ class _OtpScreenState extends State<OtpScreen> {
     );
   }
 
-  // _onVerificationCompleted(PhoneAuthCredential authCredential) async {
-  //   print("verification completed ${authCredential.smsCode}");
-  //   User user = FirebaseAuth.instance.currentUser;
-  //   print('code is ${authCredential.smsCode}');
-  //   setState(() {
-  //     this.textEditingController1.text = authCredential.smsCode;
-  //   });
-  //   if (authCredential.smsCode != null) {
-  //     try {
-  //       UserCredential credential =
-  //           await user.linkWithCredential(authCredential);
-  //     } on FirebaseAuthException catch (e) {
-  //       if (e.code == 'provider-already-linked') {
-  //         await FirebaseAuth.instance.signInWithCredential(authCredential);
-  //       }
-  //     }
-  //     Navigator.pushAndRemoveUntil(
-  //         context,
-  //         MaterialPageRoute(builder: (context) => CreateAccountScreen()),
-  //         (route) => false);
-  //   }
-  // }
-
   _verifyPhone() async {
     await auth.verifyPhoneNumber(
         phoneNumber: widget.phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await auth.signInWithCredential(credential);
+        verificationCompleted: (PhoneAuthCredential credential) {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => CreateAccountScreen()),
@@ -186,13 +136,11 @@ class _OtpScreenState extends State<OtpScreen> {
     super.initState();
     _verifyPhone();
     textEditingController1 = TextEditingController();
-    // initSmsListener();
   }
 
   @override
   void dispose() {
     textEditingController1.dispose();
-    // AltSmsAutofill().unregisterListener();
     super.dispose();
   }
 }
