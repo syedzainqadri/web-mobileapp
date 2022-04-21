@@ -60,7 +60,9 @@ class CartScreen extends StatelessWidget {
             double _itemPrice = 0;
             double _discount = 0;
             double _tax = 0;
-            cart.cartList.forEach((cartModel) {
+            Provider.of<CartProvider>(context, listen: false)
+                .cartList
+                .forEach((cartModel) {
               _itemPrice = _itemPrice + (cartModel.price * cartModel.quantity);
               _discount = _discount + (cartModel.discount * cartModel.quantity);
               _tax = _tax + (cartModel.tax * cartModel.quantity);
