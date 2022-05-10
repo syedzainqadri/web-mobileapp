@@ -85,11 +85,13 @@ class CartProductWidget extends StatelessWidget {
                     children: [
                       Expanded(
                           flex: 2,
-                          child: Text(cart.name,
-                              style: poppinsRegular.copyWith(
-                                  fontSize: Dimensions.FONT_SIZE_SMALL),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis)),
+                          child: Text(
+                            cart.name,
+                            style: poppinsRegular.copyWith(
+                                fontSize: Dimensions.FONT_SIZE_SMALL),
+                            // maxLines: 2,
+                            // overflow: TextOverflow.ellipsis,
+                          )),
                       Container(
                         height: 70,
                         width: 80,
