@@ -23,12 +23,23 @@ class ProductImageView extends StatelessWidget {
       children: [
         Stack(children: [
           InkWell(
-            onTap: () => Navigator.of(context).pushNamed(
-              RouteHelper.getProductImagesRoute(
-                  productModel.name, jsonEncode(productModel.image)),
-              arguments: ProductImageScreen(
-                  imageList: productModel.image, title: productModel.name),
-            ),
+            onTap: () {
+              print(" zoom click ");
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProductImageScreen(
+                          imageList: productModel.image,
+                          title: productModel.name)));
+
+              // Navigator.of(context).pushNamed(
+              //   RouteHelper.getProductImagesRoute(
+              //       productModel.name, jsonEncode(productModel.image)),
+              //   arguments: ProductImageScreen(
+              //       imageList: productModel.image, title: productModel.name),
+              // );
+            },
             child: SizedBox(
               height: ResponsiveHelper.isDesktop(context)
                   ? 350
