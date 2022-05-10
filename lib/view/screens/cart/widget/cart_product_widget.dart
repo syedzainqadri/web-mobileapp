@@ -104,13 +104,18 @@ class CartProductWidget extends StatelessWidget {
                             SizedBox(
                               height: 10,
                             ),
-                            Text(
-                              PriceConverter.convertPrice(context, cart.price),
-                              style: poppinsLight.copyWith(
-                                  fontSize: Dimensions.FONT_SIZE_SMALL,
-                                  color: Colors.red,
-                                  decoration: TextDecoration.lineThrough),
-                            ),
+                            (cart.price != cart.discountedPrice)
+                                ? Text(
+                                    PriceConverter.convertPrice(
+                                        context, cart.price),
+                                    style: poppinsLight.copyWith(
+                                        fontSize: Dimensions.FONT_SIZE_SMALL,
+                                        color: Colors.red,
+                                        decoration: TextDecoration.lineThrough),
+                                  )
+                                : SizedBox(
+                                    height: 10,
+                                  ),
                           ],
                         ),
                       ),
