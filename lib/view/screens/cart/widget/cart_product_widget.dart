@@ -5,6 +5,7 @@ import 'package:flutter_grocery/helper/responsive_helper.dart';
 import 'package:flutter_grocery/localization/language_constrants.dart';
 import 'package:flutter_grocery/provider/cart_provider.dart';
 import 'package:flutter_grocery/provider/coupon_provider.dart';
+import 'package:flutter_grocery/provider/product_provider.dart';
 import 'package:flutter_grocery/provider/splash_provider.dart';
 import 'package:flutter_grocery/provider/theme_provider.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
@@ -42,7 +43,7 @@ class CartProductWidget extends StatelessWidget {
                 .removeFromCart(index, context);
           },
           child: Container(
-            height: 95,
+            height: 125,
             padding: EdgeInsets.symmetric(
                 vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL,
                 horizontal: Dimensions.PADDING_SIZE_SMALL),
@@ -83,19 +84,35 @@ class CartProductWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        flex: 2,
-                        child: Text(
-                          cart.name,
-                          style: poppinsRegular.copyWith(
-                              fontSize: Dimensions.FONT_SIZE_SMALL),
-                          // maxLines: 2,
-                          // overflow: TextOverflow.ellipsis,
+                          flex: 2,
+                          child: Text(cart.name,
+                              style: poppinsRegular.copyWith(
+                                  fontSize: Dimensions.FONT_SIZE_SMALL),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis)),
+                      Container(
+                        height: 70,
+                        width: 80,
+                        child: Column(
+                          children: [
+                            Text(
+                              PriceConverter.convertPrice(
+                                  context, cart.discountedPrice),
+                              style: poppinsSemiBold.copyWith(
+                                  fontSize: Dimensions.FONT_SIZE_LARGE),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              PriceConverter.convertPrice(context, cart.price),
+                              style: poppinsLight.copyWith(
+                                  fontSize: Dimensions.FONT_SIZE_SMALL,
+                                  color: Colors.red,
+                                  decoration: TextDecoration.lineThrough),
+                            ),
+                          ],
                         ),
-                      ),
-                      Text(
-                        PriceConverter.convertPrice(context, cart.price),
-                        style: poppinsSemiBold.copyWith(
-                            fontSize: Dimensions.FONT_SIZE_SMALL),
                       ),
                       SizedBox(width: 10),
                     ],
