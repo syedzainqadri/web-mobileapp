@@ -27,6 +27,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isLoading = true;
+
   Future<void> _loadData(BuildContext context, bool reload) async {
     await Provider.of<CategoryProvider>(context, listen: false).getCategoryList(
       context,
@@ -78,14 +79,22 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   var searchController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadData(context, false);
+  }
+
   @override
   Widget build(BuildContext context) {
     final ScrollController _scrollController = ScrollController();
-    _loadData(context, false);
     final ScrollController _scrollController2 = ScrollController();
 
     return RefreshIndicator(
       onRefresh: () async {
+        print(1);
         await _loadData(context, true);
       },
       backgroundColor: Theme.of(context).primaryColor,

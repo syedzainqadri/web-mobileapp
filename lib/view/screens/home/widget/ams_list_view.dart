@@ -184,7 +184,32 @@ class AmsItemView extends StatelessWidget {
                                                             .discount >
                                                         0
                                                     ? Text(
-                                                        '${Provider.of<ProductProvider>(context, listen: false).amsItemList[index].price}',
+                                                        PriceConverter
+                                                                .convertWithDiscount(
+                                                              context,
+                                                              Provider.of<ProductProvider>(
+                                                                      context,
+                                                                      listen:
+                                                                          false)
+                                                                  .amsItemList[
+                                                                      index]
+                                                                  .price,
+                                                              Provider.of<ProductProvider>(
+                                                                      context,
+                                                                      listen:
+                                                                          false)
+                                                                  .amsItemList[
+                                                                      index]
+                                                                  .discount,
+                                                              Provider.of<ProductProvider>(
+                                                                      context,
+                                                                      listen:
+                                                                          false)
+                                                                  .amsItemList[
+                                                                      index]
+                                                                  .discountType,
+                                                            ).toString() +
+                                                            '.00',
                                                         style: poppinsRegular.copyWith(
                                                             fontSize: Dimensions
                                                                 .FONT_SIZE_SMALL,

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery/localization/language_constrants.dart';
@@ -109,9 +108,9 @@ class _SplashScreenState extends State<SplashScreen> {
           SizedBox(height: 30),
           Text(AppConstants.APP_NAME,
               textAlign: TextAlign.center,
-              style: poppinsBold.copyWith(
+              style: poppinsSemiBold.copyWith(
                 color: Theme.of(context).primaryColor,
-                fontSize: 30,
+                fontSize: 50,
               )),
         ],
       ),

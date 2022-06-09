@@ -40,6 +40,7 @@ class CategoryProvider extends ChangeNotifier {
       apiResponse.response.data.forEach(
           (category) => _categoryList.add(CategoryModel.fromJson(category)));
       _categorySelectedIndex = 0;
+      print('MyTest');
     } else {
       ApiChecker.checkApi(context, apiResponse);
     }

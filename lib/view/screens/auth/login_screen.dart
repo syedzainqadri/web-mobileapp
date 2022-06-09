@@ -12,7 +12,6 @@ import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/utill/images.dart';
 import 'package:flutter_grocery/utill/styles.dart';
 import 'package:flutter_grocery/view/base/custom_button.dart';
-import 'package:flutter_grocery/view/base/custom_button_login_signup.dart';
 import 'package:flutter_grocery/view/base/custom_snackbar.dart';
 import 'package:flutter_grocery/view/base/custom_text_field.dart';
 import 'package:flutter_grocery/view/base/main_app_bar.dart';
@@ -28,8 +27,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String phoneNumber;
-  String cCode;
   FocusNode _emailFocus = FocusNode();
   FocusNode _numberFocus = FocusNode();
   FocusNode _passwordFocus = FocusNode();
@@ -154,9 +151,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 CodePickerWidget(
                                   onChanged: (CountryCode countryCode) {
                                     _countryDialCode = countryCode.dialCode;
-                                    setState(() {
-                                      cCode = _countryDialCode;
-                                    });
                                   },
                                   initialSelection: _countryDialCode,
                                   favorite: [_countryDialCode],
@@ -303,112 +297,81 @@ class _LoginScreenState extends State<LoginScreen> {
                         // for login button
                         SizedBox(height: 10),
                         !authProvider.isLoading
-                            ? Row(
-                                children: [
-                                  Expanded(
-                                    child: CustomLoginButton(
-                                      buttonText:
-                                          getTranslated('login', context),
-                                      onPressed: () async {
-                                        String token = await FirebaseMessaging
-                                            .instance
-                                            .getToken();
-                                        print(token);
-                                        String _email =
-                                            _emailController.text.trim();
-                                        if (!Provider.of<SplashProvider>(
-                                                context,
-                                                listen: false)
-                                            .configModel
-                                            .emailVerification) {
-                                          _email = _countryDialCode +
-                                              _emailController.text.trim();
-                                          setState(() {
-                                            phoneNumber = _email;
-                                          });
-                                        }
-                                        String _password =
-                                            _passwordController.text.trim();
-                                        if (_email.isEmpty) {
-                                          if (Provider.of<SplashProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .configModel
-                                              .emailVerification) {
-                                            showCustomSnackBar(
-                                                getTranslated(
-                                                    'enter_email_address',
-                                                    context),
-                                                context);
-                                          } else {
-                                            showCustomSnackBar(
-                                                getTranslated(
-                                                    'enter_phone_number',
-                                                    context),
-                                                context);
-                                          }
-                                        } else if (Provider.of<SplashProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .configModel
-                                                .emailVerification &&
-                                            EmailChecker.isNotValid(_email)) {
-                                          showCustomSnackBar(
-                                              getTranslated(
-                                                  'enter_valid_email', context),
-                                              context);
-                                        } else if (_password.isEmpty) {
-                                          showCustomSnackBar(
-                                              getTranslated(
-                                                  'enter_password', context),
-                                              context);
-                                        } else if (_password.length < 6) {
-                                          showCustomSnackBar(
-                                              getTranslated(
-                                                  'password_should_be',
-                                                  context),
-                                              context);
+                            ? CustomButton(
+                                buttonText: getTranslated('login', context),
+                                onPressed: () async {
+                                  String token = await FirebaseMessaging
+                                      .instance
+                                      .getToken();
+                                  print(token);
+                                  String _email = _emailController.text.trim();
+                                  if (!Provider.of<SplashProvider>(context,
+                                          listen: false)
+                                      .configModel
+                                      .emailVerification) {
+                                    _email = _countryDialCode +
+                                        _emailController.text.trim();
+                                  }
+                                  String _password =
+                                      _passwordController.text.trim();
+                                  if (_email.isEmpty) {
+                                    if (Provider.of<SplashProvider>(context,
+                                            listen: false)
+                                        .configModel
+                                        .emailVerification) {
+                                      showCustomSnackBar(
+                                          getTranslated(
+                                              'enter_email_address', context),
+                                          context);
+                                    } else {
+                                      showCustomSnackBar(
+                                          getTranslated(
+                                              'enter_phone_number', context),
+                                          context);
+                                    }
+                                  } else if (Provider.of<SplashProvider>(
+                                              context,
+                                              listen: false)
+                                          .configModel
+                                          .emailVerification &&
+                                      EmailChecker.isNotValid(_email)) {
+                                    showCustomSnackBar(
+                                        getTranslated(
+                                            'enter_valid_email', context),
+                                        context);
+                                  } else if (_password.isEmpty) {
+                                    showCustomSnackBar(
+                                        getTranslated(
+                                            'enter_password', context),
+                                        context);
+                                  } else if (_password.length < 6) {
+                                    showCustomSnackBar(
+                                        getTranslated(
+                                            'password_should_be', context),
+                                        context);
+                                  } else {
+                                    authProvider
+                                        .login(_email, _password)
+                                        .then((status) async {
+                                      if (status.isSuccess) {
+                                        if (authProvider.isActiveRememberMe) {
+                                          authProvider
+                                              .saveUserNumberAndPassword(
+                                                  _emailController.text,
+                                                  _password);
                                         } else {
                                           authProvider
-                                              .login(_email, _password)
-                                              .then((status) async {
-                                            if (status.isSuccess) {
-                                              if (authProvider
-                                                  .isActiveRememberMe) {
-                                                authProvider
-                                                    .saveUserNumberAndPassword(
-                                                        _emailController.text,
-                                                        _password);
-                                              } else {
-                                                authProvider
-                                                    .clearUserNumberAndPassword();
-                                              }
-                                              Navigator.pushNamedAndRemoveUntil(
-                                                  context,
-                                                  RouteHelper.menu,
-                                                  (route) => false,
-                                                  arguments: MenuScreen());
-                                            }
-                                          });
+                                              .clearUserNumberAndPassword();
                                         }
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Expanded(
-                                    child: CustomLoginButton(
-                                      buttonText:
-                                          getTranslated('signup', context),
-                                      onPressed: () async {
-                                        Navigator.of(context).pushNamed(
-                                            RouteHelper.signUp,
-                                            arguments: SignUpScreen());
-                                      },
-                                    ),
-                                  ),
-                                ],
+                                        Navigator.pushNamedAndRemoveUntil(
+                                            context,
+                                            RouteHelper.menu,
+                                            (route) => false,
+                                            arguments: MenuScreen());
+                                      }
+                                    });
+                                  }
+                                },
                               )
                             : Center(
                                 child: CircularProgressIndicator(

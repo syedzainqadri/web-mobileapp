@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery/helper/price_converter.dart';
 import 'package:flutter_grocery/helper/route_helper.dart';
@@ -196,7 +197,31 @@ class DailyItemView extends StatelessWidget {
                                                             .discount >
                                                         0
                                                     ? Text(
-                                                        '${Provider.of<ProductProvider>(context, listen: false).dailyItemList[index].price}',
+                                                        PriceConverter.convertWithDiscount(
+                                                                    context,
+                                                                    Provider.of<ProductProvider>(
+                                                                            context,
+                                                                            listen:
+                                                                                false)
+                                                                        .dailyItemList[
+                                                                            index]
+                                                                        .price,
+                                                                    Provider.of<ProductProvider>(
+                                                                            context,
+                                                                            listen:
+                                                                                false)
+                                                                        .dailyItemList[
+                                                                            index]
+                                                                        .discount,
+                                                                    Provider.of<ProductProvider>(
+                                                                            context,
+                                                                            listen:
+                                                                                false)
+                                                                        .dailyItemList[
+                                                                            index]
+                                                                        .discountType)
+                                                                .toString() +
+                                                            ".00",
                                                         style: poppinsRegular.copyWith(
                                                             fontSize: Dimensions
                                                                 .FONT_SIZE_SMALL,

@@ -67,6 +67,7 @@ class ProductProvider extends ChangeNotifier {
 
   Future<void> getPopularProductList(BuildContext context, String offset,
       bool reload, String languageCode) async {
+    print('products test 1');
     if (reload || offset == '1') {
       _offsetList = [];
     }
@@ -99,6 +100,7 @@ class ProductProvider extends ChangeNotifier {
 
   Future<void> getDailyItemList(
       BuildContext context, bool reload, String languageCode) async {
+    print('daily products');
     if (_dailyItemList == null || reload) {
       ApiResponse apiResponse =
           await productRepo.getDailyItemList(languageCode);
@@ -107,6 +109,7 @@ class ProductProvider extends ChangeNotifier {
         _dailyItemList = [];
         apiResponse.response.data.forEach(
             (dailyItem) => _dailyItemList.add(Product.fromJson(dailyItem)));
+         print('check 2');
       } else {
         ApiChecker.checkApi(context, apiResponse);
       }
@@ -116,6 +119,7 @@ class ProductProvider extends ChangeNotifier {
 
   Future<void> getAmsItemList(
       BuildContext context, bool reload, String languageCode) async {
+    print('products AMSItem');
     if (_amsItemList == null || reload) {
       ApiResponse apiResponse = await productRepo.getAmsItemList(languageCode);
       if (apiResponse.response != null &&
@@ -132,6 +136,7 @@ class ProductProvider extends ChangeNotifier {
 
   Future<void> getFreshItemList(
       BuildContext context, bool reload, String languageCode) async {
+    print('Fresh');
     if (_freshItemList == null || reload) {
       ApiResponse apiResponse =
           await productRepo.getFreshItemList(languageCode);
@@ -149,6 +154,7 @@ class ProductProvider extends ChangeNotifier {
 
   Future<void> getProductDetails(BuildContext context, Product product,
       CartModel cart, String languageCode) async {
+    print('Detail');
     if (product.name != null) {
       _product = product;
     } else {
