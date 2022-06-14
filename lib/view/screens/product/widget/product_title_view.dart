@@ -52,12 +52,27 @@ class ProductTitleView extends StatelessWidget {
           return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  product.name ?? '',
-                  style: poppinsMedium.copyWith(
-                      fontSize: Dimensions.FONT_SIZE_LARGE,
-                      color: ColorResources.getTextColor(context)),
-                  // maxLines: 2,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      product.name ?? '',
+                      style: poppinsMedium.copyWith(
+                          fontSize: Dimensions.FONT_SIZE_LARGE,
+                          color: ColorResources.getTextColor(context)),
+                      // maxLines: 2,
+                    ),
+                    stock <= 0
+                        ? Text(
+                            'out of stock',
+                            style: poppinsMedium.copyWith(
+                                decoration: TextDecoration.lineThrough,
+                                decorationColor: Colors.red,
+                                color: Theme.of(context).errorColor,
+                                fontSize: Dimensions.FONT_SIZE_LARGE),
+                          )
+                        : SizedBox()
+                  ],
                 ),
                 //Product Price
                 SizedBox(

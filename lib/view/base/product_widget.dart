@@ -124,6 +124,16 @@ class ProductWidget extends StatelessWidget {
                             style: poppinsRegular.copyWith(
                                 fontSize: Dimensions.FONT_SIZE_SMALL,
                                 color: ColorResources.getTextColor(context))),
+                        _stock <= 0
+                            ? Text(
+                                'out of stock',
+                                style: poppinsMedium.copyWith(
+                                    decoration: TextDecoration.lineThrough,
+                                    decorationColor: Colors.red,
+                                    color: Theme.of(context).errorColor,
+                                    fontSize: Dimensions.FONT_SIZE_LARGE),
+                              )
+                            : SizedBox()
                       ]),
                 ),
               ),
