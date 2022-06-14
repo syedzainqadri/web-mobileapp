@@ -34,6 +34,9 @@ class BannerTwoView extends StatelessWidget {
                       children: [
                         CarouselSlider.builder(
                           options: CarouselOptions(
+                            autoPlayInterval: Duration(seconds: 10),
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 1600),
                             autoPlay: true,
                             enlargeCenterPage: true,
                             viewportFraction: 1,
