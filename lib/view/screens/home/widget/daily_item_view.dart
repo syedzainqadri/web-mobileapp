@@ -233,6 +233,28 @@ class DailyItemView extends StatelessWidget {
                                                             color: Colors.red),
                                                       )
                                                     : SizedBox(),
+                                                Provider.of<ProductProvider>(
+                                                                context,
+                                                                listen: false)
+                                                            .dailyItemList[
+                                                                index]
+                                                            .totalStock <=
+                                                        0
+                                                    ? Text(
+                                                        'out of stock',
+                                                        style: poppinsMedium.copyWith(
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .lineThrough,
+                                                            decorationColor:
+                                                                Colors.red,
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .errorColor,
+                                                            fontSize: Dimensions
+                                                                .FONT_SIZE_LARGE),
+                                                      )
+                                                    : SizedBox()
                                               ],
                                             ),
                                             Container(
