@@ -87,15 +87,13 @@ class _HomeScreenState extends State<HomeScreen> {
   var searchController = TextEditingController();
 
   ScrollController _scrollController;
-@override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-  _loadData(context, false);
-  setState(() {
-    isLoading=false;
-  });
-    super.didChangeDependencies();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadData(context, false);
   }
+
   @override
   Widget build(BuildContext context) {
     _scrollController = ScrollController(initialScrollOffset: 0.0);
@@ -104,151 +102,210 @@ class _HomeScreenState extends State<HomeScreen> {
     final ScrollController _scrollController2 = ScrollController();
     // _loadData(context, false);
 
-    return isLoading?Center(child: CircularProgressIndicator(),):RefreshIndicator(
-      onRefresh: () async {
-        await _loadData(context, true);
-      },
-      backgroundColor: Theme.of(context).primaryColor,
-      child: Scaffold(
-          appBar: ResponsiveHelper.isDesktop(context) ? MainAppBar() : null,
-          body: Scrollbar(
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              child: Container(
-                // height: 7000,
-                padding: EdgeInsets.symmetric(
-                    horizontal: weidth > 800 ? weidth * 0.14 : 40),
-                child: Column(children: [
-                  Container(
-                      height: 70.0,
-                      child: SearchBar(
-                        searchControlller: searchController,
-                        categoryClick: () {
-                          Navigator.pushNamed(context, RouteHelper.categorys);
-                        },
-                      )),
-                  //categories
-                  Provider.of<CategoryProvider>(context, listen: false).categoryList == null
-                      ? Container(height: 335, child: CategoryListView())
-                      :  Provider.of<CategoryProvider>(context, listen: false).categoryList.length == 0
-                      ? SizedBox()
-                      : Container(
-                      height: 335, child: CategoryListView(
-                  )),
-
-                  //banner
-                  Provider.of<BannerProvider>(context, listen: false).bannerList == null
-                      ? BannersView()
-                      : Provider.of<BannerProvider>(context, listen: false).bannerList.length == 0
-                      ? SizedBox()
-                      : BannersView(),
-
-                  // daily item view
-                  Provider.of<ProductProvider>(context, listen: false).dailyItemList == null
-                      ? Container(height: 340, child: DailyItemView())
-                      :  Provider.of<ProductProvider>(context, listen: false).dailyItemList.length == 0
-                      ? SizedBox()
-                      : Container(height: 382, child: DailyItemView()),
-
-                  // Banner Two
-                  Provider.of<BannerTwoProvider>(context, listen: false).bannerTwoList == null
-                      ? BannerTwoView()
-                      :   Provider.of<BannerTwoProvider>(context, listen: false).bannerTwoList.length == 0
-                      ? SizedBox()
-                      : BannerTwoView(),
-
-                  // Akbari Mandi Special
-
-                  Provider.of<ProductProvider>(context, listen: false).amsItemList == null
-                      ? AmsItemView()
-                      : Provider.of<ProductProvider>(context, listen: false).amsItemList.length == 0
-                      ? SizedBox()
-                      : AmsItemView(),
-
-                  // Fresh Items
-
-                  Provider.of<ProductProvider>(context, listen: false).freshItemList == null
-                      ? FreshItemView()
-                      :  Provider.of<ProductProvider>(context, listen: false).freshItemList.length == 0
-                      ? SizedBox()
-                      : FreshItemView(),
-
-                  //All Categories with sub Categories
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    // padding: EdgeInsets.symmetric(
-                    //     horizontal: weidth > 1150
-                    //         ? weidth * 0.08
-                    //         : weidth > 1000
-                    //             ? weidth * 0.05
-                    //             : 8),
-
-                    child:Provider.of<CategoryProvider>(context, listen: false).categoryList==null?
-                    SizedBox():
-                    Provider.of<CategoryProvider>(context, listen: false).categoryList.length == 0
-                            ?SizedBox(): ListView.builder(
-                                itemCount: Provider.of<CategoryProvider>(context, listen: false).categoryList.length,
-                                primary: false,
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.all(4.0),
-                                itemBuilder: (context, index) {
-                                  CategoryModel _category =
-                                  Provider.of<CategoryProvider>(context, listen: false).categoryList[index];
-
-                                  var category = Provider.of<CategoryProvider>(
-                                          context,
-                                          listen: false)
-                                      .subCategoryList;
-                                  print("sub categoris list $category");
-
-                                  return HomeCategory(
-                                    title: _category.name,
-                                    id: _category.id,
-                                  );
-                                }),
-
-
-                  ),
-                  // Popular Item
-                  Padding(
-                    padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                    child: TitleWidget(
-                        title: getTranslated('popular_item', context)),
-                  ),
-                  ProductView(
-                      productType: ProductType.POPULAR_PRODUCT,
-                      scrollController: _scrollController2),
-                  //Footer
-                  isLoading
-                      ? CircularProgressIndicator()
-                      : Footer(
-                          categoriesList: Provider.of<CategoryProvider>(context,
-                                  listen: false)
-                              .categoryList,
-                          brandsList: Provider.of<CategoryProvider>(context,
-                                  listen: false)
-                              .brands,
-                        )
-                ]),
-              ),
-            ),
-          ),
-          floatingActionButton:
-              // _scrollController.hasClients?_scrollController.position.pixels<800 ?Offstage():
-              FloatingActionButton(
-            child: Icon(Icons.keyboard_arrow_up_outlined),
-            backgroundColor: Colors.green,
-            onPressed: () {
-              _scrollController.animateTo(
-                0.0,
-                duration: Duration(milliseconds: 300),
-                curve: Curves.fastOutSlowIn,
-              );
-            },
+    return isLoading
+        ? Center(
+            child: CircularProgressIndicator(),
           )
-          // :Offstage(),
-          ),
-    );
+        : RefreshIndicator(
+            onRefresh: () async {
+              await _loadData(context, true);
+            },
+            backgroundColor: Theme.of(context).primaryColor,
+            child: Scaffold(
+                appBar:
+                    ResponsiveHelper.isDesktop(context) ? MainAppBar() : null,
+                body: Scrollbar(
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    child: Container(
+                      // height: 7000,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: weidth > 800 ? weidth * 0.14 : 40),
+                      child: Column(children: [
+                        Container(
+                            height: 70.0,
+                            child: SearchBar(
+                              searchControlller: searchController,
+                              categoryClick: () {
+                                Navigator.pushNamed(
+                                    context, RouteHelper.categorys);
+                              },
+                            )),
+                        //categories
+                        Provider.of<CategoryProvider>(context, listen: false)
+                                    .categoryList ==
+                                null
+                            ? Container(height: 335, child: CategoryListView())
+                            : Provider.of<CategoryProvider>(context,
+                                            listen: false)
+                                        .categoryList
+                                        .length ==
+                                    0
+                                ? SizedBox()
+                                : Container(
+                                    height: 335, child: CategoryListView()),
+
+                        //banner
+                        Provider.of<BannerProvider>(context, listen: false)
+                                    .bannerList ==
+                                null
+                            ? BannersView()
+                            : Provider.of<BannerProvider>(context,
+                                            listen: false)
+                                        .bannerList
+                                        .length ==
+                                    0
+                                ? SizedBox()
+                                : BannersView(),
+
+                        // daily item view
+                        Provider.of<ProductProvider>(context, listen: false)
+                                    .dailyItemList ==
+                                null
+                            ? Container(height: 340, child: DailyItemView())
+                            : Provider.of<ProductProvider>(context,
+                                            listen: false)
+                                        .dailyItemList
+                                        .length ==
+                                    0
+                                ? SizedBox()
+                                : Container(
+                                    height: 382, child: DailyItemView()),
+
+                        // Banner Two
+                        Provider.of<BannerTwoProvider>(context, listen: false)
+                                    .bannerTwoList ==
+                                null
+                            ? BannerTwoView()
+                            : Provider.of<BannerTwoProvider>(context,
+                                            listen: false)
+                                        .bannerTwoList
+                                        .length ==
+                                    0
+                                ? SizedBox()
+                                : BannerTwoView(),
+
+                        // Akbari Mandi Special
+
+                        Provider.of<ProductProvider>(context, listen: false)
+                                    .amsItemList ==
+                                null
+                            ? AmsItemView()
+                            : Provider.of<ProductProvider>(context,
+                                            listen: false)
+                                        .amsItemList
+                                        .length ==
+                                    0
+                                ? SizedBox()
+                                : AmsItemView(),
+
+                        // Fresh Items
+
+                        Provider.of<ProductProvider>(context, listen: false)
+                                    .freshItemList ==
+                                null
+                            ? FreshItemView()
+                            : Provider.of<ProductProvider>(context,
+                                            listen: false)
+                                        .freshItemList
+                                        .length ==
+                                    0
+                                ? SizedBox()
+                                : FreshItemView(),
+
+                        //All Categories with sub Categories
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          // padding: EdgeInsets.symmetric(
+                          //     horizontal: weidth > 1150
+                          //         ? weidth * 0.08
+                          //         : weidth > 1000
+                          //             ? weidth * 0.05
+                          //             : 8),
+
+                          child: Provider.of<CategoryProvider>(context,
+                                          listen: false)
+                                      .categoryList ==
+                                  null
+                              ? SizedBox()
+                              : Provider.of<CategoryProvider>(context,
+                                              listen: false)
+                                          .categoryList
+                                          .length ==
+                                      0
+                                  ? SizedBox()
+                                  : ListView.builder(
+                                      itemCount: Provider.of<CategoryProvider>(
+                                              context,
+                                              listen: false)
+                                          .categoryList
+                                          .length,
+                                      primary: false,
+                                      shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      padding: EdgeInsets.all(4.0),
+                                      itemBuilder: (context, index) {
+                                        CategoryModel _category =
+                                            Provider.of<CategoryProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .categoryList[index];
+
+                                        var category =
+                                            Provider.of<CategoryProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .subCategoryList;
+                                        print("sub categoris list $category");
+
+                                        return HomeCategory(
+                                          title: _category.name,
+                                          id: _category.id,
+                                        );
+                                      }),
+                        ),
+                        // Popular Item
+                        Padding(
+                          padding:
+                              EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                          child: TitleWidget(
+                              title: getTranslated('popular_item', context)),
+                        ),
+                        ProductView(
+                            productType: ProductType.POPULAR_PRODUCT,
+                            scrollController: _scrollController2),
+                        //Footer
+                        isLoading
+                            ? CircularProgressIndicator()
+                            : Footer(
+                                categoriesList: Provider.of<CategoryProvider>(
+                                        context,
+                                        listen: false)
+                                    .categoryList,
+                                brandsList: Provider.of<CategoryProvider>(
+                                        context,
+                                        listen: false)
+                                    .brands,
+                              )
+                      ]),
+                    ),
+                  ),
+                ),
+                floatingActionButton:
+                    // _scrollController.hasClients?_scrollController.position.pixels<800 ?Offstage():
+                    FloatingActionButton(
+                  child: Icon(Icons.keyboard_arrow_up_outlined),
+                  backgroundColor: Colors.green,
+                  onPressed: () {
+                    _scrollController.animateTo(
+                      0.0,
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.fastOutSlowIn,
+                    );
+                  },
+                )
+                // :Offstage(),
+                ),
+          );
   }
 }
