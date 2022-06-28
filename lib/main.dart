@@ -46,17 +46,17 @@ Future<void> main() async {
   await di.init();
   int _orderID;
   try {
-    if (!kIsWeb) {
-      final RemoteMessage remoteMessage =
-          await FirebaseMessaging.instance.getInitialMessage();
-      if (remoteMessage != null) {
-        _orderID = remoteMessage.notification.titleLocKey != null
-            ? int.parse(remoteMessage.notification.titleLocKey)
-            : null;
-      }
-      await NotificationHelper.initialize(flutterLocalNotificationsPlugin);
-      FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
+    // if (!kIsWeb) {
+    final RemoteMessage remoteMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+    if (remoteMessage != null) {
+      _orderID = remoteMessage.notification.titleLocKey != null
+          ? int.parse(remoteMessage.notification.titleLocKey)
+          : null;
     }
+    await NotificationHelper.initialize(flutterLocalNotificationsPlugin);
+    FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
+    // }
   } catch (e) {}
 
   runApp(MultiProvider(
@@ -81,7 +81,10 @@ Future<void> main() async {
           create: (context) => di.sl<NotificationProvider>()),
       ChangeNotifierProvider(create: (context) => di.sl<BannerTwoProvider>()),
     ],
-    child: MyApp(orderID: _orderID, isWeb: !kIsWeb),
+    child: MyApp(
+      orderID: _orderID,
+      isWeb: !kIsWeb,
+    ),
   ));
 }
 

@@ -77,11 +77,16 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  @override
+  void initState() {
+    _loadData(context, false);
+    super.initState();
+  }
+
   var searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final ScrollController _scrollController = ScrollController();
-    _loadData(context, false);
     final ScrollController _scrollController2 = ScrollController();
 
     return RefreshIndicator(
