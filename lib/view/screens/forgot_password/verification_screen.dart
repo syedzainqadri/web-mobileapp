@@ -6,6 +6,7 @@ import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/utill/images.dart';
 import 'package:flutter_grocery/utill/styles.dart';
 import 'package:flutter_grocery/view/screens/auth/create_account_screen.dart';
+import 'package:flutter_grocery/view/screens/forgot_password/onShopScreen.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -112,7 +113,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CreateAccountScreen()),
+                              builder: (context) => OnShopScreen()),
                           (route) => false);
                     }
                   });

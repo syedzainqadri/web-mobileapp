@@ -48,7 +48,7 @@ class CategoryProvider extends ChangeNotifier {
 
   Future<void> getBrands(BuildContext context) async {
     final apiResponse =
-        await Dio().get('https://admin.akbarimandi.online/api/v1/brands');
+        await Dio().get('https://wholesale.akbarimandi.online/api/v1/brands');
     if (apiResponse.data != null && apiResponse.statusCode == 200) {
       _brands = [];
       apiResponse.data

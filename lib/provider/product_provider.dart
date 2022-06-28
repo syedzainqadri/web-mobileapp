@@ -45,7 +45,7 @@ class ProductProvider extends ChangeNotifier {
   Future<List<BrandsModel>> getBrands(cnxt) async {
     try {
       var response =
-          await Dio().get('https://admin.akbarimandi.online/api/v1/brands');
+          await Dio().get('https://wholesale.akbarimandi.online/api/v1/brands');
       print(response);
       // final response = await dioClient.get(
       //   AppConstants.POPULAR_PRODUCT_URI,
@@ -59,7 +59,7 @@ class ProductProvider extends ChangeNotifier {
       print(e);
     }
     final response = await Dio().get(
-      "https://admin.akbarimandi.online/api/v1/brands",
+      "https://wholesale.akbarimandi.online/api/v1/brands",
     );
     print(" resopnse data of brads is:  ${response.data}");
     return brandsModelFromJson(response.data);

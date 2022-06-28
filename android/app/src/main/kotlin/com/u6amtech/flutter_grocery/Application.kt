@@ -1,4 +1,4 @@
-package amo.ewiglife.com
+package amo.ewiglife.wholesale
 
 import io.flutter.app.FlutterApplication
 import io.flutter.plugin.common.PluginRegistry

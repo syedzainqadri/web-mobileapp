@@ -27,8 +27,8 @@ class CategoryView extends StatelessWidget {
                         TitleWidget(title: getTranslated('category', context)),
                   ),
                   GridView.builder(
-                    itemCount: category.categoryList.length > 5
-                        ? 6
+                    itemCount: category.categoryList.length > 15
+                        ? 15
                         : category.categoryList.length,
                     padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                     physics: NeverScrollableScrollPhysics(),
@@ -50,22 +50,21 @@ class CategoryView extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          if (index == 5) {
-                            ResponsiveHelper.isMobilePhone()
-                                ? Provider.of<SplashProvider>(context,
-                                        listen: false)
-                                    .setPageIndex(1)
-                                : SizedBox();
-                            ResponsiveHelper.isWeb()
-                                ? Navigator.pushNamed(
-                                    context, RouteHelper.categorys)
-                                : SizedBox();
-                          } else {
-                            Navigator.of(context).pushNamed(
-                              RouteHelper.getCategoryProductsRoute(
-                                  category.categoryList[index].id),
-                            );
-                          }
+                          // if (index == 5) {
+                          //   ResponsiveHelper.isMobilePhone()
+                          //       ? Provider.of<SplashProvider>(context,
+                          //               listen: false)
+                          //           .setPageIndex(1)
+                          //       : SizedBox();
+                          //   ResponsiveHelper.isWeb()
+                          //       ? Navigator.pushNamed(
+                          //           context, RouteHelper.categorys)
+                          //       : SizedBox();
+                          // } else {
+                          Navigator.of(context).pushNamed(
+                            RouteHelper.getCategoryProductsRoute(
+                                category.categoryList[index].id),
+                          );
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -88,48 +87,49 @@ class CategoryView extends StatelessWidget {
                             Expanded(
                               flex: ResponsiveHelper.isDesktop(context) ? 7 : 6,
                               child: Container(
-                                margin: EdgeInsets.all(
-                                    Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal:
-                                        Dimensions.PADDING_SIZE_DEFAULT),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: ColorResources.getCardBgColor(context),
-                                ),
-                                child: index != 5
-                                    ? ClipRRect(
-                                        borderRadius: BorderRadius.circular(50),
-                                        child: FadeInImage.assetNetwork(
-                                          placeholder: Images.placeholder,
-                                          image:
-                                              '${Provider.of<SplashProvider>(context, listen: false).baseUrls.categoryImageUrl}/${category.categoryList[index].image}',
-                                          fit: BoxFit.cover,
-                                          height: 100,
-                                          width: 100,
-                                          imageErrorBuilder: (c, o, s) =>
-                                              Image.asset(Images.placeholder,
-                                                  height: 100,
-                                                  width: 100,
-                                                  fit: BoxFit.cover),
-                                        ),
-                                      )
-                                    : Container(
-                                        height: 100,
-                                        width: 100,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                            '${category.categoryList.length - 5}+',
-                                            style: poppinsRegular.copyWith(
-                                                color: Theme.of(context)
-                                                    .cardColor)),
-                                      ),
-                              ),
+                                  margin: EdgeInsets.all(
+                                      Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          Dimensions.PADDING_SIZE_DEFAULT),
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color:
+                                        ColorResources.getCardBgColor(context),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child: FadeInImage.assetNetwork(
+                                      placeholder: Images.placeholder,
+                                      image:
+                                          '${Provider.of<SplashProvider>(context, listen: false).baseUrls.categoryImageUrl}/${category.categoryList[index].image}',
+                                      fit: BoxFit.cover,
+                                      height: 100,
+                                      width: 100,
+                                      imageErrorBuilder: (c, o, s) =>
+                                          Image.asset(Images.placeholder,
+                                              height: 100,
+                                              width: 100,
+                                              fit: BoxFit.cover),
+                                    ),
+                                  )
+
+                                  // : Container(
+                                  //     height: 100,
+                                  //     width: 100,
+                                  //     decoration: BoxDecoration(
+                                  //       shape: BoxShape.circle,
+                                  //       color: Theme.of(context).primaryColor,
+                                  //     ),
+                                  //     alignment: Alignment.center,
+                                  //     child: Text(
+                                  //         '${category.categoryList[index].name}',
+                                  //         style: poppinsRegular.copyWith(
+                                  //             color: Theme.of(context)
+                                  //                 .cardColor)),
+                                  //   ),
+                                  ),
                             ),
                             Expanded(
                               flex: ResponsiveHelper.isDesktop(context) ? 3 : 4,
@@ -137,9 +137,7 @@ class CategoryView extends StatelessWidget {
                                 padding: EdgeInsets.all(
                                     Dimensions.PADDING_SIZE_EXTRA_SMALL),
                                 child: Text(
-                                  index != 5
-                                      ? category.categoryList[index].name
-                                      : getTranslated('view_all', context),
+                                  category.categoryList[index].name,
                                   style: poppinsRegular,
                                   textAlign: TextAlign.center,
                                   maxLines: 2,

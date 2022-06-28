@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "150344500554",
-    "project_id": "akbarimandionline-80eec",
-    "storage_bucket": "akbarimandionline-80eec.appspot.com"
+    "project_number": "693579964063",
+    "project_id": "akbarimandiwholesaleapp",
+    "storage_bucket": "akbarimandiwholesaleapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:150344500554:android:a83982154dfad3c8e82db3",
+        "mobilesdk_app_id": "1:693579964063:android:3756273724051da2dd0caa",
         "android_client_info": {
-          "package_name": "amo.ewiglife.com"
+          "package_name": "amo.ewiglife.wholesale"
         }
       },
       "oauth_client": [
         {
-          "client_id": "150344500554-derv31k576ac0j8k6p3aj04rc4uj9eot.apps.googleusercontent.com",
+          "client_id": "693579964063-l4ccsaeqvah73h2q865tscr8fejafag6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "amo.ewiglife.wholesale",
+            "certificate_hash": "4be4901c78d349d2b15f49b69585bb611c9cbe3e"
+          }
+        },
+        {
+          "client_id": "693579964063-235f57ug1j02hlbettbdp7rbl5bjnla3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCFXlGnaglcwCbk8wDY6RSJ9rdWw812jGI"
+          "current_key": "AIzaSyB_o5K1UlBL7VLjMIdpG8vYdcOdb1mIPes"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "150344500554-derv31k576ac0j8k6p3aj04rc4uj9eot.apps.googleusercontent.com",
+              "client_id": "693579964063-235f57ug1j02hlbettbdp7rbl5bjnla3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -103,37 +103,37 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SizedBox(
                 width: 1170,
                 child: Column(children: [
-                  BannersView(),
+                  BannerTwoView(),
                   // Category
                   CategoryView(),
                   // Banner Two
-                  BannerTwoView(),
+
                   // daily item view
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12.0),
-                    child: DailyItemView(),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 12.0),
+                  //   child: DailyItemView(),
+                  // ),
                   // Ams Item View
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12.0),
-                    child: AmsItemView(),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 12.0),
+                  //   child: AmsItemView(),
+                  // ),
                   // Fresh Items
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12.0),
-                    child: FreshItemView(),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 12.0),
+                  //   child: FreshItemView(),
+                  // ),
                   //All Categories with sub Categories
-                  CatwithSubCatonHome(),
+                  // CatwithSubCatonHome(),
                   // Popular Item
-                  Padding(
-                    padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                    child: TitleWidget(
-                        title: getTranslated('popular_item', context)),
-                  ),
-                  ProductView(
-                      productType: ProductType.POPULAR_PRODUCT,
-                      scrollController: _scrollController2),
+                  // Padding(
+                  //   padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                  //   child: TitleWidget(
+                  //       title: getTranslated('popular_item', context)),
+                  // ),
+                  // ProductView(
+                  //     productType: ProductType.POPULAR_PRODUCT,
+                  //     scrollController: _scrollController2),
                 ]),
               ),
             ),

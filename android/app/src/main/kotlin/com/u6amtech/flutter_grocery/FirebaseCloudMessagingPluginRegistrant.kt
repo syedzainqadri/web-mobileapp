@@ -1,4 +1,4 @@
-package amo.ewiglife.com
+package amo.ewiglife.wholesale
 
 import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingPlugin

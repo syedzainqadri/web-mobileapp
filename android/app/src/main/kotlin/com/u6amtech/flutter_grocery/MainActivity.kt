@@ -1,4 +1,4 @@
-package amo.ewiglife.com
+package amo.ewiglife.wholesale
 
 import io.flutter.embedding.android.FlutterActivity
 
