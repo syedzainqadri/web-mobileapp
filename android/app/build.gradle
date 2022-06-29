@@ -39,8 +39,11 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
-    lintOptions {
-        disable 'InvalidPackage'
+    // lintOptions {
+    //     disable 'InvalidPackage'
+    // }
+    lintOptions { 
+        checkReleaseBuilds false
     }
 
     defaultConfig {

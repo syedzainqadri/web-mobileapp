@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Text(
                           getTranslated('login', context),
                           style: poppinsMedium.copyWith(
-                              fontSize: 24,
+                              fontSize: 30,
                               color: ColorResources.getTextColor(context)),
                         )),
                         SizedBox(height: 35),
@@ -135,6 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             : Text(
                                 getTranslated('mobile_number', context),
                                 style: poppinsRegular.copyWith(
+                                    fontSize: 20,
                                     color:
                                         ColorResources.getHintColor(context)),
                               ),
@@ -185,6 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text(
                           getTranslated('password', context),
                           style: poppinsRegular.copyWith(
+                              fontSize: 20,
                               color: ColorResources.getHintColor(context)),
                         ),
                         SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
@@ -241,8 +243,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           .textTheme
                                           .headline2
                                           .copyWith(
-                                              fontSize: Dimensions
-                                                  .FONT_SIZE_EXTRA_SMALL,
+                                              fontSize: 20,
                                               color:
                                                   ColorResources.getHintColor(
                                                       context)),
@@ -265,7 +266,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       .textTheme
                                       .headline2
                                       .copyWith(
-                                          fontSize: Dimensions.FONT_SIZE_SMALL,
+                                          fontSize: 20,
                                           color: ColorResources.getHintColor(
                                               context)),
                                 ),
@@ -417,40 +418,40 @@ class _LoginScreenState extends State<LoginScreen> {
                               )),
 
                         // for create an account
-                        SizedBox(height: 20),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).pushNamed(RouteHelper.signUp,
-                                arguments: SignUpScreen());
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  getTranslated('create_an_account', context),
-                                  style: poppinsRegular.copyWith(
-                                      fontSize: Dimensions.FONT_SIZE_SMALL,
-                                      color:
-                                          ColorResources.getHintColor(context)),
-                                ),
-                                SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
-                                Text(
-                                  getTranslated('signup', context),
-                                  style: poppinsMedium.copyWith(
-                                      fontSize: Dimensions.FONT_SIZE_SMALL,
-                                      color:
-                                          ColorResources.getTextColor(context)),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        // SizedBox(height: 20),
+                        // InkWell(
+                        //   onTap: () {
+                        //     Navigator.of(context).pushNamed(RouteHelper.signUp,
+                        //         arguments: SignUpScreen());
+                        //   },
+                        //   child: Padding(
+                        //     padding: EdgeInsets.all(8.0),
+                        //     child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.center,
+                        //       children: [
+                        //         Text(
+                        //           getTranslated('create_an_account', context),
+                        //           style: poppinsRegular.copyWith(
+                        //               fontSize: Dimensions.FONT_SIZE_SMALL,
+                        //               color:
+                        //                   ColorResources.getHintColor(context)),
+                        //         ),
+                        //         // SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
+                        //         // Text(
+                        //         //   getTranslated('signup', context),
+                        //         //   style: poppinsMedium.copyWith(
+                        //         //       fontSize: Dimensions.FONT_SIZE_SMALL,
+                        //         //       color:
+                        //         //           ColorResources.getTextColor(context)),
+                        //         // ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
 
-                        Center(
-                            child: Text(getTranslated('OR', context),
-                                style: poppinsRegular.copyWith(fontSize: 12))),
+                        // Center(
+                        //     child: Text(getTranslated('OR', context),
+                        //         style: poppinsRegular.copyWith(fontSize: 12))),
 
                         Center(
                           child: TextButton(
@@ -464,20 +465,20 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             child: RichText(
                                 text: TextSpan(children: [
-                              TextSpan(
-                                  text:
-                                      '${getTranslated('login_as_a', context)} ',
-                                  style: poppinsRegular.copyWith(
-                                      fontSize: Dimensions.FONT_SIZE_SMALL,
-                                      color: ColorResources.getHintColor(
-                                          context))),
-                              TextSpan(
-                                  text: getTranslated('guest', context),
-                                  style: poppinsRegular.copyWith(
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1
-                                          .color)),
+                              // TextSpan(
+                              //     text:
+                              //         '${getTranslated('login_as_a', context)} ',
+                              //     style: poppinsRegular.copyWith(
+                              //         fontSize: Dimensions.FONT_SIZE_SMALL,
+                              //         color: ColorResources.getHintColor(
+                              //             context))),
+                              // TextSpan(
+                              //     text: getTranslated('guest', context),
+                              //     style: poppinsRegular.copyWith(
+                              //         color: Theme.of(context)
+                              //             .textTheme
+                              //             .bodyText1
+                              //             .color)),
                             ])),
                           ),
                         ),

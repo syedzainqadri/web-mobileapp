@@ -15,6 +15,7 @@ import 'package:flutter_grocery/view/base/custom_snackbar.dart';
 import 'package:flutter_grocery/view/base/custom_text_field.dart';
 import 'package:flutter_grocery/view/base/main_app_bar.dart';
 import 'package:flutter_grocery/view/screens/address/add_new_address_screen.dart';
+import 'package:flutter_grocery/view/screens/address/addresspicker.dart';
 import 'package:flutter_grocery/view/screens/auth/login_screen.dart';
 import 'package:flutter_grocery/view/screens/auth/widget/code_picker_widget.dart';
 import 'package:flutter_grocery/view/screens/menu/menu_screen.dart';
@@ -92,7 +93,7 @@ class CreateAccountScreen extends StatelessWidget {
                       ),
                       SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
                       CustomTextField(
-                        hintText: 'John',
+                        hintText: 'آپنا پورا نام درج کیجیے',
                         isShowBorder: true,
                         controller: _firstNameController,
                         focusNode: _firstNameFocus,
@@ -110,7 +111,7 @@ class CreateAccountScreen extends StatelessWidget {
                       ),
                       SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
                       CustomTextField(
-                        hintText: 'Doe',
+                        hintText: 'دکان کا نام درج کیجیے',
                         isShowBorder: true,
                         controller: _lastNameController,
                         focusNode: _lastNameFocus,
@@ -303,11 +304,17 @@ class CreateAccountScreen extends StatelessWidget {
                                         .registration(signUpModel)
                                         .then((status) async {
                                       if (status.isSuccess) {
-                                        Navigator.pushNamedAndRemoveUntil(
+                                        Navigator.pushAndRemoveUntil(
                                             context,
-                                            RouteHelper.menu,
-                                            (route) => false,
-                                            arguments: AddNewAddressScreen());
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AddressPickerScreen()),
+                                            (route) => false);
+                                        // Navigator.pushNamedAndRemoveUntil(
+                                        //     context,
+                                        //     RouteHelper.menu,
+                                        //     (route) => false,
+                                        //     arguments: AddNewAddressScreen());
                                       }
                                     });
                                   }
@@ -364,11 +371,17 @@ class CreateAccountScreen extends StatelessWidget {
                                         .registration(signUpModel)
                                         .then((status) async {
                                       if (status.isSuccess) {
-                                        Navigator.pushNamedAndRemoveUntil(
+                                        Navigator.pushAndRemoveUntil(
                                             context,
-                                            RouteHelper.menu,
-                                            (route) => false,
-                                            arguments: AddNewAddressScreen());
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AddressPickerScreen()),
+                                            (route) => false);
+                                        // Navigator.pushNamedAndRemoveUntil(
+                                        //     context,
+                                        //     RouteHelper.menu,
+                                        //     (route) => false,
+                                        //     arguments: AddNewAddressScreen());
                                       }
                                     });
                                   }

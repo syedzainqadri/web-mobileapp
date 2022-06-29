@@ -26,8 +26,7 @@ class CustomButton extends StatelessWidget {
         ),
         child: Text(buttonText,
             style: poppinsMedium.copyWith(
-                color: Theme.of(context).cardColor,
-                fontSize: Dimensions.FONT_SIZE_LARGE)),
+                color: Theme.of(context).cardColor, fontSize: 20)),
       ),
     );
   }

@@ -79,9 +79,9 @@ class _OtpScreenState extends State<OtpScreen> {
               margin: EdgeInsets.only(top: 20),
               child: Center(
                 child: Text(
-                  'Please Enter Verification Code',
+                  'آپنا کوڈ انٹر کریں ',
                   style: poppinsBold.copyWith(
-                    fontSize: Dimensions.FONT_SIZE_LARGE,
+                    fontSize: 25,
                   ),
                 ),
               ),

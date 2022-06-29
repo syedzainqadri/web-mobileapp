@@ -1,7 +1,7 @@
 import 'package:flutter_grocery/data/model/response/language_model.dart';
 
 class AppConstants {
-  static const String APP_NAME = 'Akbari Mandi Online';
+  static const String APP_NAME = 'اکبری منڈی ہول سیل';
   static const String BASE_URL = 'https://wholesale.akbarimandi.online';
   static const String CONFIG_URI = '/api/v1/config';
   static const String BANNER_URI = '/api/v1/banners';
@@ -70,14 +70,14 @@ class AppConstants {
   static const String USER_ADDRESS = 'user_address';
   static const String USER_NUMBER = 'user_number';
   static const String SEARCH_ADDRESS = 'search_address';
-  static const String TOPIC = 'Akbari Mandi Online';
+  static const String TOPIC = 'اکبری منڈی ہول سیل';
 
   static List<LanguageModel> languages = [
-    // LanguageModel(
-    //     imageUrl: '',
-    //     languageName: 'English',
-    //     countryCode: 'US',
-    //     languageCode: 'en'),
+    LanguageModel(
+        imageUrl: '',
+        languageName: 'English',
+        countryCode: 'US',
+        languageCode: 'en'),
     LanguageModel(
         imageUrl: '',
         languageName: 'اردو',

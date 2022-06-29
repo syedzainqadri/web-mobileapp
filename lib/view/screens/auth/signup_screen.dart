@@ -89,12 +89,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        SizedBox(height: 10),
                         Center(
                             child: Text(
                           getTranslated('signup', context),
                           style: poppinsMedium.copyWith(
-                              fontSize: 24,
+                              fontSize: 30,
                               color: ColorResources.getTextColor(context)),
                         )),
                         SizedBox(height: 35),
@@ -110,6 +110,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             : Text(
                                 getTranslated('mobile_number', context),
                                 style: poppinsRegular.copyWith(
+                                    fontSize: 20,
                                     color:
                                         ColorResources.getHintColor(context)),
                               ),
@@ -297,7 +298,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   getTranslated(
                                       'already_have_account', context),
                                   style: poppinsRegular.copyWith(
-                                      fontSize: Dimensions.FONT_SIZE_SMALL,
+                                      fontSize: 20,
                                       color:
                                           ColorResources.getHintColor(context)),
                                 ),
