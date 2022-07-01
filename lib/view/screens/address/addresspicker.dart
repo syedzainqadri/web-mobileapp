@@ -23,8 +23,14 @@ class AddressPickerScreen extends StatefulWidget {
   final bool isEnableUpdate;
   final bool fromCheckout;
   final AddressModel address;
+  var name;
+  var phone;
   AddressPickerScreen(
-      {this.isEnableUpdate = false, this.address, this.fromCheckout = false});
+      {this.phone,
+      this.name,
+      this.isEnableUpdate = false,
+      this.address,
+      this.fromCheckout = false});
 
   @override
   State<AddressPickerScreen> createState() => _AddressPickerScreenState();
@@ -45,7 +51,10 @@ class _AddressPickerScreenState extends State<AddressPickerScreen> {
   @override
   void initState() {
     super.initState();
-
+    _contactPersonNameController.text = widget.name;
+    _contactPersonNumberController.text = widget.phone;
+    print("Name when page loads is ${_contactPersonNameController.text}");
+    print("Name when page loads is ${_contactPersonNumberController.text}");
     Provider.of<LocationProvider>(context, listen: false)
         .initializeAllAddressType(context: context);
     Provider.of<LocationProvider>(context, listen: false)

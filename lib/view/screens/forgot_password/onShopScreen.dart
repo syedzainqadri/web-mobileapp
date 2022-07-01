@@ -6,7 +6,8 @@ import 'package:flutter_grocery/view/base/main_app_bar.dart';
 import 'package:flutter_grocery/view/screens/auth/create_account_screen.dart';
 
 class OnShopScreen extends StatelessWidget {
-  OnShopScreen({Key key}) : super(key: key);
+  var phone;
+  OnShopScreen({@required this.phone, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +38,14 @@ class OnShopScreen extends StatelessWidget {
                           MaterialStateProperty.all(Color(0xFF01684B)),
                     ),
                     onPressed: () async {
+                      print(
+                          "Phone Number at create Account Screen is : $phone");
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CreateAccountScreen()),
+                              builder: (context) => CreateAccountScreen(
+                                    phone: phone,
+                                  )),
                           (route) => false);
                     },
                     child: SizedBox(

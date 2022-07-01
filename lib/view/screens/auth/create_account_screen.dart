@@ -22,6 +22,8 @@ import 'package:flutter_grocery/view/screens/menu/menu_screen.dart';
 import 'package:provider/provider.dart';
 
 class CreateAccountScreen extends StatelessWidget {
+  var phone;
+  CreateAccountScreen({this.phone, Key key}) : super(key: key);
   final FocusNode _firstNameFocus = FocusNode();
   final FocusNode _lastNameFocus = FocusNode();
   final FocusNode _emailFocus = FocusNode();
@@ -123,59 +125,86 @@ class CreateAccountScreen extends StatelessWidget {
 
                       // for email section
 
-                      Provider.of<SplashProvider>(context, listen: false)
-                              .configModel
-                              .emailVerification
-                          ? Text(
-                              getTranslated('mobile_number', context),
-                              style: poppinsRegular.copyWith(
-                                  color: ColorResources.getHintColor(context)),
-                            )
-                          : Text(
-                              getTranslated('email', context),
-                              style: poppinsRegular.copyWith(
-                                  color: ColorResources.getHintColor(context)),
-                            ),
-                      SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                      Provider.of<SplashProvider>(context, listen: false)
-                              .configModel
-                              .emailVerification
-                          ? Row(children: [
-                              CodePickerWidget(
-                                onChanged: (CountryCode countryCode) {
-                                  _countryDialCode = countryCode.dialCode;
-                                },
-                                initialSelection: _countryDialCode,
-                                favorite: [_countryDialCode],
-                                showDropDownButton: true,
-                                padding: EdgeInsets.zero,
-                                showFlagMain: true,
-                                textStyle: TextStyle(
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .headline1
-                                        .color),
-                              ),
-                              Expanded(
-                                child: CustomTextField(
-                                  hintText:
-                                      getTranslated('number_hint', context),
-                                  isShowBorder: true,
-                                  controller: _numberController,
-                                  focusNode: _numberFocus,
-                                  nextFocus: _passwordFocus,
-                                  inputType: TextInputType.phone,
-                                ),
-                              ),
-                            ])
-                          : CustomTextField(
-                              hintText: getTranslated('demo_gmail', context),
-                              isShowBorder: true,
-                              controller: _emailController,
-                              focusNode: _emailFocus,
-                              nextFocus: _passwordFocus,
-                              inputType: TextInputType.emailAddress,
-                            ),
+                      // Provider.of<SplashProvider>(context, listen: false)
+                      //         .configModel
+                      //         .emailVerification
+                      //     ? Text(
+                      //         getTranslated('mobile_number', context),
+                      //         style: poppinsRegular.copyWith(
+                      //             color: ColorResources.getHintColor(context)),
+                      //       )
+                      //     : Text(
+                      //         getTranslated('email', context),
+                      //         style: poppinsRegular.copyWith(
+                      //             color: ColorResources.getHintColor(context)),
+                      //       ),
+                      // SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                      // // Provider.of<SplashProvider>(context, listen: false)
+                      // //         .configModel
+                      // //         .emailVerification
+                      // //     ?
+                      // // Row(children: [
+                      // //     CodePickerWidget(
+                      // //       onChanged: (CountryCode countryCode) {
+                      // //         _countryDialCode = countryCode.dialCode;
+                      // //       },
+                      // //       initialSelection: _countryDialCode,
+                      // //       favorite: [_countryDialCode],
+                      // //       showDropDownButton: true,
+                      // //       padding: EdgeInsets.zero,
+                      // //       showFlagMain: true,
+                      // //       textStyle: TextStyle(
+                      // //           color: Theme.of(context)
+                      // //               .textTheme
+                      // //               .headline1
+                      // //               .color),
+                      // //     ),
+                      // //     Expanded(
+                      // //       child: CustomTextField(
+                      // //         hintText:
+                      // //             getTranslated('number_hint', context),
+                      // //         isShowBorder: true,
+                      // //         controller: _numberController,
+                      // //         focusNode: _numberFocus,
+                      // //         nextFocus: _passwordFocus,
+                      // //         inputType: TextInputType.phone,
+                      // //       ),
+                      // //     ),
+                      // //   ])
+                      // // CustomTextField(
+                      // //     hintText: getTranslated('demo_gmail', context),
+                      // //     isShowBorder: true,
+                      // //     controller: _emailController,
+                      // //     focusNode: _emailFocus,
+                      // //     nextFocus: _passwordFocus,
+                      // //     inputType: TextInputType.emailAddress,
+                      // //   )
+                      // // :
+                      // Row(children: [
+                      //   CodePickerWidget(
+                      //     onChanged: (CountryCode countryCode) {
+                      //       _countryDialCode = countryCode.dialCode;
+                      //     },
+                      //     initialSelection: _countryDialCode,
+                      //     favorite: [_countryDialCode],
+                      //     showDropDownButton: true,
+                      //     padding: EdgeInsets.zero,
+                      //     showFlagMain: true,
+                      //     textStyle: TextStyle(
+                      //         color:
+                      //             Theme.of(context).textTheme.headline1.color),
+                      //   ),
+                      //   Expanded(
+                      //     child: CustomTextField(
+                      //       hintText: getTranslated('number_hint', context),
+                      //       isShowBorder: true,
+                      //       controller: _numberController,
+                      //       focusNode: _numberFocus,
+                      //       nextFocus: _passwordFocus,
+                      //       inputType: TextInputType.phone,
+                      //     ),
+                      //   ),
+                      // ]),
 
                       SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
 
@@ -248,7 +277,7 @@ class CreateAccountScreen extends StatelessWidget {
                                 String _lastName =
                                     _lastNameController.text.trim();
                                 String _number = _numberController.text.trim();
-                                String _email = _emailController.text.trim();
+                                String _email = _numberController.text.trim();
                                 String _password =
                                     _passwordController.text.trim();
                                 String _confirmPassword =
@@ -267,11 +296,11 @@ class CreateAccountScreen extends StatelessWidget {
                                         getTranslated(
                                             'enter_last_name', context),
                                         context);
-                                  } else if (_number.isEmpty) {
-                                    showCustomSnackBar(
-                                        getTranslated(
-                                            'enter_phone_number', context),
-                                        context);
+                                    // } else if (_number.isEmpty) {
+                                    //   showCustomSnackBar(
+                                    //       getTranslated(
+                                    //           'enter_phone_number', context),
+                                    //       context);
                                   } else if (_password.isEmpty) {
                                     showCustomSnackBar(
                                         getTranslated(
@@ -296,19 +325,25 @@ class CreateAccountScreen extends StatelessWidget {
                                     SignUpModel signUpModel = SignUpModel(
                                       fName: _firstName,
                                       lName: _lastName,
-                                      email: authProvider.email,
+                                      // email: _number,
                                       password: _password,
-                                      phone: _number,
+                                      phone: this.phone,
                                     );
                                     authProvider
                                         .registration(signUpModel)
                                         .then((status) async {
                                       if (status.isSuccess) {
+                                        var name = _firstName + _lastName;
+                                        print(
+                                            "Data at the time of Navigation to Address picker is $name + $phone");
                                         Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    AddressPickerScreen()),
+                                                    AddressPickerScreen(
+                                                      phone: phone,
+                                                      name: name,
+                                                    )),
                                             (route) => false);
                                         // Navigator.pushNamedAndRemoveUntil(
                                         //     context,
@@ -329,16 +364,16 @@ class CreateAccountScreen extends StatelessWidget {
                                         getTranslated(
                                             'enter_last_name', context),
                                         context);
-                                  } else if (_email.isEmpty) {
-                                    showCustomSnackBar(
-                                        getTranslated(
-                                            'enter_email_address', context),
-                                        context);
-                                  } else if (EmailChecker.isNotValid(_email)) {
-                                    showCustomSnackBar(
-                                        getTranslated(
-                                            'enter_valid_email', context),
-                                        context);
+                                    // } else if (_email.isEmpty) {
+                                    //   showCustomSnackBar(
+                                    //       getTranslated(
+                                    //           'enter_email_address', context),
+                                    //       context);
+                                    // } else if (EmailChecker.isNotValid(_email)) {
+                                    //   showCustomSnackBar(
+                                    //       getTranslated(
+                                    //           'enter_valid_email', context),
+                                    //       context);
                                   } else if (_password.isEmpty) {
                                     showCustomSnackBar(
                                         getTranslated(
@@ -371,11 +406,17 @@ class CreateAccountScreen extends StatelessWidget {
                                         .registration(signUpModel)
                                         .then((status) async {
                                       if (status.isSuccess) {
+                                        var name = _firstName + _lastName;
+                                        print(
+                                            "Data at the time of Navigation to Address picker is $name + $phone");
                                         Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    AddressPickerScreen()),
+                                                    AddressPickerScreen(
+                                                      phone: phone,
+                                                      name: name,
+                                                    )),
                                             (route) => false);
                                         // Navigator.pushNamedAndRemoveUntil(
                                         //     context,

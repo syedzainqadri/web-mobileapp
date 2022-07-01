@@ -14,6 +14,7 @@ import 'package:flutter_grocery/view/base/custom_snackbar.dart';
 import 'package:flutter_grocery/view/base/main_app_bar.dart';
 import 'package:flutter_grocery/view/screens/auth/create_account_screen.dart';
 import 'package:flutter_grocery/view/screens/forgot_password/create_new_password_screen.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 
@@ -163,7 +164,9 @@ class VerificationScreen extends StatelessWidget {
                                               Navigator.of(context).pushNamed(
                                                   RouteHelper.createAccount,
                                                   arguments:
-                                                      CreateAccountScreen());
+                                                      CreateAccountScreen(
+                                                    phone: this.emailAddress,
+                                                  ));
                                             } else {
                                               showCustomSnackBar(
                                                   value.message, context);
@@ -178,7 +181,9 @@ class VerificationScreen extends StatelessWidget {
                                               Navigator.of(context).pushNamed(
                                                   RouteHelper.createAccount,
                                                   arguments:
-                                                      CreateAccountScreen());
+                                                      CreateAccountScreen(
+                                                    phone: this.emailAddress,
+                                                  ));
                                             } else {
                                               showCustomSnackBar(
                                                   value.message, context);

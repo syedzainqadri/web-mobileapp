@@ -110,10 +110,14 @@ class _OtpScreenState extends State<OtpScreen> {
                           verificationId: _verificationCode, smsCode: pin))
                       .then((value) async {
                     if (value.user != null) {
+                      print(
+                          "Phone Number at create Account Screen is : ${widget.emailAddress}");
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => OnShopScreen()),
+                              builder: (context) => OnShopScreen(
+                                    phone: widget.emailAddress,
+                                  )),
                           (route) => false);
                     }
                   });
@@ -138,10 +142,14 @@ class _OtpScreenState extends State<OtpScreen> {
               .signInWithCredential(credential)
               .then((value) async {
             if (value.user != null) {
+              print(
+                  "Phone Number at create Account Screen is : ${widget.emailAddress}");
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => CreateAccountScreen()),
+                      builder: (context) => OnShopScreen(
+                            phone: widget.emailAddress,
+                          )),
                   (route) => false);
             }
           });
