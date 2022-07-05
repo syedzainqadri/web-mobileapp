@@ -9,36 +9,72 @@ class OnBoardingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-
-      Expanded(flex: 7, child: Padding(
-        padding: EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_LARGE),
-        child: Image.asset(onBoardingModel.imageUrl),
-      )),
-
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Expanded(
-        flex: 1,
-        child: Text(
-          onBoardingModel.title,
-          style: poppinsMedium.copyWith(
-            fontSize: Dimensions.FONT_SIZE_LARGE,
-            color: Theme.of(context).primaryColor,
+          flex: 7,
+          child: Padding(
+            padding: EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_LARGE),
+            child: Image.asset(onBoardingModel.imageUrl),
+          )),
+      Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Text(
+              onBoardingModel.title,
+              style: poppinsMedium.copyWith(
+                fontSize: 20,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.right,
+            ),
           ),
-          textAlign: TextAlign.center,
-        ),
+          Icon(
+            Icons.circle,
+            color: Colors.white,
+          ),
+        ],
       ),
-
-      Expanded(
-        flex: 2,
-        child: Text(
-          onBoardingModel.description,
-          style: poppinsLight.copyWith(
-            fontSize: Dimensions.FONT_SIZE_LARGE,
+      SizedBox(height: 10),
+      Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Text(
+              onBoardingModel.title2,
+              style: poppinsMedium.copyWith(
+                fontSize: 20,
+                color: Colors.yellow,
+              ),
+              textAlign: TextAlign.right,
+            ),
           ),
-          textAlign: TextAlign.center,
-        ),
+          Icon(
+            Icons.circle,
+            color: Colors.white,
+          ),
+        ],
+      ),
+      SizedBox(height: 10),
+      Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Text(
+              onBoardingModel.title3,
+              style: poppinsMedium.copyWith(
+                fontSize: 20,
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.right,
+            ),
+          ),
+          Icon(
+            Icons.circle,
+            color: Colors.white,
+          ),
+        ],
       )
-
     ]);
   }
 }

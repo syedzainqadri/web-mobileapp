@@ -15,12 +15,30 @@ class OnBoardingRepo {
   Future<ApiResponse> getOnBoardingList(BuildContext context) async {
     try {
       List<OnBoardingModel> onBoardingList = [
-        OnBoardingModel(Images.on_boarding_1, getTranslated('select_your_items_to_buy', context), getTranslated('onboarding_1_text', context)),
-        OnBoardingModel(Images.on_boarding_2, getTranslated('order_item_from_your_shopping_bag', context), getTranslated('onboarding_2_text', context)),
-        OnBoardingModel(Images.on_boarding_3, getTranslated('our_system_delivery_item_to_you', context), getTranslated('onboarding_3_text', context)),
+        OnBoardingModel(
+            Images.on_boarding_1,
+            '- مندی آپکے ہاتھ میں',
+            getTranslated('onboarding_1_text', context),
+            '- روزانہ کے ہول سیل ریٹ ',
+            '-مندی سے بھی سستا'),
+        OnBoardingModel(
+            Images.on_boarding_2,
+            '- اب منڈی کیوں جائیں',
+            getTranslated('onboarding_2_text', context),
+            '- روزانہ کی بنیاد پہ بدلتے ہول سیل ریٹ چیک کریں',
+            '- اپنے وقت کے مطابق آرڈر کریں'),
+        OnBoardingModel(
+            Images.on_boarding_3,
+            '- وقت بچائیں پیسہ بچائیں فائدہ اٹھائیں',
+            getTranslated('onboarding_3_text', context),
+            '- منڈی سے اپنے اسٹور پر مال حاصل کریں',
+            '- چند گھنٹوں میں، وہ بھی سستے دام'),
       ];
 
-      Response response = Response(requestOptions: RequestOptions(path: ''), data: onBoardingList, statusCode: 200);
+      Response response = Response(
+          requestOptions: RequestOptions(path: ''),
+          data: onBoardingList,
+          statusCode: 200);
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
