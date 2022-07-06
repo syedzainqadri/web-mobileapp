@@ -11,8 +11,11 @@ class TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(title, style: poppinsMedium),
+    return Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+      Padding(
+        padding: const EdgeInsets.only(left: 10.0),
+        child: Text(title, style: poppinsBold.copyWith(fontSize: 20)),
+      ),
       onTap != null
           ? InkWell(
               onTap: onTap,

@@ -34,6 +34,7 @@ class AppConstants {
   static const String COUPON_APPLY_URI = '/api/v1/coupon/apply?code=';
   static const String CUSTOMER_INFO_URI = '/api/v1/customer/info';
   static const String UPDATE_PROFILE_URI = '/api/v1/customer/update-profile';
+  static const String UPDATE_IMAGES_URI = '/api/v1/customer/update-images';
   static const String ADDRESS_LIST_URI = '/api/v1/customer/address/list';
   static const String REMOVE_ADDRESS_URI =
       '/api/v1/customer/address/delete?address_id=';

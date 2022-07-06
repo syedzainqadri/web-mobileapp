@@ -40,7 +40,7 @@ class CategoryView extends StatelessWidget {
                       crossAxisCount: ResponsiveHelper.isDesktop(context)
                           ? 6
                           : ResponsiveHelper.isMobilePhone()
-                              ? 3
+                              ? 2
                               : ResponsiveHelper.isTab(context)
                                   ? 4
                                   : 3,
@@ -138,7 +138,7 @@ class CategoryView extends StatelessWidget {
                                     Dimensions.PADDING_SIZE_EXTRA_SMALL),
                                 child: Text(
                                   category.categoryList[index].name,
-                                  style: poppinsRegular,
+                                  style: poppinsRegular.copyWith(fontSize: 20),
                                   textAlign: TextAlign.center,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,

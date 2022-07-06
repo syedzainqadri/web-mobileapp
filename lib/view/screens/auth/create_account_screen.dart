@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_grocery/data/model/response/signup_model.dart';
@@ -9,6 +11,7 @@ import 'package:flutter_grocery/provider/auth_provider.dart';
 import 'package:flutter_grocery/provider/splash_provider.dart';
 import 'package:flutter_grocery/utill/color_resources.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
+import 'package:flutter_grocery/utill/images.dart';
 import 'package:flutter_grocery/utill/styles.dart';
 import 'package:flutter_grocery/view/base/custom_button.dart';
 import 'package:flutter_grocery/view/base/custom_snackbar.dart';
@@ -16,6 +19,7 @@ import 'package:flutter_grocery/view/base/custom_text_field.dart';
 import 'package:flutter_grocery/view/base/main_app_bar.dart';
 import 'package:flutter_grocery/view/screens/address/add_new_address_screen.dart';
 import 'package:flutter_grocery/view/screens/address/addresspicker.dart';
+import 'package:flutter_grocery/view/screens/auth/imagePickerScreen.dart';
 import 'package:flutter_grocery/view/screens/auth/login_screen.dart';
 import 'package:flutter_grocery/view/screens/auth/widget/code_picker_widget.dart';
 import 'package:flutter_grocery/view/screens/menu/menu_screen.dart';
@@ -26,6 +30,7 @@ class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen({this.phone, Key key}) : super(key: key);
   final FocusNode _firstNameFocus = FocusNode();
   final FocusNode _lastNameFocus = FocusNode();
+  final FocusNode _cnicFocus = FocusNode();
   final FocusNode _emailFocus = FocusNode();
   final FocusNode _numberFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
@@ -33,6 +38,7 @@ class CreateAccountScreen extends StatelessWidget {
 
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _cnicController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -86,7 +92,6 @@ class CreateAccountScreen extends StatelessWidget {
                             color: ColorResources.getTextColor(context)),
                       )),
                       SizedBox(height: 30),
-
                       // for first name section
                       Text(
                         getTranslated('first_name', context),
@@ -117,8 +122,26 @@ class CreateAccountScreen extends StatelessWidget {
                         isShowBorder: true,
                         controller: _lastNameController,
                         focusNode: _lastNameFocus,
-                        nextFocus: _emailFocus,
+                        nextFocus: _cnicFocus,
                         inputType: TextInputType.name,
+                        capitalization: TextCapitalization.words,
+                      ),
+                      SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
+
+                      // for last name section
+                      Text(
+                        'شناختی کارڈ نمبر',
+                        style: poppinsRegular.copyWith(
+                            color: ColorResources.getHintColor(context)),
+                      ),
+                      SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                      CustomTextField(
+                        hintText: 'قومی شناختی کارڈ نمبر درج کریں',
+                        isShowBorder: true,
+                        controller: _cnicController,
+                        focusNode: _cnicFocus,
+                        nextFocus: _passwordFocus,
+                        inputType: TextInputType.number,
                         capitalization: TextCapitalization.words,
                       ),
                       SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
@@ -272,6 +295,8 @@ class CreateAccountScreen extends StatelessWidget {
                           ? CustomButton(
                               buttonText: getTranslated('signup', context),
                               onPressed: () {
+                                String _cnic = _cnicController.text.trim();
+                                print('cnic is : $_cnic');
                                 String _firstName =
                                     _firstNameController.text.trim();
                                 String _lastName =
@@ -296,11 +321,6 @@ class CreateAccountScreen extends StatelessWidget {
                                         getTranslated(
                                             'enter_last_name', context),
                                         context);
-                                    // } else if (_number.isEmpty) {
-                                    //   showCustomSnackBar(
-                                    //       getTranslated(
-                                    //           'enter_phone_number', context),
-                                    //       context);
                                   } else if (_password.isEmpty) {
                                     showCustomSnackBar(
                                         getTranslated(
@@ -321,14 +341,19 @@ class CreateAccountScreen extends StatelessWidget {
                                         getTranslated(
                                             'password_did_not_match', context),
                                         context);
+                                  } else if (_cnic.isEmpty) {
+                                    showCustomSnackBar(
+                                        'Please enter CNIC', context);
                                   } else {
                                     SignUpModel signUpModel = SignUpModel(
                                       fName: _firstName,
                                       lName: _lastName,
-                                      // email: _number,
                                       password: _password,
                                       phone: this.phone,
+                                      cnic: _cnic,
                                     );
+                                    print(
+                                        'cnic in model is: ${signUpModel.cnic}');
                                     authProvider
                                         .registration(signUpModel)
                                         .then((status) async {
@@ -340,16 +365,12 @@ class CreateAccountScreen extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    AddressPickerScreen(
+                                                    ImagePickerScreen(
                                                       phone: phone,
                                                       name: name,
+                                                      shopname: _lastName,
                                                     )),
                                             (route) => false);
-                                        // Navigator.pushNamedAndRemoveUntil(
-                                        //     context,
-                                        //     RouteHelper.menu,
-                                        //     (route) => false,
-                                        //     arguments: AddNewAddressScreen());
                                       }
                                     });
                                   }
@@ -364,16 +385,6 @@ class CreateAccountScreen extends StatelessWidget {
                                         getTranslated(
                                             'enter_last_name', context),
                                         context);
-                                    // } else if (_email.isEmpty) {
-                                    //   showCustomSnackBar(
-                                    //       getTranslated(
-                                    //           'enter_email_address', context),
-                                    //       context);
-                                    // } else if (EmailChecker.isNotValid(_email)) {
-                                    //   showCustomSnackBar(
-                                    //       getTranslated(
-                                    //           'enter_valid_email', context),
-                                    //       context);
                                   } else if (_password.isEmpty) {
                                     showCustomSnackBar(
                                         getTranslated(
@@ -394,13 +405,16 @@ class CreateAccountScreen extends StatelessWidget {
                                         getTranslated(
                                             'password_did_not_match', context),
                                         context);
+                                  } else if (_cnic.isEmpty) {
+                                    showCustomSnackBar(
+                                        'Please enter CNIC', context);
                                   } else {
                                     SignUpModel signUpModel = SignUpModel(
                                       fName: _firstName,
                                       lName: _lastName,
-                                      email: _email,
                                       password: _password,
                                       phone: authProvider.email.trim(),
+                                      cnic: _cnic,
                                     );
                                     authProvider
                                         .registration(signUpModel)
@@ -413,9 +427,10 @@ class CreateAccountScreen extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    AddressPickerScreen(
+                                                    ImagePickerScreen(
                                                       phone: phone,
                                                       name: name,
+                                                      shopname: _lastName,
                                                     )),
                                             (route) => false);
                                         // Navigator.pushNamedAndRemoveUntil(

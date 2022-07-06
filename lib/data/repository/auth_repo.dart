@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
-
+import 'dart:typed_data';
+import 'package:path/path.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -10,8 +11,10 @@ import 'package:flutter_grocery/data/model/response/base/api_response.dart';
 import 'package:flutter_grocery/data/model/response/signup_model.dart';
 import 'package:flutter_grocery/helper/responsive_helper.dart';
 import 'package:flutter_grocery/utill/app_constants.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:http/http.dart' as http;
 
 class AuthRepo {
   final DioClient dioClient;
@@ -21,11 +24,13 @@ class AuthRepo {
 
   Future<ApiResponse> registration(SignUpModel signUpModel) async {
     try {
+      print(signUpModel.cnic);
       print(signUpModel.toJson());
       Response response = await dioClient.post(
         AppConstants.REGISTER_URI,
         data: signUpModel.toJson(),
       );
+      print(response.data);
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
