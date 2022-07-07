@@ -51,11 +51,13 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                         .setPageIndex(0);
                     Navigator.of(context).pop();
                   }),
-              title: Text(getTranslated('update_profile', context) ?? '',
-                  style: poppinsMedium.copyWith(
-                    fontSize: Dimensions.FONT_SIZE_SMALL,
-                    color: Theme.of(context).textTheme.bodyText1.color,
-                  )),
+              title: Center(
+                child: Text('دکان کی تصاویر اپلوڈ کریں' ?? '',
+                    style: poppinsBold.copyWith(
+                      fontSize: Dimensions.FONT_SIZE_EXTRA_LARGE,
+                      color: Theme.of(context).textTheme.bodyText1.color,
+                    )),
+              ),
             ),
       body: SafeArea(
         child: Consumer<ProfileProvider>(
@@ -70,13 +72,21 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // for shop image1
+                      Center(
+                          child: Text(
+                        'دکان کے بھر کی ایک تصویر ڈالیں',
+                        style: poppinsBold.copyWith(
+                          fontSize: Dimensions.FONT_SIZE_EXTRA_LARGE,
+                          color: Theme.of(context).textTheme.bodyText1.color,
+                        ),
+                      )),
                       Container(
                         margin: EdgeInsets.only(top: 10, bottom: 0),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           border: Border.all(
                               color: ColorResources.getGreyColor(context),
-                              width: 3),
+                              width: 0),
                           shape: BoxShape.circle,
                         ),
                         child: InkWell(
@@ -95,21 +105,21 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                                 child: profileProvider.file1 != null
                                     ? Image.file(profileProvider.file1,
                                         width: 300,
-                                        height: 200,
-                                        fit: BoxFit.fill)
+                                        height: 170,
+                                        fit: BoxFit.cover)
                                     : profileProvider.data1 != null
                                         ? Image.network(
                                             profileProvider.data1.path,
                                             width: 300,
-                                            height: 200,
-                                            fit: BoxFit.fill)
+                                            height: 170,
+                                            fit: BoxFit.cover)
                                         : ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(50),
                                             child: FadeInImage.assetNetwork(
                                               placeholder: Images.placeholder,
                                               width: 300,
-                                              height: 200,
+                                              height: 170,
                                               fit: BoxFit.cover,
                                               image: Images.placeholder,
                                               // '${Provider.of<SplashProvider>(context, listen: false).baseUrls.customerImageUrl}'
@@ -118,7 +128,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                                                   Image.asset(
                                                       Images.placeholder,
                                                       width: 300,
-                                                      height: 200,
+                                                      height: 170,
                                                       fit: BoxFit.cover),
                                             ),
                                           ),
@@ -137,13 +147,24 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                         ),
                       ),
                       //for shop image2
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Center(
+                          child: Text(
+                        'دکان کے اندر  کی دو  تصاویر ڈالیں ',
+                        style: poppinsBold.copyWith(
+                          fontSize: Dimensions.FONT_SIZE_EXTRA_LARGE,
+                          color: Theme.of(context).textTheme.bodyText1.color,
+                        ),
+                      )),
                       Container(
                         margin: EdgeInsets.only(top: 10, bottom: 0),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           border: Border.all(
                               color: ColorResources.getGreyColor(context),
-                              width: 3),
+                              width: 0),
                           shape: BoxShape.circle,
                         ),
                         child: InkWell(
@@ -162,21 +183,21 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                                 child: profileProvider.file2 != null
                                     ? Image.file(profileProvider.file2,
                                         width: 300,
-                                        height: 200,
-                                        fit: BoxFit.fill)
+                                        height: 170,
+                                        fit: BoxFit.cover)
                                     : profileProvider.data2 != null
                                         ? Image.network(
                                             profileProvider.data2.path,
                                             width: 300,
-                                            height: 200,
-                                            fit: BoxFit.fill)
+                                            height: 170,
+                                            fit: BoxFit.cover)
                                         : ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(50),
                                             child: FadeInImage.assetNetwork(
                                               placeholder: Images.placeholder,
                                               width: 300,
-                                              height: 200,
+                                              height: 170,
                                               fit: BoxFit.cover,
                                               image: Images.placeholder,
                                               // '${Provider.of<SplashProvider>(context, listen: false).baseUrls.customerImageUrl}'
@@ -185,7 +206,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                                                   Image.asset(
                                                       Images.placeholder,
                                                       width: 300,
-                                                      height: 200,
+                                                      height: 170,
                                                       fit: BoxFit.cover),
                                             ),
                                           ),
@@ -210,7 +231,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                         decoration: BoxDecoration(
                           border: Border.all(
                               color: ColorResources.getGreyColor(context),
-                              width: 3),
+                              width: 0),
                           shape: BoxShape.circle,
                         ),
                         child: InkWell(
@@ -229,21 +250,21 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                                 child: profileProvider.file3 != null
                                     ? Image.file(profileProvider.file3,
                                         width: 300,
-                                        height: 200,
-                                        fit: BoxFit.fill)
+                                        height: 170,
+                                        fit: BoxFit.cover)
                                     : profileProvider.data3 != null
                                         ? Image.network(
                                             profileProvider.data3.path,
                                             width: 300,
-                                            height: 200,
-                                            fit: BoxFit.fill)
+                                            height: 170,
+                                            fit: BoxFit.cover)
                                         : ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(50),
                                             child: FadeInImage.assetNetwork(
                                               placeholder: Images.placeholder,
                                               width: 300,
-                                              height: 200,
+                                              height: 170,
                                               fit: BoxFit.cover,
                                               image: Images.placeholder,
                                               // '${Provider.of<SplashProvider>(context, listen: false).baseUrls.customerImageUrl}'
@@ -252,7 +273,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                                                   Image.asset(
                                                       Images.placeholder,
                                                       width: 300,
-                                                      height: 200,
+                                                      height: 170,
                                                       fit: BoxFit.cover),
                                             ),
                                           ),
