@@ -1,5 +1,6 @@
 import 'package:alt_sms_autofill/alt_sms_autofill.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
@@ -110,6 +111,9 @@ class _OtpScreenState extends State<OtpScreen> {
                           verificationId: _verificationCode, smsCode: pin))
                       .then((value) async {
                     if (value.user != null) {
+                      var _deviceToken =
+                          await FirebaseMessaging.instance.getToken();
+                      print('just checking if the token is: $_deviceToken');
                       print(
                           "Phone Number at create Account Screen is : ${widget.emailAddress}");
                       Navigator.pushAndRemoveUntil(

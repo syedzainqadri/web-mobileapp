@@ -71,7 +71,7 @@ class AppConstants {
   static const String USER_ADDRESS = 'user_address';
   static const String USER_NUMBER = 'user_number';
   static const String SEARCH_ADDRESS = 'search_address';
-  static const String TOPIC = 'اکبری منڈی ہول سیل';
+  static const String TOPIC = 'Akbari Mandi WholeSale';
 
   static List<LanguageModel> languages = [
     LanguageModel(

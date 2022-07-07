@@ -409,9 +409,13 @@ class CreateAccountScreen extends StatelessWidget {
                                     showCustomSnackBar(
                                         'Please enter CNIC', context);
                                   } else {
+                                    var number = authProvider.email.trim();
+                                    var _number = number.substring(1);
+                                    print(_number);
                                     SignUpModel signUpModel = SignUpModel(
                                       fName: _firstName,
                                       lName: _lastName,
+                                      email: _number,
                                       password: _password,
                                       phone: authProvider.email.trim(),
                                       cnic: _cnic,

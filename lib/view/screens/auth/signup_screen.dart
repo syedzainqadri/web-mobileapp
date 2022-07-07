@@ -14,9 +14,7 @@ import 'package:flutter_grocery/view/base/custom_button.dart';
 import 'package:flutter_grocery/view/base/custom_snackbar.dart';
 import 'package:flutter_grocery/view/base/custom_text_field.dart';
 import 'package:flutter_grocery/view/base/main_app_bar.dart';
-import 'package:flutter_grocery/view/screens/auth/create_account_screen.dart';
 import 'package:flutter_grocery/view/screens/auth/widget/code_picker_widget.dart';
-import 'package:flutter_grocery/view/screens/forgot_password/otp_screen.dart';
 import 'package:flutter_grocery/view/screens/forgot_password/verification_screen.dart';
 import 'package:provider/provider.dart';
 

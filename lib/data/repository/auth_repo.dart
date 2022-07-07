@@ -41,8 +41,9 @@ class AuthRepo {
     try {
       print({"email": email, "email_or_phone": email, "password": password});
       Response response = await dioClient.post(
-        AppConstants.LOGIN_URI,
-        data: {"email": email, "email_or_phone": email, "password": password},
+        'https://wholesale.akbarimandi.online/api/v1/auth/login?email=$email&password=$password&email_or_phone=$email',
+        // AppConstants.LOGIN_URI,
+        // data: {"email": email, "email_or_phone": email, "password": password},
       );
       return ApiResponse.withSuccess(response);
     } catch (e) {
@@ -170,9 +171,10 @@ class AuthRepo {
         _deviceToken = await _saveDeviceToken();
         FirebaseMessaging.instance.subscribeToTopic(AppConstants.TOPIC);
       }
-      Response response = await dioClient.post(
-        AppConstants.TOKEN_URI,
-        data: {"_method": "put", "cm_firebase_token": _deviceToken},
+      Response response = await dioClient.put(
+        'https://wholesale.akbarimandi.online/api/v1/customer/cm-firebase-token?cm_firebase_token=$_deviceToken',
+        // AppConstants.TOKEN_URI,
+        // data: {"_method": "put", "cm_firebase_token": _deviceToken},
       );
       return ApiResponse.withSuccess(response);
     } catch (e) {
@@ -184,6 +186,12 @@ class AuthRepo {
     String _deviceToken = '';
     if (Platform.isAndroid) {
       _deviceToken = await FirebaseMessaging.instance.getToken();
+      print('device token is: $_deviceToken');
+      Response response = await dioClient.put(
+        'https://wholesale.akbarimandi.online/api/v1/customer/cm-firebase-token?cm_firebase_token=$_deviceToken',
+        // AppConstants.TOKEN_URI,
+        // data: {"_method": "put", "cm_firebase_token": _deviceToken},
+      );
     } else if (Platform.isIOS) {
       _deviceToken = await FirebaseMessaging.instance.getAPNSToken();
     }
