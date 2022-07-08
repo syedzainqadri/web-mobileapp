@@ -16,9 +16,9 @@ import 'package:provider/provider.dart';
 class OtpScreenFromLogin extends StatefulWidget {
   String token;
   String emailAddress;
-  final bool fromSignUp;
+  final bool fromLogin;
   OtpScreenFromLogin(
-      {@required this.emailAddress, this.fromSignUp, @required this.token});
+      {@required this.emailAddress, this.fromLogin, @required this.token});
 
   @override
   State<OtpScreenFromLogin> createState() => _OtpScreenFromLoginState();

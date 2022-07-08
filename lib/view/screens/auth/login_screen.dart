@@ -363,8 +363,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                           authProvider
                                               .checkPhone(_email)
                                               .then((value) async {
-                                            value.isSuccess == false
-                                                ? Navigator.push(
+                                            value.isSuccess == true
+                                                ? ScaffoldMessenger.of(context)
+                                                    .showSnackBar(SnackBar(
+                                                        content: Text(
+                                                            'User Does Not Exist Please Signup First',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white)),
+                                                        duration: Duration(
+                                                            milliseconds: 600),
+                                                        backgroundColor:
+                                                            Colors.red))
+                                                : Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
@@ -372,19 +383,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                               emailAddress:
                                                                   _email,
                                                               token: token),
-                                                    ))
-                                                : print("email is $_email");
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
-                                                    content: Text(
-                                                        'User Does Not Exist Please Signup First',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.white)),
-                                                    duration: Duration(
-                                                        milliseconds: 600),
-                                                    backgroundColor:
-                                                        Colors.red));
+                                                    ));
                                           });
                                         }
                                       },

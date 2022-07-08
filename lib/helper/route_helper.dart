@@ -23,6 +23,7 @@ import 'package:flutter_grocery/view/screens/checkout/payment_screen.dart';
 import 'package:flutter_grocery/view/screens/coupon/coupon_screen.dart';
 import 'package:flutter_grocery/view/screens/forgot_password/create_new_password_screen.dart';
 import 'package:flutter_grocery/view/screens/forgot_password/forgot_password_screen.dart';
+import 'package:flutter_grocery/view/screens/forgot_password/otpscreenFromLogin.dart';
 import 'package:flutter_grocery/view/screens/forgot_password/verification.dart';
 import 'package:flutter_grocery/view/screens/forgot_password/verification_screen.dart';
 import 'package:flutter_grocery/view/screens/html/html_viewer_screen.dart';
@@ -54,6 +55,7 @@ class RouteHelper {
   static String onBoarding = '/on-boarding';
   static String menu = '/';
   static String login = '/login';
+  static String loginFromFirebase = '/loginfromfirebase';
   static String forgetPassword = '/forget-password';
   static String signUp = '/sign-up';
   static String verification = '/verification';
@@ -100,6 +102,8 @@ class RouteHelper {
 
   static String getOrderDetailsRoute(int id) => '$orderDetails?id=$id';
   static String getVerifyRoute(String page, String email) =>
+      '$verification?page=$page&email=$email';
+  static String getOtpRoute(String page, String email) =>
       '$verification?page=$page&email=$email';
   static String getEmailVerifyRoute(String page, String email) =>
       '$emailVerification?page=$page&email=$email';
@@ -182,6 +186,18 @@ class RouteHelper {
         ? _verificationScreen
         : OtpScreen(
             fromSignUp: params['page'][0] == 'sign-up',
+            emailAddress: params['email'][0],
+          );
+  });
+  static Handler _firebaseverificationHandler =
+      Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+    OtpScreenFromLogin _firebaseverificationScreen =
+        ModalRoute.of(context).settings.arguments;
+    return _firebaseverificationScreen != null
+        ? _firebaseverificationScreen
+        : OtpScreenFromLogin(
+            token: params['token'][0],
+            fromLogin: params['page'][0] == 'sign-up',
             emailAddress: params['email'][0],
           );
   });
@@ -459,6 +475,9 @@ class RouteHelper {
         handler: _forgetPassHandler, transitionType: TransitionType.fadeIn);
     router.define(signUp,
         handler: _signUpHandler, transitionType: TransitionType.fadeIn);
+    router.define(loginFromFirebase,
+        handler: _firebaseverificationHandler,
+        transitionType: TransitionType.fadeIn);
     router.define(verification,
         handler: _verificationHandler, transitionType: TransitionType.fadeIn);
     router.define(emailVerification,
