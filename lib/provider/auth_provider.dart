@@ -98,6 +98,40 @@ class AuthProvider with ChangeNotifier {
     return responseModel;
   }
 
+  Future<ResponseModel> loginWithFirebase(
+    String token,
+  ) async {
+    _isLoading = true;
+    _loginErrorMessage = '';
+    notifyListeners();
+    ApiResponse apiResponse = await authRepo.loginWithFirebase(
+      token: token,
+    );
+    ResponseModel responseModel;
+    if (apiResponse.response != null &&
+        apiResponse.response.statusCode == 200) {
+      Map map = apiResponse.response.data;
+      String token = map["token"];
+      print('token at this is $token');
+      authRepo.saveUserToken(token);
+      await authRepo.updateToken();
+      responseModel = ResponseModel(true, 'successful');
+    } else {
+      String errorMessage;
+      if (apiResponse.error is String) {
+        errorMessage = apiResponse.error.toString();
+      } else {
+        errorMessage = apiResponse.error.errors[0].message;
+      }
+      print(errorMessage);
+      _loginErrorMessage = errorMessage;
+      responseModel = ResponseModel(false, errorMessage);
+    }
+    _isLoading = false;
+    notifyListeners();
+    return responseModel;
+  }
+
   // for forgot password
   bool _isForgotPasswordLoading = false;
 

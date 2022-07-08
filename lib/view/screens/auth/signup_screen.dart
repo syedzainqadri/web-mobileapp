@@ -262,6 +262,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                   fromSignUp: true),
                                             );
                                           } else {
+                                            print("email is $_email");
                                             Navigator.of(context).pushNamed(
                                                 RouteHelper.getVerifyRoute(
                                                     'sign-up', _email),

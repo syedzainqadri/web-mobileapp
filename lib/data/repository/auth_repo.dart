@@ -51,6 +51,25 @@ class AuthRepo {
     }
   }
 
+  Future<ApiResponse> loginWithFirebase({
+    String token,
+  }) async {
+    try {
+      print({
+        "email": token,
+      });
+      Response response = await dioClient.post(
+        'https://wholesale.akbarimandi.online/api/v1/auth/firebase-login?token=$token',
+        // AppConstants.LOGIN_URI,
+        // data: {"email": email, "email_or_phone": email, "password": password},
+      );
+      print('response is $response');
+      return ApiResponse.withSuccess(response);
+    } catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
   // for forgot password
   Future<ApiResponse> forgetPassword(String email) async {
     try {

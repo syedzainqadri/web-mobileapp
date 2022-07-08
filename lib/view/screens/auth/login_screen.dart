@@ -11,7 +11,6 @@ import 'package:flutter_grocery/utill/color_resources.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/utill/images.dart';
 import 'package:flutter_grocery/utill/styles.dart';
-import 'package:flutter_grocery/view/base/custom_button.dart';
 import 'package:flutter_grocery/view/base/custom_button_login_signup.dart';
 import 'package:flutter_grocery/view/base/custom_snackbar.dart';
 import 'package:flutter_grocery/view/base/custom_text_field.dart';
@@ -19,6 +18,8 @@ import 'package:flutter_grocery/view/base/main_app_bar.dart';
 import 'package:flutter_grocery/view/screens/auth/signup_screen.dart';
 import 'package:flutter_grocery/view/screens/auth/widget/code_picker_widget.dart';
 import 'package:flutter_grocery/view/screens/forgot_password/forgot_password_screen.dart';
+import 'package:flutter_grocery/view/screens/forgot_password/otpscreenFromLogin.dart';
+import 'package:flutter_grocery/view/screens/forgot_password/verification_screen.dart';
 import 'package:flutter_grocery/view/screens/menu/menu_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -183,22 +184,22 @@ class _LoginScreenState extends State<LoginScreen> {
                               ]),
 
                         SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
-                        Text(
-                          getTranslated('password', context),
-                          style: poppinsRegular.copyWith(
-                              fontSize: 20,
-                              color: ColorResources.getHintColor(context)),
-                        ),
-                        SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                        CustomTextField(
-                          hintText: getTranslated('password_hint', context),
-                          isShowBorder: true,
-                          isPassword: true,
-                          isShowSuffixIcon: true,
-                          focusNode: _passwordFocus,
-                          controller: _passwordController,
-                          inputAction: TextInputAction.done,
-                        ),
+                        // Text(
+                        //   getTranslated('password', context),
+                        //   style: poppinsRegular.copyWith(
+                        //       fontSize: 20,
+                        //       color: ColorResources.getHintColor(context)),
+                        // ),
+                        // SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                        // CustomTextField(
+                        //   hintText: getTranslated('password_hint', context),
+                        //   isShowBorder: true,
+                        //   isPassword: true,
+                        //   isShowSuffixIcon: true,
+                        //   focusNode: _passwordFocus,
+                        //   controller: _passwordController,
+                        //   inputAction: TextInputAction.done,
+                        // ),
                         SizedBox(height: 20),
 
                         // for remember me section
@@ -252,26 +253,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).pushNamed(
-                                    RouteHelper.forgetPassword,
-                                    arguments: ForgotPasswordScreen());
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  getTranslated('forgot_password', context),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline2
-                                      .copyWith(
-                                          fontSize: 20,
-                                          color: ColorResources.getHintColor(
-                                              context)),
-                                ),
-                              ),
-                            )
+                            // InkWell(
+                            //   onTap: () {
+                            //     Navigator.of(context).pushNamed(
+                            //         RouteHelper.forgetPassword,
+                            //         arguments: ForgotPasswordScreen());
+                            //   },
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.all(8.0),
+                            //     child: Text(
+                            //       getTranslated('forgot_password', context),
+                            //       style: Theme.of(context)
+                            //           .textTheme
+                            //           .headline2
+                            //           .copyWith(
+                            //               fontSize: 20,
+                            //               color: ColorResources.getHintColor(
+                            //                   context)),
+                            //     ),
+                            //   ),
+                            // )
                           ],
                         ),
 
@@ -358,38 +359,32 @@ class _LoginScreenState extends State<LoginScreen> {
                                               getTranslated(
                                                   'enter_valid_email', context),
                                               context);
-                                        } else if (_password.isEmpty) {
-                                          showCustomSnackBar(
-                                              getTranslated(
-                                                  'enter_password', context),
-                                              context);
-                                        } else if (_password.length < 6) {
-                                          showCustomSnackBar(
-                                              getTranslated(
-                                                  'password_should_be',
-                                                  context),
-                                              context);
                                         } else {
                                           authProvider
-                                              .login(_email, _password)
-                                              .then((status) async {
-                                            if (status.isSuccess) {
-                                              if (authProvider
-                                                  .isActiveRememberMe) {
-                                                authProvider
-                                                    .saveUserNumberAndPassword(
-                                                        _emailController.text,
-                                                        _password);
-                                              } else {
-                                                authProvider
-                                                    .clearUserNumberAndPassword();
-                                              }
-                                              Navigator.pushNamedAndRemoveUntil(
-                                                  context,
-                                                  RouteHelper.menu,
-                                                  (route) => false,
-                                                  arguments: MenuScreen());
-                                            }
+                                              .checkPhone(_email)
+                                              .then((value) async {
+                                            value.isSuccess == false
+                                                ? Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          OtpScreenFromLogin(
+                                                              emailAddress:
+                                                                  _email,
+                                                              token: token),
+                                                    ))
+                                                : print("email is $_email");
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        'User Does Not Exist Please Signup First',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white)),
+                                                    duration: Duration(
+                                                        milliseconds: 600),
+                                                    backgroundColor:
+                                                        Colors.red));
                                           });
                                         }
                                       },
