@@ -23,8 +23,9 @@ import 'package:flutter_grocery/view/screens/auth/login_screen.dart';
 import 'package:provider/provider.dart';
 
 class CreateAccountScreen extends StatelessWidget {
+  var id;
   var phone;
-  CreateAccountScreen({this.phone, Key key}) : super(key: key);
+  CreateAccountScreen({this.phone, this.id, Key key}) : super(key: key);
   final FocusNode _firstNameFocus = FocusNode();
   final FocusNode _lastNameFocus = FocusNode();
   final FocusNode _cnicFocus = FocusNode();
@@ -305,7 +306,7 @@ class CreateAccountScreen extends StatelessWidget {
                                     print(
                                         'cnic in model is: ${signUpModel.cnic}');
                                     authProvider
-                                        .registration(signUpModel)
+                                        .registration(signUpModel, id)
                                         .then((status) async {
                                       if (status.isSuccess) {
                                         var name = _firstName + _lastName;
@@ -374,7 +375,7 @@ class CreateAccountScreen extends StatelessWidget {
                                       cnic: _cnic,
                                     );
                                     authProvider
-                                        .registration(signUpModel)
+                                        .registration(signUpModel, id)
                                         .then((status) async {
                                       if (status.isSuccess) {
                                         var name = _firstName + _lastName;

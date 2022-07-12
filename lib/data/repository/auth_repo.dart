@@ -51,17 +51,31 @@ class AuthRepo {
     }
   }
 
+  // Future<ApiResponse> loginWithFirebase({
+  //   String token,
+  // }) async {
+  //   try {
+  //     print({
+  //       "email": token,
+  //     });
+  //     Response response = await dioClient.post(
+  //       'https://wholesale.akbarimandi.online/api/v1/auth/firebase-login?token=$token',
+  //       // AppConstants.LOGIN_URI,
+  //       // data: {"email": email, "email_or_phone": email, "password": password},
+  //     );
+  //     print('response is $response');
+  //     return ApiResponse.withSuccess(response);
+  //   } catch (e) {
+  //     return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+  //   }
+  // }
+
   Future<ApiResponse> loginWithFirebase({
-    String token,
+    String uid,
   }) async {
     try {
-      print({
-        "email": token,
-      });
       Response response = await dioClient.post(
-        'https://wholesale.akbarimandi.online/api/v1/auth/firebase-login?token=$token',
-        // AppConstants.LOGIN_URI,
-        // data: {"email": email, "email_or_phone": email, "password": password},
+        'https://wholesale.akbarimandi.online/api/v1/auth/firebase-login-uid?uid=$uid',
       );
       print('response is $response');
       return ApiResponse.withSuccess(response);
@@ -69,6 +83,8 @@ class AuthRepo {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }
   }
+
+  // https://wholesale.akbarimandi.online/api/v1/auth/firebase-login-uid?uid=
 
   // for forgot password
   Future<ApiResponse> forgetPassword(String email) async {
@@ -201,6 +217,19 @@ class AuthRepo {
     }
   }
 
+  Future<ApiResponse> saveUID(id) async {
+    try {
+      Response response = await dioClient.put(
+        'https://wholesale.akbarimandi.online/api/v1/customer/cm-user-uid?cm_user_uid=$id',
+        // AppConstants.TOKEN_URI,
+        // data: {"_method": "put", "cm_firebase_token": _deviceToken},
+      );
+      return ApiResponse.withSuccess(response);
+    } catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
   Future<String> _saveDeviceToken() async {
     String _deviceToken = '';
     if (Platform.isAndroid) {
@@ -234,6 +263,8 @@ class AuthRepo {
     await sharedPreferences.remove(AppConstants.CART_LIST);
     await sharedPreferences.remove(AppConstants.USER_ADDRESS);
     await sharedPreferences.remove(AppConstants.SEARCH_ADDRESS);
+    await sharedPreferences.remove(AppConstants.USER_NUMBER);
+    await sharedPreferences.remove(AppConstants.USER_PASSWORD);
     await FirebaseMessaging.instance.unsubscribeFromTopic(AppConstants.TOPIC);
     // }
     // await sharedPreferences.remove(AppConstants.TOKEN);

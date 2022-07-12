@@ -7,7 +7,9 @@ import 'package:flutter_grocery/view/screens/auth/create_account_screen.dart';
 
 class OnShopScreen extends StatelessWidget {
   var phone;
-  OnShopScreen({@required this.phone, Key key}) : super(key: key);
+  var id;
+  OnShopScreen({@required this.phone, @required this.id, Key key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class OnShopScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => CreateAccountScreen(
+                                    id: id,
                                     phone: phone,
                                   )),
                           (route) => false);

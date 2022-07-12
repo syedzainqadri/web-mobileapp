@@ -33,7 +33,7 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<ResponseModel> registration(SignUpModel signUpModel) async {
+  Future<ResponseModel> registration(SignUpModel signUpModel, id) async {
     _isLoading = true;
     _registrationErrorMessage = '';
     notifyListeners();
@@ -45,6 +45,7 @@ class AuthProvider with ChangeNotifier {
       String token = map["token"];
       authRepo.saveUserToken(token);
       await authRepo.updateToken();
+      await authRepo.saveUID(id);
       responseModel = ResponseModel(true, 'successful');
     } else {
       String errorMessage;
@@ -99,13 +100,13 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<ResponseModel> loginWithFirebase(
-    String token,
+    String id,
   ) async {
     _isLoading = true;
     _loginErrorMessage = '';
     notifyListeners();
     ApiResponse apiResponse = await authRepo.loginWithFirebase(
-      token: token,
+      uid: id,
     );
     ResponseModel responseModel;
     if (apiResponse.response != null &&

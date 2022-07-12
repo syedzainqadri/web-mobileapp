@@ -118,10 +118,12 @@ class _OtpScreenState extends State<OtpScreen> {
                       var userModel = FirebaseUserModel(
                           id: value.user.uid, fcmToken: _deviceToken);
                       await Database().createUser(userModel);
+                      var id = await Database().getId(value.user.uid);
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
                               builder: (context) => OnShopScreen(
+                                    id: id,
                                     phone: widget.emailAddress,
                                   )),
                           (route) => false);
@@ -152,10 +154,13 @@ class _OtpScreenState extends State<OtpScreen> {
               var userModel =
                   FirebaseUserModel(id: value.user.uid, fcmToken: _deviceToken);
               await Database().createUser(userModel);
+              var id = await Database().getId(value.user.uid);
+              print("id is : $id");
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
                       builder: (context) => OnShopScreen(
+                            id: id,
                             phone: widget.emailAddress,
                           )),
                   (route) => false);

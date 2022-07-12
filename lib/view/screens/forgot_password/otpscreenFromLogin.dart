@@ -68,102 +68,100 @@ class _OtpScreenFromLoginState extends State<OtpScreenFromLogin> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       key: _scaffoldkey,
-      body: Consumer<AuthProvider>(builder: (context, authProvider, child) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Container(
-                child: ClipRRect(
-                  child: Image.asset(
-                    Images.app_logo,
-                    height: 100,
-                    width: 100,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Container(
+              child: ClipRRect(
+                child: Image.asset(
+                  Images.app_logo,
+                  height: 100,
+                  width: 100,
+                ),
+              ),
+            ),
+          ),
+          Center(
+            child: Container(
+              margin: EdgeInsets.only(top: 20),
+              child: Center(
+                child: Text(
+                  'آپنا کوڈ انٹر کریں ',
+                  style: poppinsBold.copyWith(
+                    fontSize: 25,
                   ),
                 ),
               ),
             ),
-            Center(
-              child: Container(
-                margin: EdgeInsets.only(top: 20),
-                child: Center(
-                  child: Text(
-                    'آپنا کوڈ انٹر کریں ',
-                    style: poppinsBold.copyWith(
-                      fontSize: 25,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 50.0, left: 50, top: 20),
-              child: PinPut(
-                fieldsCount: 6,
-                textStyle: poppinsBold.copyWith(
-                    fontSize: Dimensions.FONT_SIZE_SMALL,
-                    color: Colors.green[700]),
-                eachFieldWidth: 40.0,
-                eachFieldHeight: 55.0,
-                focusNode: _pinPutFocusNode,
-                controller: textEditingController1,
-                // controller: _pinPutController,
-                submittedFieldDecoration: pinPutDecoration,
-                selectedFieldDecoration: pinPutDecoration,
-                followingFieldDecoration: pinPutDecoration,
-                pinAnimationType: PinAnimationType.fade,
-                onSubmit: (pin) async {
-                  try {
-                    await FirebaseAuth.instance
-                        .signInWithCredential(PhoneAuthProvider.credential(
-                            verificationId: _verificationCode, smsCode: pin))
-                        .then((value) async {
-                      await Database()
-                          .getFcmToken(value.user.uid)
-                          .then((value) {
-                        setState(() {
-                          _token = value;
-                        });
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 50.0, left: 50, top: 20),
+            child: PinPut(
+              fieldsCount: 6,
+              textStyle: poppinsBold.copyWith(
+                  fontSize: Dimensions.FONT_SIZE_SMALL,
+                  color: Colors.green[700]),
+              eachFieldWidth: 40.0,
+              eachFieldHeight: 55.0,
+              focusNode: _pinPutFocusNode,
+              controller: textEditingController1,
+              // controller: _pinPutController,
+              submittedFieldDecoration: pinPutDecoration,
+              selectedFieldDecoration: pinPutDecoration,
+              followingFieldDecoration: pinPutDecoration,
+              pinAnimationType: PinAnimationType.fade,
+              onSubmit: (pin) async {
+                try {
+                  await FirebaseAuth.instance
+                      .signInWithCredential(PhoneAuthProvider.credential(
+                          verificationId: _verificationCode, smsCode: pin))
+                      .then((value) async {
+                    await Database().getFcmToken(value.user.uid).then((value) {
+                      setState(() {
+                        _token = value;
                       });
-                      if (value.user != null && _token != null) {
-                        await authProvider
-                            .loginWithFirebase(_token)
-                            .then((status) {
-                          if (status.isSuccess) {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MenuScreen()),
-                                (route) => false);
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text('Please Try Again In 5 Min',
-                                    style: TextStyle(color: Colors.white)),
-                                duration: Duration(milliseconds: 600),
-                                backgroundColor: Colors.red));
-                          }
-                        });
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text('Token is empty',
-                                style: TextStyle(color: Colors.white)),
-                            duration: Duration(milliseconds: 600),
-                            backgroundColor: Colors.red));
-                      }
+                      print('token upon login is: $_token');
                     });
-                  } catch (e) {
-                    FocusScope.of(context).unfocus();
-                    _scaffoldkey.currentState.showSnackBar(
-                        SnackBar(content: Text('Please Enter A Valid OTP')));
-                  }
-                },
-              ),
-            )
-          ],
-        );
-      }),
+                    if (value.user != null) {
+                      await Provider.of<AuthProvider>(context, listen: false)
+                          .loginWithFirebase(value.user.uid)
+                          .then((status) {
+                        if (status.isSuccess) {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MenuScreen()),
+                              (route) => false);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Please Try Again In 5 Min',
+                                  style: TextStyle(color: Colors.white)),
+                              duration: Duration(milliseconds: 600),
+                              backgroundColor: Colors.red));
+                        }
+                      });
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Token is empty',
+                              style: TextStyle(color: Colors.white)),
+                          duration: Duration(milliseconds: 600),
+                          backgroundColor: Colors.red));
+                    }
+                  });
+                } catch (e) {
+                  FocusScope.of(context).unfocus();
+                  _scaffoldkey.currentState.showSnackBar(
+                      SnackBar(content: Text('Please Enter A Valid OTP')));
+                }
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -174,36 +172,37 @@ class _OtpScreenFromLoginState extends State<OtpScreenFromLogin> {
           await FirebaseAuth.instance
               .signInWithCredential(credential)
               .then((value) async {
+            // if (value.user != null) {
+            // await Database().getFcmToken(value.user.uid).then((value) {
+            //   setState(() {
+            //     _token = value;
+            //   });
+            //   print('token upon login is: $_token');
+            // });
             if (value.user != null) {
-              await Database().getFcmToken(value.user.uid).then((value) {
-                setState(() {
-                  _token = value;
-                });
+              await Provider.of<AuthProvider>(context, listen: false)
+                  .loginWithFirebase(value.user.uid)
+                  .then((status) {
+                if (status.isSuccess) {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => MenuScreen()),
+                      (route) => false);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Please Try Again In 5 Min',
+                          style: TextStyle(color: Colors.white)),
+                      duration: Duration(milliseconds: 600),
+                      backgroundColor: Colors.red));
+                }
               });
-              if (value.user != null && _token != null) {
-                await Provider.of<AuthProvider>(context)
-                    .loginWithFirebase(_token)
-                    .then((status) {
-                  if (status.isSuccess) {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => MenuScreen()),
-                        (route) => false);
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Please Try Again In 5 Min',
-                            style: TextStyle(color: Colors.white)),
-                        duration: Duration(milliseconds: 600),
-                        backgroundColor: Colors.red));
-                  }
-                });
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text('Token is empty',
-                        style: TextStyle(color: Colors.white)),
-                    duration: Duration(milliseconds: 600),
-                    backgroundColor: Colors.red));
-              }
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('Token is empty',
+                      style: TextStyle(color: Colors.white)),
+                  duration: Duration(milliseconds: 600),
+                  backgroundColor: Colors.red));
+              // }
             }
           });
         },

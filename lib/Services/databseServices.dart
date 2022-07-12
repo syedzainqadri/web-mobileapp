@@ -41,6 +41,23 @@ class Database {
     return token;
   }
 
+  Future<String> getId(String uid) async {
+    DocumentReference documentReference = firestore
+        .collection('users')
+        .doc(uid)
+        .collection('userDetials')
+        .doc('userDetials');
+    String id;
+    await documentReference.get().then((snapshot) {
+      id = snapshot.get('id').toString();
+      List<FirebaseUserModel> retVal = [];
+      retVal.add(FirebaseUserModel(
+          id: snapshot.get('id').toString(),
+          fcmToken: snapshot.get('fcmToken').toString()));
+    });
+    return id;
+  }
+
   Stream<List<FirebaseUserModel>> userStreamm(String uid) {
     return firestore
         .collection('users')

@@ -258,7 +258,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             )
                           ],
                         ),
-
                         // for login button
                         SizedBox(height: 10),
                         !authProvider.isLoading
@@ -341,22 +340,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 valueColor: AlwaysStoppedAnimation<Color>(
                                     Theme.of(context).primaryColor),
                               )),
-
-                        // Center(
-                        //   child: TextButton(
-                        //     style: TextButton.styleFrom(
-                        //       minimumSize: Size(1, 40),
-                        //     ),
-                        //     onPressed: () {
-                        //       Navigator.pushReplacementNamed(
-                        //           context, RouteHelper.menu,
-                        //           arguments: MenuScreen());
-                        //     },
-                        //     child: RichText(
-                        //         text: TextSpan(children: [
-                        //     ])),
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
