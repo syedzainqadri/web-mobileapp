@@ -196,7 +196,6 @@ class RouteHelper {
     return _firebaseverificationScreen != null
         ? _firebaseverificationScreen
         : OtpScreenFromLogin(
-            token: params['token'][0],
             fromLogin: params['page'][0] == 'sign-up',
             emailAddress: params['email'][0],
           );

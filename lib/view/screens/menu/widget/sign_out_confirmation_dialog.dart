@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_grocery/data/model/response/firebaseuserModel.dart';
 import 'package:flutter_grocery/helper/responsive_helper.dart';
 import 'package:flutter_grocery/helper/route_helper.dart';
 import 'package:flutter_grocery/localization/language_constrants.dart';
@@ -37,6 +38,7 @@ class SignOutConfirmationDialog extends StatelessWidget {
                       Expanded(
                           child: InkWell(
                         onTap: () {
+                          FirebaseAuth.instance.signOut();
                           Provider.of<SplashProvider>(context, listen: false)
                               .setPageIndex(0);
                           Provider.of<AuthProvider>(context, listen: false)

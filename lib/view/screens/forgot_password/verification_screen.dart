@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_grocery/Services/databseServices.dart';
+import 'package:flutter_grocery/data/model/response/firebaseuserModel.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/utill/images.dart';
 import 'package:flutter_grocery/utill/styles.dart';
@@ -113,9 +115,9 @@ class _OtpScreenState extends State<OtpScreen> {
                     if (value.user != null) {
                       var _deviceToken =
                           await FirebaseMessaging.instance.getToken();
-                      print('just checking if the token is: $_deviceToken');
-                      print(
-                          "Phone Number at create Account Screen is : ${widget.emailAddress}");
+                      var userModel = FirebaseUserModel(
+                          id: value.user.uid, fcmToken: _deviceToken);
+                      await Database().createUser(userModel);
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
@@ -146,8 +148,10 @@ class _OtpScreenState extends State<OtpScreen> {
               .signInWithCredential(credential)
               .then((value) async {
             if (value.user != null) {
-              print(
-                  "Phone Number at create Account Screen is : ${widget.emailAddress}");
+              var _deviceToken = await FirebaseMessaging.instance.getToken();
+              var userModel =
+                  FirebaseUserModel(id: value.user.uid, fcmToken: _deviceToken);
+              await Database().createUser(userModel);
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(

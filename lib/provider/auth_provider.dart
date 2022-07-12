@@ -112,6 +112,7 @@ class AuthProvider with ChangeNotifier {
         apiResponse.response.statusCode == 200) {
       Map map = apiResponse.response.data;
       String token = map["token"];
+      print("Api response is ${apiResponse.response.data}");
       print('token at this is $token');
       authRepo.saveUserToken(token);
       await authRepo.updateToken();

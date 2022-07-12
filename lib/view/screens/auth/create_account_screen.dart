@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:country_code_picker/country_code.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_grocery/data/model/response/signup_model.dart';
 import 'package:flutter_grocery/helper/email_checker.dart';
 import 'package:flutter_grocery/helper/responsive_helper.dart';
@@ -11,18 +12,14 @@ import 'package:flutter_grocery/provider/auth_provider.dart';
 import 'package:flutter_grocery/provider/splash_provider.dart';
 import 'package:flutter_grocery/utill/color_resources.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
-import 'package:flutter_grocery/utill/images.dart';
 import 'package:flutter_grocery/utill/styles.dart';
 import 'package:flutter_grocery/view/base/custom_button.dart';
 import 'package:flutter_grocery/view/base/custom_snackbar.dart';
 import 'package:flutter_grocery/view/base/custom_text_field.dart';
+import 'package:flutter_grocery/view/base/idCard_Input_Field.dart';
 import 'package:flutter_grocery/view/base/main_app_bar.dart';
-import 'package:flutter_grocery/view/screens/address/add_new_address_screen.dart';
-import 'package:flutter_grocery/view/screens/address/addresspicker.dart';
 import 'package:flutter_grocery/view/screens/auth/imagePickerScreen.dart';
 import 'package:flutter_grocery/view/screens/auth/login_screen.dart';
-import 'package:flutter_grocery/view/screens/auth/widget/code_picker_widget.dart';
-import 'package:flutter_grocery/view/screens/menu/menu_screen.dart';
 import 'package:provider/provider.dart';
 
 class CreateAccountScreen extends StatelessWidget {
@@ -31,7 +28,7 @@ class CreateAccountScreen extends StatelessWidget {
   final FocusNode _firstNameFocus = FocusNode();
   final FocusNode _lastNameFocus = FocusNode();
   final FocusNode _cnicFocus = FocusNode();
-  final FocusNode _emailFocus = FocusNode();
+  // final FocusNode _emailFocus = FocusNode();
   final FocusNode _numberFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
   final FocusNode _confirmPasswordFocus = FocusNode();
@@ -40,10 +37,11 @@ class CreateAccountScreen extends StatelessWidget {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _cnicController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
+  // final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  String cnic;
 
   @override
   Widget build(BuildContext context) {
@@ -135,100 +133,52 @@ class CreateAccountScreen extends StatelessWidget {
                             color: ColorResources.getHintColor(context)),
                       ),
                       SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                      CustomTextField(
-                        hintText: 'قومی شناختی کارڈ نمبر درج کریں',
+                      IdCardInputField(
+                        hintText: 'شناختی کارڈ نمبر درج کیجیے',
                         isShowBorder: true,
                         controller: _cnicController,
                         focusNode: _cnicFocus,
-                        nextFocus: _passwordFocus,
+                        nextFocus: _numberFocus,
                         inputType: TextInputType.number,
-                        capitalization: TextCapitalization.words,
+                        onChanged: (value) {
+                          cnic = value;
+                        },
                       ),
-                      SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
-
-                      // for email section
-
-                      // Provider.of<SplashProvider>(context, listen: false)
-                      //         .configModel
-                      //         .emailVerification
-                      //     ? Text(
-                      //         getTranslated('mobile_number', context),
-                      //         style: poppinsRegular.copyWith(
-                      //             color: ColorResources.getHintColor(context)),
-                      //       )
-                      //     : Text(
-                      //         getTranslated('email', context),
-                      //         style: poppinsRegular.copyWith(
-                      //             color: ColorResources.getHintColor(context)),
-                      //       ),
-                      // SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                      // // Provider.of<SplashProvider>(context, listen: false)
-                      // //         .configModel
-                      // //         .emailVerification
-                      // //     ?
-                      // // Row(children: [
-                      // //     CodePickerWidget(
-                      // //       onChanged: (CountryCode countryCode) {
-                      // //         _countryDialCode = countryCode.dialCode;
-                      // //       },
-                      // //       initialSelection: _countryDialCode,
-                      // //       favorite: [_countryDialCode],
-                      // //       showDropDownButton: true,
-                      // //       padding: EdgeInsets.zero,
-                      // //       showFlagMain: true,
-                      // //       textStyle: TextStyle(
-                      // //           color: Theme.of(context)
-                      // //               .textTheme
-                      // //               .headline1
-                      // //               .color),
-                      // //     ),
-                      // //     Expanded(
-                      // //       child: CustomTextField(
-                      // //         hintText:
-                      // //             getTranslated('number_hint', context),
-                      // //         isShowBorder: true,
-                      // //         controller: _numberController,
-                      // //         focusNode: _numberFocus,
-                      // //         nextFocus: _passwordFocus,
-                      // //         inputType: TextInputType.phone,
-                      // //       ),
-                      // //     ),
-                      // //   ])
-                      // // CustomTextField(
-                      // //     hintText: getTranslated('demo_gmail', context),
-                      // //     isShowBorder: true,
-                      // //     controller: _emailController,
-                      // //     focusNode: _emailFocus,
-                      // //     nextFocus: _passwordFocus,
-                      // //     inputType: TextInputType.emailAddress,
-                      // //   )
-                      // // :
-                      // Row(children: [
-                      //   CodePickerWidget(
-                      //     onChanged: (CountryCode countryCode) {
-                      //       _countryDialCode = countryCode.dialCode;
+                      // Container(
+                      //   height: 50,
+                      //   decoration: BoxDecoration(
+                      //     border: Border.all(
+                      //         color: ColorResources.getHintColor(context)),
+                      //     borderRadius: BorderRadius.circular(10),
+                      //     color: Colors.white,
+                      //   ),
+                      //   alignment: Alignment.center,
+                      //   child: TextField(
+                      //     onChanged: (value) {
+                      //       cnic = value;
                       //     },
-                      //     initialSelection: _countryDialCode,
-                      //     favorite: [_countryDialCode],
-                      //     showDropDownButton: true,
-                      //     padding: EdgeInsets.zero,
-                      //     showFlagMain: true,
-                      //     textStyle: TextStyle(
-                      //         color:
-                      //             Theme.of(context).textTheme.headline1.color),
-                      //   ),
-                      //   Expanded(
-                      //     child: CustomTextField(
-                      //       hintText: getTranslated('number_hint', context),
-                      //       isShowBorder: true,
-                      //       controller: _numberController,
-                      //       focusNode: _numberFocus,
-                      //       nextFocus: _passwordFocus,
-                      //       inputType: TextInputType.phone,
+                      //     cursorColor: Colors.black,
+                      //     keyboardType: TextInputType.number,
+                      //     maxLength: 15,
+                      //     decoration: InputDecoration(
+                      //       hintText: 'قومی شناختی کارڈ نمبر درج کریں',
+                      //       border: InputBorder.none,
                       //     ),
+                      //     inputFormatters: [
+                      //       FilteringTextInputFormatter.digitsOnly,
+                      //       _mobileFormatter
+                      //     ],
                       //   ),
-                      // ]),
-
+                      // ),
+                      // CustomTextField(
+                      //   hintText: 'قومی شناختی کارڈ نمبر درج کریں',
+                      //   isShowBorder: true,
+                      //   controller: _cnicController,
+                      //   focusNode: _cnicFocus,
+                      //   nextFocus: _passwordFocus,
+                      //   inputType: TextInputType.number,
+                      //   capitalization: TextCapitalization.words,
+                      // ),
                       SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
 
                       // for password section
@@ -295,7 +245,7 @@ class CreateAccountScreen extends StatelessWidget {
                           ? CustomButton(
                               buttonText: getTranslated('signup', context),
                               onPressed: () {
-                                String _cnic = _cnicController.text.trim();
+                                String _cnic = cnic;
                                 print('cnic is : $_cnic');
                                 String _firstName =
                                     _firstNameController.text.trim();
@@ -382,8 +332,14 @@ class CreateAccountScreen extends StatelessWidget {
                                         context);
                                   } else if (_lastName.isEmpty) {
                                     showCustomSnackBar(
-                                        getTranslated(
-                                            'enter_last_name', context),
+                                        'دکان کا نام درج کریں', context);
+                                  } else if (_cnic.isEmpty) {
+                                    showCustomSnackBar(
+                                        'شناختی کارڈ کا نمبر درج کریں',
+                                        context);
+                                  } else if (_cnic.length != 15) {
+                                    showCustomSnackBar(
+                                        'شناختی کارڈ کا نمبر 13 رقمی نہیں ہے',
                                         context);
                                   } else if (_password.isEmpty) {
                                     showCustomSnackBar(
@@ -405,9 +361,6 @@ class CreateAccountScreen extends StatelessWidget {
                                         getTranslated(
                                             'password_did_not_match', context),
                                         context);
-                                  } else if (_cnic.isEmpty) {
-                                    showCustomSnackBar(
-                                        'Please enter CNIC', context);
                                   } else {
                                     var number = authProvider.email.trim();
                                     var _number = number.substring(1);

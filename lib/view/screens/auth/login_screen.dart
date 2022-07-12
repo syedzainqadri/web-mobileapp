@@ -1,7 +1,5 @@
 import 'package:country_code_picker/country_code.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_grocery/helper/email_checker.dart';
 import 'package:flutter_grocery/helper/responsive_helper.dart';
 import 'package:flutter_grocery/helper/route_helper.dart';
 import 'package:flutter_grocery/localization/language_constrants.dart';
@@ -17,10 +15,7 @@ import 'package:flutter_grocery/view/base/custom_text_field.dart';
 import 'package:flutter_grocery/view/base/main_app_bar.dart';
 import 'package:flutter_grocery/view/screens/auth/signup_screen.dart';
 import 'package:flutter_grocery/view/screens/auth/widget/code_picker_widget.dart';
-import 'package:flutter_grocery/view/screens/forgot_password/forgot_password_screen.dart';
 import 'package:flutter_grocery/view/screens/forgot_password/otpscreenFromLogin.dart';
-import 'package:flutter_grocery/view/screens/forgot_password/verification_screen.dart';
-import 'package:flutter_grocery/view/screens/menu/menu_screen.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -184,24 +179,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               ]),
 
                         SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
-                        // Text(
-                        //   getTranslated('password', context),
-                        //   style: poppinsRegular.copyWith(
-                        //       fontSize: 20,
-                        //       color: ColorResources.getHintColor(context)),
-                        // ),
-                        // SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                        // CustomTextField(
-                        //   hintText: getTranslated('password_hint', context),
-                        //   isShowBorder: true,
-                        //   isPassword: true,
-                        //   isShowSuffixIcon: true,
-                        //   focusNode: _passwordFocus,
-                        //   controller: _passwordController,
-                        //   inputAction: TextInputAction.done,
-                        // ),
-                        SizedBox(height: 20),
-
                         // for remember me section
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -253,26 +230,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ),
-                            // InkWell(
-                            //   onTap: () {
-                            //     Navigator.of(context).pushNamed(
-                            //         RouteHelper.forgetPassword,
-                            //         arguments: ForgotPasswordScreen());
-                            //   },
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.all(8.0),
-                            //     child: Text(
-                            //       getTranslated('forgot_password', context),
-                            //       style: Theme.of(context)
-                            //           .textTheme
-                            //           .headline2
-                            //           .copyWith(
-                            //               fontSize: 20,
-                            //               color: ColorResources.getHintColor(
-                            //                   context)),
-                            //     ),
-                            //   ),
-                            // )
                           ],
                         ),
 
@@ -312,10 +269,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                       buttonText:
                                           getTranslated('login', context),
                                       onPressed: () async {
-                                        String token = await FirebaseMessaging
-                                            .instance
-                                            .getToken();
-                                        print(token);
                                         String _email =
                                             _emailController.text.trim();
                                         if (!Provider.of<SplashProvider>(
@@ -331,33 +284,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                         }
                                         String _password =
                                             _passwordController.text.trim();
-                                        if (_email.isEmpty) {
-                                          if (Provider.of<SplashProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .configModel
-                                              .emailVerification) {
-                                            showCustomSnackBar(
-                                                getTranslated(
-                                                    'enter_email_address',
-                                                    context),
-                                                context);
-                                          } else {
-                                            showCustomSnackBar(
-                                                getTranslated(
-                                                    'enter_phone_number',
-                                                    context),
-                                                context);
-                                          }
-                                        } else if (Provider.of<SplashProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .configModel
-                                                .emailVerification &&
-                                            EmailChecker.isNotValid(_email)) {
+                                        if (_email.isEmpty ||
+                                            _email.length < 10) {
                                           showCustomSnackBar(
                                               getTranslated(
-                                                  'enter_valid_email', context),
+                                                  'enter_phone_number',
+                                                  context),
                                               context);
                                         } else {
                                           authProvider
@@ -380,9 +312,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     MaterialPageRoute(
                                                       builder: (context) =>
                                                           OtpScreenFromLogin(
-                                                              emailAddress:
-                                                                  _email,
-                                                              token: token),
+                                                        emailAddress: _email,
+                                                      ),
                                                     ));
                                           });
                                         }
@@ -411,71 +342,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Theme.of(context).primaryColor),
                               )),
 
-                        // for create an account
-                        // SizedBox(height: 20),
-                        // InkWell(
-                        //   onTap: () {
-                        //     Navigator.of(context).pushNamed(RouteHelper.signUp,
-                        //         arguments: SignUpScreen());
-                        //   },
-                        //   child: Padding(
-                        //     padding: EdgeInsets.all(8.0),
-                        //     child: Row(
-                        //       mainAxisAlignment: MainAxisAlignment.center,
-                        //       children: [
-                        //         Text(
-                        //           getTranslated('create_an_account', context),
-                        //           style: poppinsRegular.copyWith(
-                        //               fontSize: Dimensions.FONT_SIZE_SMALL,
-                        //               color:
-                        //                   ColorResources.getHintColor(context)),
-                        //         ),
-                        //         // SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
-                        //         // Text(
-                        //         //   getTranslated('signup', context),
-                        //         //   style: poppinsMedium.copyWith(
-                        //         //       fontSize: Dimensions.FONT_SIZE_SMALL,
-                        //         //       color:
-                        //         //           ColorResources.getTextColor(context)),
-                        //         // ),
-                        //       ],
+                        // Center(
+                        //   child: TextButton(
+                        //     style: TextButton.styleFrom(
+                        //       minimumSize: Size(1, 40),
                         //     ),
+                        //     onPressed: () {
+                        //       Navigator.pushReplacementNamed(
+                        //           context, RouteHelper.menu,
+                        //           arguments: MenuScreen());
+                        //     },
+                        //     child: RichText(
+                        //         text: TextSpan(children: [
+                        //     ])),
                         //   ),
                         // ),
-
-                        // Center(
-                        //     child: Text(getTranslated('OR', context),
-                        //         style: poppinsRegular.copyWith(fontSize: 12))),
-
-                        Center(
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              minimumSize: Size(1, 40),
-                            ),
-                            onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, RouteHelper.menu,
-                                  arguments: MenuScreen());
-                            },
-                            child: RichText(
-                                text: TextSpan(children: [
-                              // TextSpan(
-                              //     text:
-                              //         '${getTranslated('login_as_a', context)} ',
-                              //     style: poppinsRegular.copyWith(
-                              //         fontSize: Dimensions.FONT_SIZE_SMALL,
-                              //         color: ColorResources.getHintColor(
-                              //             context))),
-                              // TextSpan(
-                              //     text: getTranslated('guest', context),
-                              //     style: poppinsRegular.copyWith(
-                              //         color: Theme.of(context)
-                              //             .textTheme
-                              //             .bodyText1
-                              //             .color)),
-                            ])),
-                          ),
-                        ),
                       ],
                     ),
                   ),

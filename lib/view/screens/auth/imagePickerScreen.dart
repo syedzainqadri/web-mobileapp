@@ -337,6 +337,15 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                                           'updated_successfully', context)),
                                       backgroundColor: Colors.green,
                                     ));
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AddressPickerScreen(
+                                                  phone: widget.phone,
+                                                  name: widget.name,
+                                                )),
+                                        (route) => false);
                                   } else {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(SnackBar(
@@ -346,15 +355,6 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                                   }
                                   setState(() {});
                                 }
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            AddressPickerScreen(
-                                              phone: widget.phone,
-                                              name: widget.name,
-                                            )),
-                                    (route) => false);
                               },
                               child: Container(
                                 height: 50,

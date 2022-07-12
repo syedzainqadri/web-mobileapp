@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_grocery/Services/databseServices.dart';
+import 'package:flutter_grocery/data/model/response/firebaseuserModel.dart';
 import 'package:flutter_grocery/provider/auth_provider.dart';
 import 'package:flutter_grocery/utill/dimensions.dart';
 import 'package:flutter_grocery/utill/images.dart';
@@ -14,11 +16,12 @@ import 'package:pinput/pin_put/pin_put.dart';
 import 'package:provider/provider.dart';
 
 class OtpScreenFromLogin extends StatefulWidget {
-  String token;
   String emailAddress;
   final bool fromLogin;
-  OtpScreenFromLogin(
-      {@required this.emailAddress, this.fromLogin, @required this.token});
+  OtpScreenFromLogin({
+    @required this.emailAddress,
+    this.fromLogin,
+  });
 
   @override
   State<OtpScreenFromLogin> createState() => _OtpScreenFromLoginState();
@@ -39,6 +42,7 @@ class _OtpScreenFromLoginState extends State<OtpScreenFromLogin> {
   );
 
   String _comingSms = 'Unknown';
+  String _token;
 
   Future<void> initSmsListener() async {
     String comingSms;
@@ -116,9 +120,16 @@ class _OtpScreenFromLoginState extends State<OtpScreenFromLogin> {
                         .signInWithCredential(PhoneAuthProvider.credential(
                             verificationId: _verificationCode, smsCode: pin))
                         .then((value) async {
-                      if (value.user != null) {
+                      await Database()
+                          .getFcmToken(value.user.uid)
+                          .then((value) {
+                        setState(() {
+                          _token = value;
+                        });
+                      });
+                      if (value.user != null && _token != null) {
                         await authProvider
-                            .loginWithFirebase(widget.token)
+                            .loginWithFirebase(_token)
                             .then((status) {
                           if (status.isSuccess) {
                             Navigator.pushAndRemoveUntil(
@@ -134,11 +145,12 @@ class _OtpScreenFromLoginState extends State<OtpScreenFromLogin> {
                                 backgroundColor: Colors.red));
                           }
                         });
-                        // var _deviceToken =
-                        //     await FirebaseMessaging.instance.getToken();
-                        // print('just checking if the token is: $_deviceToken');
-                        print(
-                            "Phone Number at create Account Screen is : ${widget.emailAddress}");
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('Token is empty',
+                                style: TextStyle(color: Colors.white)),
+                            duration: Duration(milliseconds: 600),
+                            backgroundColor: Colors.red));
                       }
                     });
                   } catch (e) {
@@ -163,12 +175,35 @@ class _OtpScreenFromLoginState extends State<OtpScreenFromLogin> {
               .signInWithCredential(credential)
               .then((value) async {
             if (value.user != null) {
-              print(
-                  "Phone Number at create Account Screen is : ${widget.emailAddress}");
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => MenuScreen()),
-                  (route) => false);
+              await Database().getFcmToken(value.user.uid).then((value) {
+                setState(() {
+                  _token = value;
+                });
+              });
+              if (value.user != null && _token != null) {
+                await Provider.of<AuthProvider>(context)
+                    .loginWithFirebase(_token)
+                    .then((status) {
+                  if (status.isSuccess) {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => MenuScreen()),
+                        (route) => false);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Please Try Again In 5 Min',
+                            style: TextStyle(color: Colors.white)),
+                        duration: Duration(milliseconds: 600),
+                        backgroundColor: Colors.red));
+                  }
+                });
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('Token is empty',
+                        style: TextStyle(color: Colors.white)),
+                    duration: Duration(milliseconds: 600),
+                    backgroundColor: Colors.red));
+              }
             }
           });
         },
