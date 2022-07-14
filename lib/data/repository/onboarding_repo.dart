@@ -17,22 +17,22 @@ class OnBoardingRepo {
       List<OnBoardingModel> onBoardingList = [
         OnBoardingModel(
             Images.on_boarding_1,
-            '- مندی آپکے ہاتھ میں',
+            'مندی آپکے ہاتھ میں',
             getTranslated('onboarding_1_text', context),
-            '- روزانہ کے ہول سیل ریٹ ',
-            '-مندی سے بھی سستا'),
+            'روزانہ کے ہول سیل ریٹ ',
+            'مندی سے بھی سستا'),
         OnBoardingModel(
             Images.on_boarding_2,
-            '- اب منڈی کیوں جائیں',
+            'اب منڈی کیوں جائیں',
             getTranslated('onboarding_2_text', context),
-            '- روزانہ کی بنیاد پہ بدلتے ہول سیل ریٹ چیک کریں',
-            '- اپنے وقت کے مطابق آرڈر کریں'),
+            'روزانہ کی بنیاد پہ بدلتے ہول سیل ریٹ چیک کریں',
+            'اپنے وقت کے مطابق آرڈر کریں'),
         OnBoardingModel(
             Images.on_boarding_3,
-            '- وقت بچائیں پیسہ بچائیں فائدہ اٹھائیں',
+            'وقت بچائیں پیسہ بچائیں فائدہ اٹھائیں',
             getTranslated('onboarding_3_text', context),
-            '- منڈی سے اپنے اسٹور پر مال حاصل کریں',
-            '- چند گھنٹوں میں، وہ بھی سستے دام'),
+            'منڈی سے اپنے اسٹور پر مال حاصل کریں',
+            'ہر آرڈر کرنے پر دوسرے دن ڈیلیوری حاصل کریں'),
       ];
 
       Response response = Response(

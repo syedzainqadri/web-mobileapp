@@ -35,8 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
           .languageCode,
       reload,
     );
-    await Provider.of<BannerProvider>(context, listen: false)
-        .getBannerList(context, reload);
+    // await Provider.of<BannerProvider>(context, listen: false)
+    //     .getBannerList(context, reload);
     await Provider.of<BannerTwoProvider>(context, listen: false)
         .getBannerTwoList(context, reload);
     await Provider.of<ProductProvider>(context, listen: false).getDailyItemList(
@@ -46,31 +46,31 @@ class _HomeScreenState extends State<HomeScreen> {
           .locale
           .languageCode,
     );
-    await Provider.of<CategoryProvider>(context, listen: false).getBrands(
-      context,
-    );
-    await Provider.of<ProductProvider>(context, listen: false).getFreshItemList(
-      context,
-      reload,
-      Provider.of<LocalizationProvider>(context, listen: false)
-          .locale
-          .languageCode,
-    );
-    await Provider.of<ProductProvider>(context, listen: false).getAmsItemList(
-      context,
-      reload,
-      Provider.of<LocalizationProvider>(context, listen: false)
-          .locale
-          .languageCode,
-    );
-    Provider.of<ProductProvider>(context, listen: false).getPopularProductList(
-      context,
-      '1',
-      reload,
-      Provider.of<LocalizationProvider>(context, listen: false)
-          .locale
-          .languageCode,
-    );
+    // await Provider.of<CategoryProvider>(context, listen: false).getBrands(
+    //   context,
+    // );
+    // await Provider.of<ProductProvider>(context, listen: false).getFreshItemList(
+    //   context,
+    //   reload,
+    //   Provider.of<LocalizationProvider>(context, listen: false)
+    //       .locale
+    //       .languageCode,
+    // );
+    // await Provider.of<ProductProvider>(context, listen: false).getAmsItemList(
+    //   context,
+    //   reload,
+    //   Provider.of<LocalizationProvider>(context, listen: false)
+    //       .locale
+    //       .languageCode,
+    // );
+    // Provider.of<ProductProvider>(context, listen: false).getPopularProductList(
+    //   context,
+    //   '1',
+    //   reload,
+    //   Provider.of<LocalizationProvider>(context, listen: false)
+    //       .locale
+    //       .languageCode,
+    // );
 
     setState(() {
       isLoading = false;

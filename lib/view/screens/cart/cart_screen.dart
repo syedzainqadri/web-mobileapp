@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_grocery/data/model/response/cart_model.dart';
 import 'package:flutter_grocery/helper/price_converter.dart';
 import 'package:flutter_grocery/helper/responsive_helper.dart';
 import 'package:flutter_grocery/helper/route_helper.dart';
@@ -57,22 +58,25 @@ class CartScreen extends StatelessWidget {
                         .configModel
                         .deliveryCharge
                 : deliveryCharge = 0;
+            double _totalCount = 0;
             double _itemPrice = 0;
             double _discount = 0;
             double _tax = 0;
             Provider.of<CartProvider>(context, listen: false)
                 .cartList
                 .forEach((cartModel) {
+              _totalCount = _totalCount + cartModel.quantity;
               _itemPrice = _itemPrice + (cartModel.price * cartModel.quantity);
               // problem in below line
               _discount = _discount + (cartModel.discount * cartModel.quantity);
               _tax = _tax + (cartModel.tax * cartModel.quantity);
             });
+            var totalDeliveryCharges = deliveryCharge * _totalCount;
             double _subTotal = _itemPrice + _tax;
             double _total = _subTotal -
-                _discount -
+                _discount +
                 Provider.of<CouponProvider>(context).discount +
-                deliveryCharge;
+                totalDeliveryCharges;
 
             return Provider.of<CartProvider>(context, listen: false)
                         .cartList
@@ -365,7 +369,7 @@ class CartScreen extends StatelessWidget {
                                                                 .FONT_SIZE_LARGE),
                                                   ),
                                                   Text(
-                                                    '(+) ${PriceConverter.convertPrice(context, deliveryCharge)}',
+                                                    '(+) ${PriceConverter.convertPrice(context, totalDeliveryCharges)}',
                                                     style:
                                                         poppinsRegular.copyWith(
                                                             fontSize: Dimensions
